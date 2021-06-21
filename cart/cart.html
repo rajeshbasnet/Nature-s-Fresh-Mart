@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <!--External CSS-->
+    <link rel="stylesheet" href="cart.css" />
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <header class="position-relative">
+      <!--Navbar Section-->
+      <nav class="navbar navbar-expand-lg">
+        <!--Logo-->
+        <a class="navbar-brand" href="#">
+          <img src="../images/homepage/logo/logo.png" class="ml-3" alt="" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-align-justified"
+            width="35"
+            height="35"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="#15c0a6"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="16" y2="18" />
+          </svg>
+        </button>
+
+        <!--Navbar Items-->
+        <div class="collapse navbar-collapse mr-0" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto mr-5 font-rale">
+            <li class="nav-item active mx-3">
+              <a class="nav-link" href="#"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+
+            <li class="nav-item mx-3 dropdown">
+              <a class="nav-link" href="#" data-toggle="dropdown">
+                Shops
+                <i class="fas fa-chevron-down mx-1"></i>
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Bakery</a>
+                <a class="dropdown-item" href="#">Butcher</a>
+                <a class="dropdown-item" href="#">Greengrocer</a>
+                <a class="dropdown-item" href="#">Fishmonger</a>
+                <a class="dropdown-item" href="#">Delicatessen</a>
+              </div>
+            </li>
+
+            <li class="nav-item mx-3">
+              <a href="#" class="nav-link">About Us</a>
+            </li>
+
+            <li class="nav-item mx-3">
+              <a class="nav-link" href="#">Login In</a>
+            </li>
+
+            <li class="nav-item mx-3">
+              <a href="" class="nav-link nav-link-item">Sign Up</a>
+            </li>
+
+            <li class="nav-item mx-3">
+              <a href="#" class="nav-link cart rounded">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="mx-2">0</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="bg-image position-absolute">
+        <img
+          src="../images/homepage/pexels-lisa-1402407.jpg"
+          class="w-100"
+          alt=""
+        />
+      </div>
+
+      <!--Breadcrumbs-->
+      <nav class="breadcrumb-navbar" aria-label="breadcrumb">
+        <ol class="breadcrumb font-rubik">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Products</a></li>
+          <li class="breadcrumb-item"><a href="#">Add to Cart</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Cart</li>
+        </ol>
+      </nav>
+    </header>
+
+    <main>
+      <!--Breadcrumbs and Cart items-->
+      <section class="cart-items my-5">
+        <h4 class="font-rubik mx-3 py-2 pl-3 text-uppercase">
+          Your Cart items
+        </h4>
+
+        <div class="container-fluid mt-5">
+          <div class="row">
+            <!--Products table-->
+            <div class="col-xl-9">
+              <table class="table font-rubik table-hover">
+                <thead class="text-center">
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                  <th></th>
+                </thead>
+
+                <tbody class="text-center">
+                  <tr>
+                    <td>
+                      <img
+                        src="../images/products/pexels-pixabay-219794.jpg"
+                        alt=""
+                        class="my-3"
+                      />
+                    </td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">2</td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">
+                      <i class="fas fa-trash-alt text-danger"></i>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <img
+                        src="../images/products/pexels-polina-tankilevitch-3872373.jpg"
+                        alt=""
+                        class="my-3"
+                      />
+                    </td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">2</td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">
+                      <i class="fas fa-trash-alt text-danger"></i>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <img
+                        src="../images/products/pexels-pixabay-53494.jpg"
+                        alt=""
+                        class="my-3"
+                      />
+                    </td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">2</td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">
+                      <i class="fas fa-trash-alt text-danger"></i>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <img
+                        src="../images/products/pexels-polina-tankilevitch-3872373.jpg"
+                        alt=""
+                        class="my-3"
+                      />
+                    </td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">2</td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">
+                      <i class="fas fa-trash-alt text-danger"></i>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <img
+                        src="../images/products/pexels-pixabay-219794.jpg"
+                        alt=""
+                        class="my-3"
+                      />
+                    </td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">2</td>
+                    <td class="align-middle">$255</td>
+                    <td class="align-middle">
+                      <i class="fas fa-trash-alt text-danger"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!--Cart total section-->
+            <div class="col-xl-3">
+              <div class="cart-total font-rubik text-center">
+                <p class="summary pt-3 pb-2">Final Summary</p>
+
+                <div class="promo-code mt-5">
+                  <p class="code text-uppercase">Do you have a promo code ?</p>
+                  <input type="text" class="form-control" placeholder="#####" />
+                </div>
+
+                <p class="total my-5 text-uppercase">
+                  Cart total <span class="total-price mx-2">$189.90</span>
+                </p>
+                <div class="terms-conditions mt-5">
+                  <input type="checkbox" id="terms" name="terms" />
+                  <label for="terms">I agree your Terms & Conditions</label>
+                </div>
+                <button class="btn mt-2 font-rubik">
+                  CHECKOUT<i class="fas fa-lock mx-2"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!--Font Awesome CDN-->
+    <script
+      src="https://kit.fontawesome.com/962cfbd2be.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

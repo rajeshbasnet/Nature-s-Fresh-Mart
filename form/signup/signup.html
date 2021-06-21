@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+
+  <!-- Font awesome CDN -->
+  <script src="https://kit.fontawesome.com/962cfbd2be.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="signup.css">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-6 mx-auto column-first my-5">
+
+        <!--Create account for Customer-->
+        <form action="" class="customer-account">
+          <fieldset>
+            <h4 class="text-center font-rubik">Register for an account</h4>
+            <div class="icon-container d-flex justify-content-center align-items-center my-4">
+              <i class="fab fa-facebook-f mx-3"></i>
+              <i class="fab fa-google mx-3"></i>
+              <i class="fab fa-linkedin-in mx-3"></i>
+            </div>
+
+            <div class="input-field w-75 mx-auto my-4">
+              <!--Username field-->
+              <div class="username-field position-relative my-3 d-flex">
+                <input type="text" class="form-control mr-1" placeholder="Firstname" />
+                <i class="fas fa-user custom-icon position-absolute"></i>
+                <input type="text" class="form-control ml-1" placeholder="Lastname">
+              </div>
+
+              <!--Address field-->
+              <div class="address-field position-relative my-3">
+                <input type="text" class="form-control" placeholder="Address">
+                <i class="fas fa-address-card custom-icon position-absolute"></i>
+              </div>
+
+              <!--Email field-->
+              <div class="email-field position-relative my-3">
+                <input type="email" class="form-control" placeholder="Email" />
+                <i class="fas fa-envelope custom-icon position-absolute"></i>
+              </div>
+
+              <!--Contact field-->
+              <div class="contact-field position-relative my-3">
+                <input type="text" class="form-control" placeholder="Phone Number" />
+                <i class="fas fa-phone custom-icon position-absolute"></i>
+              </div>
+
+              <!--Password field-->
+              <div class="password-field position-relative my-3">
+                <input type="text" class="form-control" placeholder="Password" />
+                <i class="fas fa-lock custom-icon position-absolute"></i>
+              </div>
+
+              <!--Select User-->
+              <div class="role-field my-3">
+                <select name="user" id="user" class="form-control form-control-lg">
+                  <option value="customer">Customer</option>
+                  <option value="trader">Trader</option>
+                </select>
+              </div>
+
+              <p class="text-center">Already have an account ? <a class="signin" href="../signin/signin.html">Click
+                  here...</a></p>
+
+              <div class="btn-container text-center my-4">
+                <button class="btn btn-md btn-primary text-uppercase">Sign Up</button>
+              </div>
+
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-6 mx-auto column-second my-5">
+        <!--Create Account for Trader-->
+        <form action="" class="trader-account">
+          <fieldset>
+            <h4 class="text-center">Register for an account</h4>
+            <div class="icon-container d-flex justify-content-center align-items-center my-4">
+              <i class="fab fa-facebook-f mx-3"></i>
+              <i class="fab fa-google mx-3"></i>
+              <i class="fab fa-linkedin-in mx-3"></i>
+            </div>
+
+            <div class="input-field w-75 mx-auto my-4">
+
+              <!--Username field-->
+              <div class="username-field position-relative my-3 d-flex">
+                <input type="text" class="form-control mr-1" placeholder="Firstname" />
+                <i class="fas fa-user custom-icon position-absolute"></i>
+                <input type="text" class="form-control ml-1" placeholder="Lastname">
+              </div>
+
+              <!--Address field-->
+              <div class="address-field position-relative my-3">
+                <input type="text" class="form-control" placeholder="Address">
+                <i class="fas fa-address-card custom-icon position-absolute"></i>
+              </div>
+
+              <!--Email field-->
+              <div class="email-field position-relative my-3">
+                <input type="text" class="form-control" placeholder="Email" />
+                <i class="fas fa-envelope custom-icon position-absolute"></i>
+              </div>
+
+              <!--Contact field-->
+              <div class="contact-field position-relative my-3">
+                <input type="text" class="form-control" placeholder="Phone Number" />
+                <i class="fas fa-phone custom-icon position-absolute"></i>
+              </div>
+
+              <!--Shop field-->
+              <div class="shop-field position-relative my-3">
+                <input type="text" class="form-control"
+                  placeholder="Product Type ( Eg. FishMonger, Greengrocer etc... )" />
+                <i class="fab fa-product-hunt custom-icon position-absolute"></i>
+              </div>
+
+              <!--Select User-->
+              <div class="role-field my-3">
+                <select name="user" id="user" class="form-control form-control-lg">
+                  <option value="trader">Trader</option>
+                  <option value="customer">Customer</option>
+                </select>
+              </div>
+
+              <p class="text-center">Already have an account ? <a class="signin" href="#">Click here...</ac>
+              </p>
+
+              <div class="btn-container text-center my-4">
+                <button class="btn btn-md btn-primary text-uppercase">Sign Up</button>
+              </div>
+
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!--External Script-->
+  <script src="./vendor.js"></script>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
