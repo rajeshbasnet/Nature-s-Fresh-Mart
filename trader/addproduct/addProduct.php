@@ -13,6 +13,9 @@
   <!--External CSS Link-->
   <link rel="stylesheet" href="addproduct.css" />
 
+  <!-- Font awesome CDN -->
+    <script src="https://kit.fontawesome.com/962cfbd2be.js" crossorigin="anonymous"></script>
+
 </head>
 
 <!--Trader Panel-->

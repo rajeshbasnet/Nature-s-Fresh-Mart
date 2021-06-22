@@ -21,7 +21,7 @@
     <main>
         <div class="container-fluid">
             <div class="row">
-                <?php include '../trader-side-panel.php' ?>
+                <?php include '../customer-side-panel.php' ?>
 
                 <?php ?>
 
@@ -42,7 +42,7 @@
                                     <?php include '../user_profile_header.php'; ?>
 
                                     <?php
-                                        $query = "SELECT * FROM users WHERE user_id = $trader_id";
+                                        $query = "SELECT * FROM users WHERE user_id = '$userId'";
 
                                         $profile=mysqli_query($connection, $query);
                                     ?>
@@ -91,6 +91,8 @@
                                         echo "</div>";
                                         }
                                     ?>
+
+
 
                             </div>
                         </fieldset>

@@ -4,7 +4,7 @@
 
     //run query to select all records from prodsucts table
     //kina ki userid ra trader id same banauchu e.g => insert into trader values(1,1)
-    $query="SELECT profile_img FROM users where user_id = '$trader_id'";
+    $query="SELECT profile_img FROM users where user_id = '$userId'";
 
     //store the result of the query in a variable called $result
     $result=mysqli_query($connection, $query);
