@@ -40,6 +40,12 @@
                 </li>
 
                 <li class="nav-item panel-links">
+                  <a href="../offer/displayOffer/displayOffer.php" class="nav-link d-inline-block">
+                    <i class="fas fa-gift"></i>
+                    Offers</a>
+                </li>
+
+                <li class="nav-item panel-links">
                   <a href="../../index.php" class="nav-link d-inline-block">
                     <i class="fas fa-arrow-circle-left"></i>
                     Back to site</a>

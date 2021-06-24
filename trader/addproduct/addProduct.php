@@ -31,7 +31,7 @@
           <?php include '../user_profile_header.php'; ?>
           <?php include 'insertProduct.php'; ?>
 
-          <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+          <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <fieldset>
 
               <!--Title-->
@@ -51,15 +51,16 @@
 
                   <div class="product-price">
                     <label for="product-price" class="form-label">Product Price</label>
-                    <input type="text" id="product-price" class="form-control" name="product-price"
+                    <input type="number" id="product-price" class="form-control" name="product-price"
                       placeholder="E.g. 35" />
                   </div>
+                  <?php if (isset($pnameerror)){ echo $pnameerror;} ?>
 
                   <br />
 
                   <div class="product-quantity">
                     <label for="product-quantity" class="form-label">Quantity in stock</label>
-                    <input type="text" class="form-control" id="product-quantity" name="product-quantity"
+                    <input type="number" class="form-control" id="product-quantity" name="product-quantity"
                       placeholder="Total number of available product" />
                   </div>
 
@@ -68,8 +69,8 @@
                   <div class="product-availability">
                     <label for="form-label" class="product-availability">Product Availability</label>
                     <select name="product-availability" id="product-availability" class="form-control">
-                      <option value="yes">Yes (Default)</option>
-                      <option value="no">No</option>
+                      <option value="1">Yes (Default)</option>
+                      <option value="0">No</option>
                     </select>
                   </div>
 
@@ -77,14 +78,14 @@
 
                   <div class="min-order">
                     <label for="min-order" class="form-label">Minimum Order</label>
-                    <input type="text" class="form-control" id="min-order" name="min-order" />
+                    <input type="number" class="form-control" id="min-order" name="min-order" />
                   </div>
 
                   <br />
 
                   <div class="max-order">
                     <label for="max-order" class="form-label">Maximum Order</label>
-                    <input type="text" class="form-control" id="max-order" name="max-order" />
+                    <input type="number" class="form-control" id="max-order" name="max-order" />
                   </div>
                 </div>
 

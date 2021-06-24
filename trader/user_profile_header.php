@@ -4,15 +4,15 @@
 
     //run query to select all records from prodsucts table
     //kina ki userid ra trader id same banauchu e.g => insert into trader values(1,1)
-    $query="SELECT profile_img FROM users where user_id = '$trader_id'";
+    $query="SELECT PROFILE_IMG FROM ECOMMERCE.users where USER_ID = 10";
 
     //store the result of the query in a variable called $result
-    $result=mysqli_query($connection, $query);
+    $result = oci_parse($connection, $query);
+    oci_execute($result);
 
-
-    while ($row=mysqli_fetch_assoc($result)){
+    while ($row = oci_fetch_assoc($result)){
         echo "<div class='user-profile-header'>";
-            echo "<img src='".$row['profile_img']."' alt='profile' width='40px' height='40px'>";
+            echo "<img src='".$row['PROFILE_IMG']."' alt='profile' width='40px' height='40px'>";
         echo "</div>";
     }
 ?>

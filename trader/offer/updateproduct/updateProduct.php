@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +34,7 @@
           </div>
 
           <?php
-            include 'update.php';
+            include '../Connection.php';
             $id = $_GET['updateID'];
 
             $query = "SELECT * FROM ECOMMERCE.product WHERE product_id = '$id'";
@@ -42,7 +43,7 @@
             while($info = oci_fetch_assoc($productInfo)){
           ?>
 
-            <form action="" method="POST">
+            <form action="update.php" method="POST">
               <fieldset>
 
                 <!--Title-->
@@ -56,7 +57,7 @@
                   <div class="column-left w-100 mr-3">
                     <div class="product-name">
                       <label for="product-name" class="form-label">Product Name</label>
-                      <input type="text" id="up_product-name" class="form-control" name="up_product-name"
+                      <input type="text" id="up_product-name" class="form-control" name="product-name"
                         placeholder="E.g. Whole Grain Sliced Bread" value="<?php echo $info['PRODUCT_NAME'];?>" required/>
                     </div>
 
@@ -64,7 +65,7 @@
 
                     <div class="product-price">
                       <label for="product-price" class="form-label">Product Price</label>
-                      <input type="text" id="up_product-price" class="form-control" name="up_product-price"
+                      <input type="text" id="up_product-price" class="form-control" name="product-price"
                         placeholder="E.g. 35" value="<?php echo $info['ITEM_PRICE'];?>"  required/>
                     </div>
 
@@ -72,7 +73,7 @@
 
                     <div class="product-quantity">
                       <label for="product-quantity" class="form-label">Quantity in Stock</label>
-                      <input type="text" class="form-control" id="up_product-quantity" name="up_product-quantity"
+                      <input type="text" class="form-control" id="up_product-quantity" name="product-quantity"
                         placeholder="Total number of available product" value="<?php echo $info['QUANTITY_IN_STOCK'];?>" required/>
                     </div>
 
@@ -90,14 +91,14 @@
 
                     <div class="min-order">
                       <label for="min-order" class="form-label">Minimum Order</label>
-                      <input type="text" class="form-control" id="up_min-order" name="up_min-order" value="<?php echo $info['MIN_ORDER'];?>"  required/>
+                      <input type="text" class="form-control" id="up_min-order" name="min-order" value="<?php echo $info['MIN_ORDER'];?>"  required/>
                     </div>
 
                     <br />
 
                     <div class="max-order">
                       <label for="max-order" class="form-label">Maximum Order</label>
-                      <input type="text" class="form-control" id="up_max-order" name="up_max-order" value="<?php echo $info['MAX_ORDER'];?>" required/>
+                      <input type="text" class="form-control" id="up_max-order" name="max-order" value="<?php echo $info['MAX_ORDER'];?>" required/>
                     </div>
                   </div>
 
@@ -118,7 +119,7 @@
 
                     <div style="margin-top: 30px;" class="offer_code">
                       <label for="fk_offer_id" class="form-label">Offer code</label>
-                      <input type="number" class="form-control" id="up_fk_offer_id" name="up_fk_offer_id" value="<?php echo $info['FK_OFFER_ID'];?>"/>
+                      <input type="number" class="form-control" id="up_fk_offer_id" name="fk_offer_id" value="<?php echo $info['FK_OFFER_ID'];?>"/>
                     </div>
 
                     <br />
@@ -139,6 +140,7 @@
                 </div>
               </fieldset>
             </form>
+
           <?php
           }
           ?>
