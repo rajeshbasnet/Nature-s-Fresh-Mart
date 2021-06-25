@@ -23,12 +23,12 @@
   <main>
     <div class="container-fluid">
       <div class="row">
-        <?php include '../trader-side-panel.php' ?>
+        <?php include '../../trader-side-panel.php' ?>
 
         <!--Add Products Container Column-->
         <div class="col-xl-10 mx-auto p-0">
 
-          <?php include '../user_profile_header.php'; ?>
+          <?php include '../../user_profile_header.php'; ?>
           <?php include 'insertoffer.php'; ?>
 
           <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
@@ -59,7 +59,7 @@
 
               <!--Button Field Container-->
               <div class="btn-container mt-4 mb-3 d-flex">
-                <button type="submit" name="insertOffer" class="btn btn-primary w-100 mr-2">ADD PRODUCT</button>
+                <button type="submit" name="insertOffer" class="btn btn-primary w-100 mr-2">ADD OFFER</button>
                 <button type="reset" class="btn btn-danger w-100 ml-2">CLEAR ALL</button>
               </div>
             </fieldset>

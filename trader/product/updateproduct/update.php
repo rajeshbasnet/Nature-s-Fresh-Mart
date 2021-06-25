@@ -1,9 +1,9 @@
 <?php
 
-    include_once '../Connection.php';
+    include_once '../../Connection.php';
 
-    if (isset($_POST['btnUpdate '])) {
-        if(!empty($_POST['up_product-name'])&& !empty($_POST['up_product-price']) && !empty($_POST['up_product-quantity']) && !empty($_POST['product-availability']) && !empty($_POST['up_min-order']) && !empty($_POST['up_max-order']) && !empty($_POST['up_product-desc']) && !empty($_POST['up_product-img']) ){
+    if (isset($_POST['btnUpdate'])) {
+        if(!empty($_POST['up_product-name'])&& !empty($_POST['up_product-price']) && !empty($_POST['up_product-quantity']) && !empty($_POST['up_product-availability']) && !empty($_POST['up_min-order']) && !empty($_POST['up_max-order']) && !empty($_POST['up_product-desc']) ){
             $productId = $_POST['up_product-id'];
             $UPproductName = $_POST['up_product-name'];
             $UPproductPrice = $_POST['up_product-price'];
@@ -27,6 +27,8 @@
                 echo "<button type='button' class='btn btn-outline-danger btn-lg' style='white-space: normal; margin-left: 20%;' disabled><i class='fas fa-times-circle' style='color:red;'></i>ERROR: Could not execute query</button>";
             }
 
-        } echo "<button type='button' class='btn btn-outline-danger btn-lg' style='white-space: normal; margin-left: 20%;' disabled><i class='fas fa-times-circle' style='color:red;'></i>ERROR: no field(s) can be left empty</button>";
+        }else{
+            echo "<button type='button' class='btn btn-outline-danger btn-lg' style='white-space: normal; margin-left: 20%;' disabled><i class='fas fa-times-circle' style='color:red;'></i>ERROR: no field(s) can be left empty</button>";
+        }
     }
 ?>

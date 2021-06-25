@@ -23,12 +23,12 @@
   <main>
     <div class="container-fluid">
       <div class="row">
-        <?php include '../trader-side-panel.php' ?>
+        <?php include '../../trader-side-panel.php' ?>
 
         <!--Add Products Container Column-->
         <div class="col-xl-10 mx-auto p-0">
 
-          <?php include '../user_profile_header.php'; ?>
+          <?php include '../../user_profile_header.php'; ?>
           <?php include 'insertProduct.php'; ?>
 
           <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">

@@ -23,7 +23,7 @@
   <main>
     <div class="container-fluid">
       <div class="row">
-        <?php include '../trader-side-panel.php'; ?>
+        <?php include '../../trader-side-panel.php'; ?>
 
         <!--Add Products Container Column-->
         <div class="col-xl-10 mx-auto p-0">

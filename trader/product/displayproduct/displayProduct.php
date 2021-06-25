@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,11 +24,11 @@
   <main>
     <div class="container-fluid">
       <div class="row">
-        <?php include '../trader-side-panel.php' ?>
+        <?php include '../../trader-side-panel.php' ?>
 
         <!--display Products Container Column-->
         <div class="col-xl-10 mx-auto p-0">
-            <?php include '../user_profile_header.php'; ?>
+            <?php include '../../user_profile_header.php'; ?>
             <?php
 
                 //run query to select all records from prodsucts table

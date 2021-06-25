@@ -1,6 +1,6 @@
 <?php
     //Make connection to database
-    include '../Connection.php';
+    include 'Connection.php';
 
     //run query to select all records from prodsucts table
     //kina ki userid ra trader id same banauchu e.g => insert into trader values(1,1)

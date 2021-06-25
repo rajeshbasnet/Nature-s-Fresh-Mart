@@ -50,8 +50,8 @@
                               if (filter_var(trim($_POST['custEmail']), FILTER_VALIDATE_EMAIL)) {
                               $custEmail = filter_var($_POST['custEmail'], FILTER_SANITIZE_EMAIL);
                                   if (preg_match('/[A-Z]/', $_POST['custPassword']) and preg_match('/[a-z]/', $_POST['custPassword']) and (1 === preg_match('~[0-9]~', $_POST['custPassword'])) and strlen($_POST['custPassword'])>=6) {
-                                      $userPassword = filter_var($_POST['custPassword'],FILTER_SANITIZE_STRING);
-                                      $encryptedPass = md5($userPassword);
+
+                                      $encryptedPass = md5($_POST['custPassword']);
                                       echo "<button type='button' class='btn btn-outline-success btn-lg' style='white-space: normal;' disabled><i class='fas fa-check-circle' style='color:green;'></i>Your account was successfully created. To verify your email, please click the verfication link in your email</button>";
                                   } else $passerror = "<button type='button' class='btn btn-outline-danger btn-lg btn-block' style='white-space: normal;' disabled><i class='fas fa-times-circle' style='color:red;'></i>Password must be 6 characters long and must contain at least one uppercase letter, one lowercase letter and a number</button>";
                               } else echo "<button type='button' class='btn btn-outline-danger btn-lg' style='white-space: normal; margin-left: 20%;' disabled><i class='fas fa-times-circle' style='color:red;'></i>Please enter a valid email</button>";
