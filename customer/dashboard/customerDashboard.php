@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Products</title>
+    <title>Customer Dashboard</title>
 
     <!--Bootstrap CDN Link-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
@@ -23,7 +23,7 @@
   <main>
     <div class="container-fluid">
       <div class="row">
-        <?php include '../trader-side-panel.php' ?>
+        <?php include '../customer-side-panel.php' ?>
 
         <!--display Products Container Column-->
         <div class="col-xl-10 mx-auto p-0">
@@ -31,40 +31,39 @@
             <?php
 
                 //run query to select all records from prodsucts table
-                $query="SELECT * FROM product where fk_trader_id = '$trader_id'";
+                $query="SELECT payment_date, invoice_id, product_name, product_image, item_price, allergy_info, product_info
+                        FROM ECOMMERCE.product, ECOMMERCE.payment, ECOMMERCE.invoice , ECOMMERCE.basket_products, ECOMMERCE.basket, ECOMMERCE.orders
+                        WHERE product.product_id = basket_products.fk_product_id AND
+                        basket_products.fk_basket_id = basket.basket_id AND
+                        basket.basket_id = orders.fk_basket_id AND
+                        orders.order_id = payment.fk_order_id and
+                        payment.transaction_id = invoice.fk_transaction_id AND
+                        invoice.fk_user_id = 16";
 
-                //store the result of the query in a variable called $result
-                $result=mysqli_query($connection, $query);
+                $result=oci_parse($connection, $query);
+                oci_execute($result);
             ?>
 
             <table>
                 <tr>
-                    <th>Product Name</th>
+                    <th>Purchase Date</th>
+                    <th>Invoice ID</th>
+                    <th>Product name</th>
                     <th>Image</th>
                     <th>Price</th>
-                    <th>Description</th>
+                    <th>Product Info</th>
                     <th>Allergy info</th>
-                    <th>Availability</th>
-                    <th>Max order</th>
-                    <th>Min order</th>
-                    <th>offer id</th>
-                    <th>Update</th>
-                    <th>Delete</th>
                 </tr>
                 <?php
-                    while ($row=mysqli_fetch_assoc($result)){
+                    while ($row = oci_fetch_assoc($result)){
                         echo "<tr>";
-                        echo "<td>".$row['product_name']."</td>";
-                        echo '<td><img class = "productImages" src="./images/' . $row['product_image'] .'.jpg' .'" /></td>';
-                        echo "<td>".$row['item_price']."</td>";
-                        echo "<td>".$row['product_info']."</td>";
-                        echo "<td>".$row['allergy_info']."</td>";
-                        echo "<td>".$row['availablility']."</td>";
-                        echo "<td>".$row['max_order']."</td>";
-                        echo "<td>".$row['min_order']."</td>";
-                        echo "<td>".$row['fk_offer_id']."</td>";
-                        echo '<td><a href="../updateproduct/updateProduct.php?updateID='. $row['product_id'].'"><i class="fas fa-times-circle" style="color:red;"></i></a></td>';
-                        echo '<td><a href="deleteProduct.php?uID='. $row['product_id'].'"><i class="fas fa-pencil-alt" style="color:blue;></i></a></td>';
+                        echo "<td>".$row['PAYMENT_DATE']."</td>";
+                        echo "<td>".$row['INVOICE_ID']."</td>";
+                        echo "<td>".$row['PRODUCT_NAME']."</td>";
+                        echo '<td><img class = "productImages" src="./images/' . $row['PRODUCT_IMAGE'] .'.jpg' .'" /></td>';
+                        echo "<td>".$row['ITEM_PRICE']."</td>";
+                        echo "<td class='desc'>".$row['PRODUCT_INFO']."</td>";
+                        echo "<td class='desc'>".$row['ALLERGY_INFO']."</td>";
                         echo "</tr>";
                     }
                 ?>

@@ -86,3 +86,23 @@ main .container-fluid .row .col-xl-10 form fieldset .addproduct-title {
   font-weight: bold;
   color: var(--totalcart-color);
 }
+
+table{
+  width: 100%;
+  margin-left: 30px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+
+table ,tr, td, th{
+  border: 1px solid black;
+}
+
+td{
+  width: 50px;
+}
+
+.desc{
+  width: 100px;
+}

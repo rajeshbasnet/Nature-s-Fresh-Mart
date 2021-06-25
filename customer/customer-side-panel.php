@@ -5,7 +5,7 @@
             <nav class="menubar w-100">
               <ul class="nav d-flex flex-column">
                 <li class="nav-item head-panel">
-                  <a href="#" class="nav-link active"><i class="fas fa-user-cog"></i>Trader Panel</a>
+                  <a href="#" class="nav-link active"><i class="fas fa-user-cog"></i>Customer Panel</a>
                 </li>
 
                 <li class="nav-item panel-links">

@@ -1,6 +1,6 @@
-@import "../../globalcss/colors.css";
-@import "../../globalcss/font.css";
-@import "../../globalcss/global.css";
+@import "../../../globalcss/colors.css";
+@import "../../../globalcss/font.css";
+@import "../../../globalcss/global.css";
 
 body {
   font-family: var(--primary-font);
