@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
 
     <!--External CSS Link-->
-    <link rel="stylesheet" href="displayProducts.css" />
+    <link rel="stylesheet" href="displayShops.css" />
 
     <!-- Font awesome CDN -->
     <script src="https://kit.fontawesome.com/962cfbd2be.js" crossorigin="anonymous"></script>
@@ -24,15 +24,15 @@
   <main>
     <div class="container-fluid">
       <div class="row">
-        <?php include '../../trader-side-panel.php' ?>
+        <?php include '../admin-side-panel.php' ?>
 
         <!--display Products Container Column-->
         <div class="col-xl-10 mx-auto p-0">
-            <?php include '../../user_profile_header.php'; ?>
+            <?php include '../user_profile_header.php'; ?>
             <?php
 
                 //run query to select all records from prodsucts table
-                $query="SELECT * FROM ECOMMERCE.product where fk_shop_id = 80";
+                $query="SELECT * FROM  ECOMMERCE.trader,  where fk_shop_id = 80";
 
                 //store the result of the query in a variable called $result
                 $result=oci_parse($connection, $query);
@@ -60,7 +60,7 @@
                             echo "<td>".$row['PRODUCT_NAME']."</td>";
                             echo '<td  class = "productImages"><img width = "100px" height="100px"  src="./images/' . $row['PRODUCT_IMAGE'] .'.jpg' .'" /></td>';
                             echo "<td>".$row['ITEM_PRICE']."</td>";
-                            echo "<td class='desc'>".$row['PRODUCT_INFO']."</td>";
+                            echo "<td style = 'width:200px;'>".$row['PRODUCT_INFO']."</td>";
                             echo "<td>".$row['QUANTITY_IN_STOCK']."</td>";
                             echo "<td>".$row['ALLERGY_INFO']."</td>";
                             echo "<td>".$row['AVAILABLILITY']."</td>";

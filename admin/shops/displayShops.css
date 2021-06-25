@@ -103,9 +103,10 @@ td{
   width: 100px;
 }
 
-td.desc{
-  width: 200px;
-}
 .productImages{
   padding: 5px;
+}
+
+.longDesc{
+  width: 100px;
 }

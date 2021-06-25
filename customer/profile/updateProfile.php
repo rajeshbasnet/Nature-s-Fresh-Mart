@@ -22,16 +22,17 @@
                         $results = oci_parse($connection, $query2);
                         $ups = oci_execute($results);
                         oci_error();
+                        // TODO : Button position
                         if($ups){
-                            echo "<button type='button' class='btn btn-outline-success btn-lg' style='white-space: normal;' disabled><i class='fas fa-check-circle' style='color:green;'></i>Profile successfully updated</button>";
+                            echo "<button type='button' class='btn btn-outline-success btn-lg mt-4' style='white-space: normal;' disabled><i class='fas fa-check-circle' style='color:green;'></i>&nbsp;&nbsp;&nbsp;Profile successfully updated</button>";
                         }else{
-                            echo "<button type='button' class='btn btn-outline-danger btn-lg' style='white-space: normal; margin-left: 20%;' disabled><i class='fas fa-times-circle' style='color:red;'></i>ERROR: Could not execute query</button>";
+                            echo "<button type='button' class='btn btn-outline-danger btn-lg mt-4' style='white-space: normal; margin-left: 20%;' disabled><i class='fas fa-times-circle' style='color:red;'></i>&nbsp;&nbsp;&nbsp;ERROR: Could not execute query</button>";
                         }
-                  } else $passerror = "<button type='button' class='btn btn-outline-danger btn-lg btn-block' style='white-space: normal;' disabled><i class='fas fa-times-circle' style='color:red;'></i>Password must be 6 characters long and must contain at least one uppercase letter, one lowercase letter and a number</button>";
-                }else $lnameerror = "<button type='button' class='btn btn-outline-danger btn-lg btn-block' style='white-space: normal;' disabled><i class='fas fa-times-circle' style='color:red;'></i>Last name cannot contain numbers</button>";
-            } else $fnameerror = "<button type='button' class='btn btn-outline-danger btn-lg btn-block' style='white-space: normal;' disabled><i class='fas fa-times-circle' style='color:red;'></i>First name cannot contain numbers</button>";
+                  } else $passerror = "<button type='button' class='btn btn-outline-danger btn-lg btn-block  mt-4' style='white-space: normal;' disabled><i class='fas fa-times-circle' style='color:red;'></i>&nbsp;&nbsp;&nbsp;Password must be 6 characters long and must contain at least one uppercase letter, one lowercase letter and a number</button>";
+                }else $lnameerror = "<button type='button' class='btn btn-outline-danger btn-lg btn-block  mt-4' style='white-space: normal;' disabled><i class='fas fa-times-circle' style='color:red;'></i>&nbsp;&nbsp;&nbsp;Last name cannot contain numbers</button>";
+            } else $fnameerror = "<button type='button' class='btn btn-outline-danger btn-lg btn-block  mt-4' style='white-space: normal;' disabled><i class='fas fa-times-circle' style='color:red;'></i>&nbsp;&nbsp;&nbsp;First name cannot contain numbers</button>";
         } else{
-            echo "<button type='button' class='btn btn-outline-danger btn-lg' style='white-space: normal; margin-left: 20%;' disabled><i class='fas fa-times-circle' style='color:red;'></i>ERROR: NON OF THE FIELD[S] CAN BE LEFT EMPTY</button>";
+            echo "<button type='button' class='btn btn-outline-danger btn-lg mt-4' style='white-space: normal; margin-left: 20%;' disabled><i class='fas fa-times-circle' style='color:red;'></i>&nbsp;&nbsp;&nbsp;ERROR: NON OF THE FIELD[S] CAN BE LEFT EMPTY</button>";
         }
     }
 ?>
