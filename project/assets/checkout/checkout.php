@@ -12,7 +12,7 @@ if(isset($_SESSION['user'])) { ?>
 
 <div class="custom-container d-flex align-items-center justify-content-center">
     <div class="payment-container">
-        <h3 class="font-rale mt-5">Click below button to pay for purchased order.</h3>
+        <h3 class="font-rale mb-5">Click below button to pay for purchased order.</h3>
         <button class="btn">Paypal</button>
     </div>
 </div>
