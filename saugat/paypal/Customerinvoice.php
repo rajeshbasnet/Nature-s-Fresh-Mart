@@ -68,16 +68,19 @@
         /*border-left: 1px dashed black;*/
         border-right: 1px dashed black;
         border-bottom: 1px dashed black;
+        border-top: 0px dashed black;
        }
 
        td{
         /*border-left: 1px dashed black;*/
         border-right: 1px dashed black;
         border-bottom: 1px dashed black;
+        text-align: center;
        }
        th{
         border-top: 0px;
         padding: 7px 30px;
+        text-align: center;
        }
    </style>
 </head>
@@ -91,10 +94,11 @@
       <?php
         $countCust = 0;
         while (($row = oci_fetch_assoc($qp2)) && ($countCust === 0)){
-          echo "<p>Order ID:&nbsp;&nbsp;".$row['ORDER_ID']."</p>";
-          echo "<p>Date:&nbsp;&nbsp;".$row['PAYMENT_DATE']."</p>";
-          echo "<p>User ID:&nbsp;&nbsp;".$row['USER_ID']."</p>";
-          echo "<p>Customer Name:&nbsp;&nbsp;".$row['FIRST_NAME']."&nbsp;&nbsp;".$row['LAST_NAME']."</p>";
+          echo "<p style='float: left;'><strong>Order ID:&nbsp;&nbsp;".$row['ORDER_ID']."</strong></p>";
+          echo "<p style='float: right;'><strong>Date:&nbsp;&nbsp;".$row['PAYMENT_DATE']."</strong></p>";
+          echo "<br><br>";
+          echo "<p style='float: left;'><strong>User ID:&nbsp;&nbsp;".$row['USER_ID']."</strong></p>";
+          echo "<p style='float: right; text-transform: uppercase; '><strong>Customer Name:&nbsp;&nbsp;".$row['FIRST_NAME']."&nbsp;&nbsp;".$row['LAST_NAME']."</strong></p>";
           $countCust++;
         }
       ?>
@@ -105,16 +109,24 @@
           <th>quantity</th>
         </tr>
         <?php
-          while (($row = oci_fetch_assoc($qp2)) && ($countCust === 0)){
+          // $countPr = 0;
+          while (($roww = oci_fetch_assoc($qp2)) ){
             echo "<tr>";
               echo "<td>".$roww['PRODUCT_NAME']."</td>";
               echo "<td>".$roww['ITEM_PRICE']."</td>";
               echo "<td>".$roww['QUANTITY']."</td>";
             echo "</tr>";
-            $countCust++;
+            // $countPr++;
           }
         ?>
+        <tr>
+          <td></td>
+          <td><strong>Total</strong></td>
+          <td><?php echo $cartTotal; ?></td>
+        </tr>
       </table>
+      <br>
+
       <br>
       <footer>Thank you for shopping with us !!!</footer>
     </div>

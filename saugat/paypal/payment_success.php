@@ -19,6 +19,7 @@ include 'Connection.php';
     $basketID = $_GET['basketID'];
     $collectionID = $_GET['collectionID'];
     $userID = $_GET['userID'];
+    $cartTotal = $_GET['cartTotal'];
 
     //check if connection was successful
     if ($connection) {
@@ -42,7 +43,6 @@ include 'Connection.php';
         $qp2 = oci_parse($connection, $query2);
 
         if (oci_execute($qp2)) {
-
             include 'Customerinvoice.php';
             // ob_start();
             // include "Customerinvoice.php";
