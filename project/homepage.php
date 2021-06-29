@@ -11,10 +11,13 @@ include_once "./assets/trader-types/functions.php";
 //Creating new basket as soon as the new user logs in
 if (isset($_SESSION['user'])) {
 
+
     $inserted_items = "";
     insert_into_basket($_SESSION['user'], $connection);
 
     if(count($_COOKIE) > 1) {
+        $total_price = 0;
+
         foreach ($_COOKIE as $key => $item) {
             if ($key == "PHPSESSID") {
                 continue;
@@ -28,6 +31,16 @@ if (isset($_SESSION['user'])) {
                 $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
                 $basket_id = get_basket_id_from_baskets($customer_id, $connection);
                 insert_into_basket_products($basket_id, $product_id, $quantity, $connection);
+
+                $value = fetch_offerid_and_productprice_from_product_id($product_id, $connection);
+                $offer_id = $value['offer_id'];
+                $product_price = $value['product_price'];
+                $discount = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
+                $discounted_price = $discount['total_price_after_discount'];
+                $final_price = $discounted_price * $quantity;
+                $total_price = $total_price + $final_price;
+                update_total_sum_from_baskets($basket_id, $customer_id, $total_price, $connection);
+
                 $inserted_items = fetch_cart_items_from_baskets($basket_id, $connection);
                 setcookie($product_id, "", time() - (86400 * 30), '/website/project/');
             }

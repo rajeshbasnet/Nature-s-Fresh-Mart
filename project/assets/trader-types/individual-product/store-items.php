@@ -8,7 +8,7 @@ if (isset($_POST['formSubmit'])) {
 
     $product_id = htmlspecialchars($_GET['search']);
     $product_quantity = $_POST['product_quantity'] ??= 1;
-    $product_price = $_POST['product-price'] ??= "";
+    $product_price = $_POST['product-price'] ??= 0;
     $product_name = $_POST['product-name'] ??= "";
     $product_image = $_POST['product-image'] ??= "";
 

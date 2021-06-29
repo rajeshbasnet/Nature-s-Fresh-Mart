@@ -23,7 +23,7 @@ function fetch_individual_products($product_id, $connection) {
 }
 
 function fetch_reviews_from_products($product_id, $connection) {
-    $query = "SELECT * FROM RAJES.REVIEWS WHERE REVIEWS.FK1_PRODUCT_ID = $product_id";
+    $query = "SELECT * FROM REVIEWS WHERE REVIEWS.FK1_PRODUCT_ID = $product_id";
     $result = oci_parse($connection, $query);
     oci_execute($result);
 
@@ -31,7 +31,7 @@ function fetch_reviews_from_products($product_id, $connection) {
 }
 
 function fetch_offers_from_products($offer_id, $connection) {
-    $query = "SELECT * FROM RAJES.OFFERS WHERE OFFER_ID = $offer_id";
+    $query = "SELECT * FROM OFFERS WHERE OFFER_ID = $offer_id";
     $result = oci_parse($connection, $query);
     oci_execute($result);
 
@@ -56,6 +56,23 @@ function fetch_discouted_price_from_products($offer_id, $product_price, $connect
     return array("offer_percentage" => $price['offer_percentage'], "offer_description" => $price['description'], "discount" => $discount,
         "total_price_after_discount" => $totalPriceAfterDiscount);
 }
+
+function fetch_offerid_and_productprice_from_product_id($product_id, $connection) {
+    $query = "SELECT ITEM_PRICE, FK_OFFER_ID FROM PRODUCTS WHERE PRODUCT_ID = $product_id";
+    $result = oci_parse($connection, $query);
+    oci_execute($result);
+
+    $offer_id = "";
+    $product_price = "";
+
+    while($rows = oci_fetch_assoc($result)) {
+        $offer_id = $rows['FK_OFFER_ID'];
+        $product_price = $rows['ITEM_PRICE'];
+    }
+
+    return array('offer_id' => $offer_id, 'product_price' => $product_price);
+}
+
 
 function fetch_all_reviews_and_rating($product_id, $connection) {
     $query = "SELECT * FROM RAJES.REVIEWS, RAJES.USERS, RAJES.CUSTOMERS
@@ -172,6 +189,15 @@ function fetch_cart_items_from_baskets($basket_id, $connection) {
     return $result;
 }
 
+function fetch_all_from_basket_produts($basket_id, $connection) {
+
+    $query = "SELECT * FROM BASKET_PRODUCTS WHERE BASKET_PRODUCTS.FK_BASKET_ID = $basket_id";
+    $result = oci_parse($connection, $query);
+    oci_execute($result);
+
+    return $result;
+}
+
 function fetch_trader_type_from_product($product_id, $connection) {
     $trader_type = "";
     $query = "SELECT TRADER_TYPE FROM TRADERS, SHOPS, PRODUCTS WHERE PRODUCTS.FK_SHOP_ID = SHOPS.SHOP_ID AND SHOPS.FK_TRADER_ID = TRADERS.TRADER_ID AND PRODUCTS.PRODUCT_ID = $product_id";
@@ -193,14 +219,25 @@ function remove_from_basket($basket_id, $product_id, $connection) {
     oci_execute($result);
 }
 
-function get_user_info($user_id, $connection) {
-    $query = "SELECT * FROM USERS WHERE USERS.USER_ID = $user_id";
+function fetch_total_sum_from_baskets($basket_id, $connection) {
+    $query = "SELECT * FROM BASKETS WHERE BASKETS.BASKET_ID = $basket_id";
     $result = oci_parse($connection, $query);
     oci_execute($result);
-    $user_info = [];
+
+    $total_sum = 0;
 
     while($rows = oci_fetch_assoc($result)) {
-        $user_info['firstname'] = $rows['FIRST_NAME'];
-
+        $total_sum = $rows['TOTAL_SUM'];
     }
+
+    return $total_sum;
 }
+
+
+
+function update_total_sum_from_baskets($basket_id, $customer_id, $total_sum, $connection) {
+    $query = "UPDATE BASKETS SET TOTAL_SUM = $total_sum WHERE BASKETS.BASKET_ID = $basket_id AND FK_CUSTOMER_ID = $customer_id";
+    $result = oci_parse($connection,$query);
+    oci_execute($result);
+}
+

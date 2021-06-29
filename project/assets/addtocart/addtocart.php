@@ -2,6 +2,8 @@
 session_start();
 
 $totalPrice = 0;
+$customer_id = "";
+$basket_id = "";
 
 include_once "../../connection/connect.php";
 $connection = getConnection();
@@ -96,7 +98,6 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
                                     $discounted_price = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
                                     $total_price = $discounted_price['total_price_after_discount'] * $rows['QUANTITY'];
                                     $totalPrice = $total_price + $totalPrice;
-
                                     ?>
                                     <tr>
                                         <td style="font-weight: bold;"
@@ -199,6 +200,12 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
                         </div>
 
                         <p class="total my-5 text-uppercase">
+                            <?php
+                            if(isset($_SESSION['user'])) {
+                                update_total_sum_from_baskets($basket_id, $customer_id, $totalPrice, $connection);
+                            }
+                            ?>
+
                             Cart total <span class="total-price mx-2">£<?php echo $totalPrice; ?></span>
                         </p>
                         <div class="terms-conditions mt-5">
