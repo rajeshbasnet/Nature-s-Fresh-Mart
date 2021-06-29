@@ -1,0 +1,18 @@
+@import '../../globalcss/colors.css';
+@import '../../globalcss/fonts.css';
+@import '../../globalcss/global.css';
+
+body {
+    width: 100vw;
+    height: 100vh !important;
+    overflow: hidden;
+}
+
+.custom-container {
+    height: 100%;
+    width: 100%;
+    background-image: url('../../assets/form//bg-image/formbg.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
