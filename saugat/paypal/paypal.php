@@ -10,6 +10,7 @@
   <?php
     $cartTotal = $_SESSION['cartTotal'];
     $cartID = $_SESSION['cartID'];
+    $userId = $_SESSION['userID'];
     $collectionID = $_SESSION['collectionID'];
   ?>
 
@@ -37,7 +38,7 @@
               return actions.order.capture().then(function(details) {
                 // This function shows a transaction success message to your buyer.
                 alert('Transaction completed by ' + details.payer.name.given_name);
-                location.href='payment_sucess.php?basketID=<?php echo $cartID; ?>&collectionID=<?php echo $collectionID; ?>';
+                location.href='payment_sucess.php?userID=<?php echo $userId; ?>&basketID=<?php echo $cartID; ?>&collectionID=<?php echo $collectionID; ?>';
               });
             }
           }).render('#paypal-button-container');
