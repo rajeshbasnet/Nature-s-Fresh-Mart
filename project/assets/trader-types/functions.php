@@ -102,16 +102,11 @@ function get_user_type_id($id, $connection, $user_type) {
 
 }
 
-function insert_into_basket($users_id, $connection) {
+function insert_into_basket($customer_id, $connection) {
 
-    $customer_id = get_user_type_id($users_id, $connection, "CUSTOMERS");
-    $count = check_customers_from_basket($customer_id, $connection);
-
-    if($count === 0) {
         $query = "INSERT INTO BASKETS (BASKET_ID, TOTAL_SUM, FK_CUSTOMER_ID) VALUES(null, null, $customer_id)";
         $result = oci_parse($connection, $query);
         oci_execute($result);
-    }
 
 }
 
