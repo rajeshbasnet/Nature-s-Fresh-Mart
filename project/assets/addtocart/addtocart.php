@@ -67,6 +67,10 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
                         $basket_id = get_basket_id_from_baskets($customer_id, $connection);
                         $count_items = fetch_cart_items_from_baskets($basket_id, $connection);
 
+                        $count_basket_products = "";
+                        $count_basket_products =  count_basket_products($basket_id, $connection);
+
+
                         while ($rows = oci_fetch_assoc($count_items)) {
                             $count++;
                         }

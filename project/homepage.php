@@ -5,6 +5,7 @@ session_start();
 include_once "./connection/connect.php";
 $connection = getConnection();
 
+
 //Functions
 include_once "./assets/trader-types/functions.php";
 
@@ -14,6 +15,8 @@ if (isset($_SESSION['user'])) {
 
     $inserted_items = "";
     insert_into_basket($_SESSION['user'], $connection);
+    $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
+    $basket_id = get_basket_id_from_baskets($customer_id, $connection);
 
     if(count($_COOKIE) > 1) {
         $total_price = 0;
@@ -28,8 +31,6 @@ if (isset($_SESSION['user'])) {
                 $product_id = $decodedItem['id'] ??= "";
                 $quantity = $decodedItem['quantity'] ??= "";
 
-                $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
-                $basket_id = get_basket_id_from_baskets($customer_id, $connection);
                 insert_into_basket_products($basket_id, $product_id, $quantity, $connection);
 
                 $value = fetch_offerid_and_productprice_from_product_id($product_id, $connection);
@@ -58,6 +59,25 @@ if (isset($_SESSION['user'])) {
         }else {
             $_SESSION['count'] = $count_cart_items;
         }
+
+    }else {
+
+        $bool = true;
+
+
+        if(isset($bool)) {
+            $count_basket_products = count_basket_products($basket_id, $connection);
+
+            if(isset($_SESSION['count'])) {
+                $_SESSION['count'] = $_SESSION['count'] + $count_basket_products;
+
+            }else {
+                $_SESSION['count'] = $count_basket_products;
+            }
+
+            $bool = false;
+        }
+
 
     }
 }

@@ -80,7 +80,7 @@ oci_execute($result);
 
                 <li class="nav-item mx-3">
                     <!--Provide Link for Sign Up-->
-                    <a href="#" class="nav-link nav-link-item"><i style="font-size: 1.5rem"
+                    <a href="/website/project/panels/customer-panel/profile/customer-profile.php" class="nav-link nav-link-item"><i style="font-size: 1.5rem"
                                                                   class="fas fa-user text-warning"></i></a>
                 </li>
 

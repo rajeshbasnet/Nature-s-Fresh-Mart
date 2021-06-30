@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once "../../includes/html-skeleton/skeleton.php";
 include_once "../../includes/cdn-links/fontawesome-cdn.php";
 include_once "../../includes/cdn-links/bootstrap-cdn.php"; ?>

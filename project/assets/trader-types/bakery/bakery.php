@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 //Fetch Connection
 include_once "../../../connection/connect.php";
 $connection = getConnection();

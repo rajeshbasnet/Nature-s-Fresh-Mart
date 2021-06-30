@@ -1,5 +1,5 @@
 @import "../../../globalcss/colors.css";
-@import "../../../globalcss/font.css";
+@import "../../../globalcss/fonts.css";
 @import "../../../globalcss/global.css";
 
 body {
@@ -74,8 +74,53 @@ main .container-fluid .row .col-xl-10 .user-profile-header img {
     border: 2px solid var(--primary-color);
     border-radius: 50px;
     object-fit: cover;
-    margin-right: 1rem;
+    margin-right: 5rem;
     cursor: pointer;
+}
+
+main .container-fluid .row .col-xl-10 .logout-section {
+    top: 10%;
+    right: 3.5%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.block {
+    opacity: 1 !important;
+    pointer-events: all !important;
+    animation: slide-from-down 0.3s ease-in;
+}
+
+@keyframes slide-from-down {
+    0% {
+        top: 9%;
+    }
+
+    100% {
+        top: 10%;
+    }
+}
+
+main .container-fluid .row .col-xl-10 .logout-section p {
+    text-transform: uppercase;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+main .container-fluid .row .col-xl-10 .logout-section p .btn {
+    font-weight: bold;
+}
+
+main .container-fluid .row .col-xl-10 .logout-section p::after {
+    content: "";
+    position: absolute;
+    top: -10%;
+    left: 40%;
+    transform: rotate(45deg);
+    width: 20px;
+    height: 20px;
+    background-color: black;
 }
 
 /** Add Product Container Column Form Section **/
@@ -85,7 +130,7 @@ main .container-fluid .row .col-xl-10 form {
     margin: 0rem auto;
 }
 
-main .container-fluid .row .col-xl-10 form fieldset .addproduct-title {
+main .container-fluid .row .col-xl-10 form fieldset .user-title {
     text-transform: uppercase;
     font-weight: bold;
     color: var(--totalcart-color);
