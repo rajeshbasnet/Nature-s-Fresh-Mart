@@ -2,10 +2,10 @@
 
 //Fetch functions
 function fetch_all_products_of_trader($trader_type, $connection) {
-    $query = "SELECT * FROM RAJES.PRODUCTS, RAJES.SHOPS, RAJES.TRADERS
-                  WHERE RAJES.PRODUCTS.FK_SHOP_ID = RAJES.SHOPS.SHOP_ID 
-                  AND RAJES.SHOPS.FK_TRADER_ID = RAJES.TRADERS.TRADER_ID
-                  AND RAJES.TRADERS.TRADER_TYPE = '$trader_type' AND RAJES.PRODUCTS.STATUS = 1";
+    $query = "SELECT * FROM PRODUCTS, SHOPS, TRADERS
+                  WHERE PRODUCTS.FK_SHOP_ID = SHOPS.SHOP_ID
+                  AND SHOPS.FK_TRADER_ID = TRADERS.TRADER_ID
+                  AND TRADERS.TRADER_TYPE = '$trader_type' AND PRODUCTS.STATUS = 1";
     $result = oci_parse($connection, $query);
     oci_execute($result);
 
@@ -15,7 +15,7 @@ function fetch_all_products_of_trader($trader_type, $connection) {
 
 function fetch_individual_products($product_id, $connection) {
     //Select individual product from all products
-    $query = "SELECT * FROM RAJES.PRODUCTS WHERE PRODUCT_ID = $product_id";
+    $query = "SELECT * FROM PRODUCTS WHERE PRODUCT_ID = $product_id";
     $result = oci_parse($connection, $query);
     oci_execute($result);
 
@@ -75,7 +75,7 @@ function fetch_offerid_and_productprice_from_product_id($product_id, $connection
 
 
 function fetch_all_reviews_and_rating($product_id, $connection) {
-    $query = "SELECT * FROM RAJES.REVIEWS, RAJES.USERS, RAJES.CUSTOMERS
+    $query = "SELECT * FROM REVIEWS, USERS, CUSTOMERS
     WHERE REVIEWS.FK2_USER_ID = USERS.USER_ID AND USERS.USER_ID = CUSTOMERS.USER_ID
     AND FK1_PRODUCT_ID = $product_id";
     $result = oci_parse($connection, $query);
@@ -265,3 +265,16 @@ function count_basket_products($basket_id, $connection) {
 
     return $count;
  }
+
+function get_all_collection_slots($collection_slot_id, $connection){
+    $query = "SELECT COLLECTION_DAY, COLLECTION_TIME FROM COLLECTION_SLOTS WHERE COLLECTION_SLOT_ID = $collection_slot_id";
+    $result = oci_parse($connection,$query);
+    oci_execute($result);
+
+    while($rows = oci_fetch_assoc($result)) {
+        $collection_day = $rows['COLLECTION_DAY'];
+        $collection_time = $rows['COLLECTION_TIME'];
+    }
+
+    return $collection_day."&nbsp;&nbsp;&nbsp;(".$collection_time.")";
+}

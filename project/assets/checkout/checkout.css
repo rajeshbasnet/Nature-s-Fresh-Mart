@@ -16,3 +16,23 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.collection_slots{
+    width: 40%;
+    margin-left: 1rem;
+
+}
+
+.from-label{
+    font-size: 1.2rem;
+}
+
+option{
+    text-align: center;
+}
+
+.coll_btn{
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-weight: bold;
+}
