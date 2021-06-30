@@ -3,6 +3,7 @@
 session_start();
 include_once '../../connection/connect.php';
 $connection = getConnection();
+$collection_slot_id = "";
 
 include_once '../../includes/html-skeleton/skeleton.php';
 include_once '../../includes/cdn-links/fontawesome-cdn.php';
@@ -72,7 +73,7 @@ if(isset($_SESSION['user'])) {
               return actions.order.capture().then(function(details) {
                 // This function shows a transaction success message to your buyer.
                 alert('Transaction completed by ' + details.payer.name.given_name);
-                location.href='payment_success.php?user_id=<?php echo $user_id; ?>&basket_id=<?php echo $basket_id; ?>&total_sum=<?php echo $total_sum;?>&collection_slot_id=<?php echo $collection_slot_id;?>';
+                location.href='payment_success.php?&collection_slot_id=<?php echo $collection_slot_id;?>';
               });
             }
           }).render('#paypal-button-container');

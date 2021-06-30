@@ -109,7 +109,7 @@
           <th>quantity</th>
         </tr>
         <?php
-          // $countPr = 0;
+        oci_execute($qp2);
           while (($roww = oci_fetch_assoc($qp2)) ){
             echo "<tr>";
               echo "<td>".$roww['PRODUCT_NAME']."</td>";
