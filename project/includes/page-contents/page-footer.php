@@ -6,11 +6,11 @@
                 <ul>
                     <!--TODO: Provide Links-->
                     <li class="text-uppercase">Information</li>
-                    <li class="mt-2"><a href="#" class="text-light">Contact Us</a></li>
+                    <li class="mt-2"><a href="#" class="text-light">About Us</a></li>
                     <li><a href="#" class="text-light">FAQ</a></li>
-                    <li><a href="#" class="text-light">Recipes</a></li>
-                    <li><a href="#" class="text-light">Sustainability</a></li>
-                    <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                    <li><a href="#" class="text-light">Shops</a></li>
+                    <li><a href="https://www.freeprivacypolicy.com/live/14455127-10ed-4ec8-921e-a121d69783e8" class="text-light">Privacy & Policy</a></li>
+                    <li><a href="https://www.termsfeed.com/live/d3aef62f-bd0d-467a-80d8-c99297c37f2e" class="text-light">Terms & Conditions</a></li>
                 </ul>
             </div>
 

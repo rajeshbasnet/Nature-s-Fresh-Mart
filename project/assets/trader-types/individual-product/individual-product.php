@@ -29,7 +29,6 @@ if (!empty($product_id) && !empty($trader_type)) {
     include_once "../../../includes/cdn-links/fontawesome-cdn.php"; ?>
 
 
-
     <!--External Sylesheet-->
     <link rel="stylesheet" href="../trader-product-css/trader-product.css">
 
@@ -125,7 +124,16 @@ if (!empty($product_id) && !empty($trader_type)) {
                                         $offerId = $row['FK_OFFER_ID'];
                                         $productPrice = $row['ITEM_PRICE'];
 
-                                        $resultThird = fetch_discouted_price_from_products($offerId, $productPrice, $connection); ?>
+                                        if (isset($offerId)) {
+                                            $resultThird = fetch_discouted_price_from_products($offerId, $productPrice, $connection);
+
+                                        } else {
+                                            $resultThird['total_price_after_discount'] = $productPrice;
+                                            $resultThird['offer_percentage'] = 0;
+                                            $resultThird['offer_description'] = "";
+                                        }
+
+                                        ?>
 
 
                                         <div class="pricing-container my-4">
@@ -151,7 +159,7 @@ if (!empty($product_id) && !empty($trader_type)) {
 
                                         $product_quantity = $row['QUANTITY_IN_STOCK'];
 
-                                        if($product_quantity >= 20) { ?>
+                                        if ($product_quantity >= 20) { ?>
 
                                             <div class="order-quantity d-flex align-items-start my-3">
                                                 <p class="mr-2">Quantity :</p>
@@ -164,7 +172,7 @@ if (!empty($product_id) && !empty($trader_type)) {
                                                 </div>
                                             </div>
 
-                                        <?php }else { ?>
+                                        <?php } else { ?>
 
                                             <div class="order-quantity d-flex align-items-start my-3">
                                                 <p class="mr-2">Quantity :</p>
@@ -173,11 +181,14 @@ if (!empty($product_id) && !empty($trader_type)) {
                                                     <button type="button" class="btn decrease-btn">-</button>
                                                     <input type="number" class="form-control w-25 text-center" value="1"
                                                            name="product_quantity" readonly>
-                                                    <button type="button" class="btn increase-btn btn-<?php echo $product_quantity; ?>">+</button>
+                                                    <button type="button"
+                                                            class="btn increase-btn btn-<?php echo $product_quantity; ?>">
+                                                        +
+                                                    </button>
                                                 </div>
                                             </div>
 
-                                        <?php }?>
+                                        <?php } ?>
 
 
                                         <div class="order-btn__container my-3">

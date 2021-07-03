@@ -121,7 +121,13 @@
 
             $offer_id = $value['offer_id'];
             $product_price = $value['product_price'];
-            $array_value = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
+
+            if(isset($offer_id)) {
+                $array_value = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
+
+            }else {
+                $array_value['total_price_after_discount'] = $product_price;
+            }
 
             $discount_price = $array_value['total_price_after_discount'];
 

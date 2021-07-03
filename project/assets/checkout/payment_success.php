@@ -34,8 +34,8 @@
     if (isset($_SESSION['user'])) {
 
         //insert into order after payment success
-        $query1 = "INSERT INTO orders (order_id, fk_basket_id, fk_collection_slot_id, payment_date)
-                VALUES (null, '$basket_id', $collection_id, sysdate)";
+        $query1 = "INSERT INTO orders (order_id, payment_date, order_status, fk_basket_id, fk_collection_slot_id)
+                VALUES (null, sysdate, null, $basket_id, $collection_id)";
         $qp1 = oci_parse($connection, $query1);
 
         if (oci_execute($qp1)) {

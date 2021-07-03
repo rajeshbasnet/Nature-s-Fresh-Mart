@@ -7,8 +7,6 @@ if (isset($_POST['insertProduct'])) {
         $productPrice = htmlspecialchars(trim($_POST['product-price']));
         $instock = htmlspecialchars(trim($_POST['product-quantity']));
         $availability = htmlspecialchars(trim($_POST['product-availability']));
-        $minOrder = 1;
-        $maxOrder = $instock;
         $productDesc = htmlspecialchars(trim($_POST['product-desc']));
         $allergyInfo = htmlspecialchars(trim($_POST['product-allergy__info']));
         $product_image = $_FILES['product-img'];
@@ -16,7 +14,7 @@ if (isset($_POST['insertProduct'])) {
         $trader_id = get_user_type_id($_SESSION['trader'], $connection, "TRADERS");
         $fk_shop_id = get_shop_id_of_trader($trader_id, $connection);
 
-        $fk_offer_id = $_POST['fk_offer_id'];
+        $fk_offer_id = $_POST['fk_offer_id'] ??= null;
         $status = 1;
         $image_name = "";
         $query = "";
@@ -42,7 +40,7 @@ if (isset($_POST['insertProduct'])) {
                 move_uploaded_file($temp_path, $actual_path);
 
                 $query = "INSERT INTO products (product_id, product_name, item_price, quantity_in_stock, availablility, min_order, max_order, allergy_info, product_info, product_image, fk_shop_id, fk_offer_id, status)
-                                VALUES (null, '$productName', $productPrice, $instock, $availability, $minOrder, $maxOrder, '$allergyInfo', '$productDesc', '$image_name', $fk_shop_id, $fk_offer_id, $status)";
+                                VALUES (null, '$productName', $productPrice, $instock, $availability, 1, $instock, '$allergyInfo', '$productDesc', '$image_name', $fk_shop_id, '$fk_offer_id', $status)";
 
             } else {
                 $img_error = "<p style='border-width:1px !important' class='text-danger border border-danger text-center mt-4'><i class='fas fa-times-circle'></i>&nbsp;&nbsp;ERROR: INVALID IMAGE FORMAT</p>";
@@ -50,9 +48,8 @@ if (isset($_POST['insertProduct'])) {
 
         } else {
             $query = "INSERT INTO products (product_id, product_name, item_price, quantity_in_stock, availablility, min_order, max_order, allergy_info, product_info, product_image, fk_shop_id, fk_offer_id, status)
-                                VALUES (null, '$productName', $productPrice, $instock, $availability, $minOrder, $maxOrder, '$allergyInfo', '$productDesc', '', $fk_shop_id, $fk_offer_id, $status)";
+                                VALUES (null, '$productName', $productPrice, $instock, $availability, 1 , $instock, '$allergyInfo', '$productDesc', '', $fk_shop_id, '$fk_offer_id', $status)";
         }
-
 
         $qte = oci_parse($connection, $query);
         if (oci_execute($qte)) {

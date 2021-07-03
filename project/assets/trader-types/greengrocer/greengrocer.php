@@ -34,11 +34,10 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
         ">
             <h2 class="text-center mb-4">Greengrocer</h2>
             <p class="text-center font-rubik">
-                <!--TODO : Proper Description-->
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-                corporis aliquid pariatur reiciendis laborum hic facere doloribus
-                voluptate ipsum similique omnis, unde incidunt accusantium. Incidunt
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                After 30 glorious years of working with the greenest thumbs in organic farming
+                we really know our carrots from our parsnips. The proof's in the tasting,
+                so fill your boots with the best of the season's veggie delights right here and
+                provide yourself with organic goods.
             </p>
         </div>
     </header>
@@ -160,7 +159,16 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
                             <div class="info d-flex align-items-baseline justify-content-between mt-3">
                                 <p class="font-rubik"><?php echo $row['PRODUCT_NAME'] ?></p>
 
-                                <?php $discounted_result = fetch_discouted_price_from_products($row['FK_OFFER_ID'], $row['ITEM_PRICE'], $connection) ?>
+                                <?php
+
+                                if (isset($row['FK_OFFER_ID'])) {
+                                    $discounted_result = fetch_discouted_price_from_products($row['FK_OFFER_ID'], $row['ITEM_PRICE'], $connection);
+
+                                } else {
+                                    $discounted_result['total_price_after_discount'] = $row['ITEM_PRICE'];
+                                }
+                                ?>
+
                                 <p class="font-rubik price-content">
                                     $<?php echo $discounted_result['total_price_after_discount'] ?></p>
                             </div>

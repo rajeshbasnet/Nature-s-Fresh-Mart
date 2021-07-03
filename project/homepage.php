@@ -37,7 +37,15 @@ if (isset($_SESSION['user'])) {
                 $value = fetch_offerid_and_productprice_from_product_id($product_id, $connection);
                 $offer_id = $value['offer_id'];
                 $product_price = $value['product_price'];
-                $discount = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
+
+                if(isset($offer_id)) {
+                    $discount = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
+
+                }else {
+                    $discount['total_price_after_discount'] = $product_price;
+
+                }
+
                 $discounted_price = $discount['total_price_after_discount'];
                 $final_price = $discounted_price * $quantity;
                 $total_price = $total_price + $final_price;
@@ -124,11 +132,11 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
 
                     <h5 class="mt-4 text-center">High Quality Products</h5>
                     <p class="mt-4 text-dark text-justify">
-                        <!--TODO : Provide Proper Description--->
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                        doloremque dolores inventore dignissimos, consectetur id
-                        reiciendis, officiis numquam temporibus molestiae odio itaque
-                        accusantium ex eius culpa obcaecati quod dolore quis, deleniti
+                        We’re on a mission to make shopping sustainably simple,
+                        putting people and our planet first every step of the way.
+                        To compete with the opening hours of bigger convenience stores
+                        in the area without missing out on precious family time and your
+                        support towards family.
                     </p>
                 </div>
 
@@ -139,11 +147,10 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
 
                     <h5 class="mt-4 text-center">We have a Large Family</h5>
                     <p class="mt-4 text-dark text-justify">
-                        <!--TODO : Provide Proper Description--->
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                        doloremque dolores inventore dignissimos, consectetur id
-                        reiciendis, officiis numquam temporibus molestiae odio itaque
-                        accusantium ex eius culpa obcaecati quod dolore quis, deleniti
+                        Our people make us who we are. We work with independent,
+                        organic growers and makers, so by shopping with us, you’re helping to support
+                        local communities and workers’ rights, both at home and further afield.
+                        We’re a proud member of the B Corp community.
                     </p>
                 </div>
 
@@ -154,11 +161,10 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
 
                     <h5 class="mt-4 text-center">Timely delivery</h5>
                     <p class="mt-4 text-dark text-justify">
-                        <!--TODO : Provide Proper Description--->
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                        doloremque dolores inventore dignissimos, consectetur id
-                        reiciendis, officiis numquam temporibus molestiae odio itaque
-                        accusantium ex eius culpa obcaecati quod dolore quis, deleniti
+                        They tend to come at a similar time, but this can be subject to change.
+                        We order our rounds each week depending on what deliveries we have in your area.
+                        This means we make more deliveries with fewer vans, which is great for the environment
+                        Giving back is incredibly
                     </p>
                 </div>
             </div>
@@ -292,7 +298,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                     justify-content-between
                   " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
                              id="headingOne">
-                            <p class="font-rale">How to view above image</p>
+                            <p class="font-rale">How is my box being packed?</p>
                             <i class="fas fa-chevron-down"></i>
                         </div>
 
@@ -300,14 +306,11 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                              data-parent="#accordion">
                             <div class="card-body">
                                 <p class="font-rubik">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                    accusamus terry richardson ad squid. 3 wolf moon officia
-                                    aute, non cupidatat skateboard dolor brunch. Food truck
-                                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                                    tempor, sunt aliqua put a bird on it squid single-origin
-                                    coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                    helvetica, craft beer labore wes anderson cred nesciunt
-                                    sapiente ea proident. Ad vegan excepteur butcher vice
+                                    We need to make sure our packing teams are maintaining safe social distancing,
+                                    which means we have less people actively packing at any time.
+                                    Our teams are still adhering to 2m social distancing guidelines
+                                    and are equipped with all the necessary PPE. Everyone has their
+                                    temperature checked before they are allowed onto the site. Ad vegan excepteur butcher vice
                                     lomo. Leggings occaecat craft beer farm-to-table, raw
                                     denim aesthetic synth nesciunt you probably haven't heard
                                     of them accusamus labore sustainable VHS.
@@ -329,17 +332,15 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
                                 <p class="font-rubik">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                    accusamus terry richardson ad squid. 3 wolf moon officia
-                                    aute, non cupidatat skateboard dolor brunch. Food truck
-                                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                                    tempor, sunt aliqua put a bird on it squid single-origin
-                                    coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                    helvetica, craft beer labore wes anderson cred nesciunt
-                                    sapiente ea proident. Ad vegan excepteur butcher vice
-                                    lomo. Leggings occaecat craft beer farm-to-table, raw
-                                    denim aesthetic synth nesciunt you probably haven't heard
-                                    of them accusamus labore sustainable VHS.
+                                    Collection slots are the time at which the goods should be
+                                    delivered as chosen by the customer at the time of checkout.
+                                    They will offer 3 collection slots 10-13, 13-16, 16-19.
+                                </p>
+                                <p class="font-rubik">
+                                    For the pilot these will only be for Wed, Thus, Fri.
+                                    Collection slots are the time at which the goods should be
+                                    delivered as chosen by the customer at the time of checkout.
+                                    For the pilot these will only be for Wed, Thus, Fri.
                                 </p>
                             </div>
                         </div>
@@ -359,18 +360,15 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                              data-parent="#accordion">
                             <div class="card-body">
                                 <p class="font-rubik">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                    accusamus terry richardson ad squid. 3 wolf moon officia
-                                    aute, non cupidatat skateboard dolor brunch. Food truck
-                                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                                    tempor, sunt aliqua put a bird on it squid single-origin
-                                    coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                    helvetica, craft beer labore wes anderson cred nesciunt
-                                    sapiente ea proident. Ad vegan excepteur butcher vice
-                                    lomo. Leggings occaecat craft beer farm-to-table, raw
-                                    denim aesthetic synth nesciunt you probably haven't heard
-                                    of them accusamus labore sustainable VHS.
-                                </p>
+                                    To compete with the opening hours of bigger convenience stores
+                                    in the area without missing out on precious family time is the
+                                    main reason why the traders are willing to invest in an e-commerce site.
+                                    This also means that there is an opportunity for the traders to widen
+                                    their markets out of their local suburbs to other areas which inturn
+                                    increases their revenue and recognition as a trustworthy fresh food online marketplace.
+                                    The site will also boasts a trader interface which allows the traders to manage
+                                    their products and other relevant information by themselves.In order to maintain
+                                    a secure environment.
                             </div>
                         </div>
                     </div>

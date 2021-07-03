@@ -20,7 +20,7 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
         <?php include_once "../../../includes/page-contents/page-navbar.php" ?>
 
         <div class="bg-image position-absolute">
-            <img src="images/bg-img/pexels-francesco-ungaro-3361052.jpg" class="w-100" alt="" />
+            <img src="images/bg-img/pexels-francesco-ungaro-3361052.jpg" class="w-100" alt=""/>
         </div>
 
 
@@ -35,17 +35,17 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
             <h2 class="text-center mb-4">Fishmonger</h2>
             <p class="text-center font-rubik">
                 <!--TODO : Proper Description-->
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-                corporis aliquid pariatur reiciendis laborum hic facere doloribus
-                voluptate ipsum similique omnis, unde incidunt accusantium. Incidunt
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                With the Marine Conservation Society at our side,
+                we're sourcing more seafood from responsibly managed fisheries.
+                Let's put the 'plenty' back in 'fish in the sea'.The proof's in the tasting,
+                so fill your boots with the best of the season's veggie delights right here.
             </p>
         </div>
     </header>
 
 
-    <br />
-    <br />
+    <br/>
+    <br/>
 
     <main>
         <!--Search and Sort section-->
@@ -74,7 +74,7 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
                         <form action="#" method="POST" class="d-flex align-items-center justify-content-end">
                             <div class="search-field mx-2">
                                 <input type="text" class="form-control font-rubik" name="search-items"
-                                       placeholder="Eg. Bananas, Apple" />
+                                       placeholder="Eg. Bananas, Apple"/>
                             </div>
 
                             <div class="sort-field mx-2">
@@ -95,8 +95,8 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
             </div>
         </section>
 
-        <br />
-        <br />
+        <br/>
+        <br/>
 
         <?php
 
@@ -149,13 +149,24 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
                     while ($row = oci_fetch_assoc($result)) { ?>
                         <div class="individual-product">
                             <div class="img-container position-relative">
-                                <img src="./images/products/<?php echo $row['PRODUCT_IMAGE'] ?>" alt="" />
+                                <img src="./images/products/<?php echo $row['PRODUCT_IMAGE'] ?>" alt=""/>
                                 <i class="fas fa-search position-absolute"></i>
                             </div>
                             <div class="info d-flex align-items-baseline justify-content-between mt-3">
                                 <p class="font-rubik"><?php echo $row['PRODUCT_NAME'] ?></p>
-                                <?php $discounted_result = fetch_discouted_price_from_products($row['FK_OFFER_ID'], $row['ITEM_PRICE'], $connection) ?>
-                                <p class="font-rubik price-content">$<?php echo $discounted_result['total_price_after_discount']?></p>
+
+                                <?php
+
+                                if (isset($row['FK_OFFER_ID'])) {
+                                    $discounted_result = fetch_discouted_price_from_products($row['FK_OFFER_ID'], $row['ITEM_PRICE'], $connection);
+
+                                } else {
+                                    $discounted_result['total_price_after_discount'] = $row['ITEM_PRICE'];
+                                }
+
+                                ?>
+                                <p class="font-rubik price-content">
+                                    $<?php echo $discounted_result['total_price_after_discount'] ?></p>
                             </div>
                             <div class="btn-container font-rubik">
                                 <a href="/website/project/assets/trader-types/individual-product/individual-product.php?search=<?php echo $row['PRODUCT_ID'] ?>&type=fishmonger"

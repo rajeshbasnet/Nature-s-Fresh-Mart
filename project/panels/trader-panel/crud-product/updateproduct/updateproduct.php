@@ -41,8 +41,8 @@ if (isset($user_id)) {
 
                         echo "<div class='user-profile-header'>";
 
-                        if (!isset($profile_image)) {
-                            $profile_image = "default-image.jpg";
+                        if (!isset($profile_img)) {
+                            $profile_img = "default-image.jpg";
                         }
 
                         echo "<img src='../../profile/profile-img/" . $profile_img . "' alt='profile-icon' width='40px' height='40px'>";

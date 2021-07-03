@@ -102,7 +102,14 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
                                     $offer_id = $rows['FK_OFFER_ID'];
 
                                     $trader_type = fetch_trader_type_from_product($rows['PRODUCT_ID'], $connection);
-                                    $discounted_price = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
+
+                                    if(isset($offer_id)) {
+                                        $discounted_price = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
+
+                                    }else {
+                                        $discounted_price['total_price_after_discount'] = $product_price;
+                                    }
+
                                     $total_price = $discounted_price['total_price_after_discount'] * $rows['QUANTITY'];
                                     $totalPrice = $total_price + $totalPrice;
                                     ?>
@@ -236,7 +243,7 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
                         <?php } elseif ($total_product_per_orders <= 20 && $total_product_per_orders > 0) { ?>
 
                             <a href="/website/project/assets/checkout/checkout.php"
-                               class="checkout-btn btn mt-2 font-rubik">
+                               class="checkout-btn btn mt-5 font-rubik">
                                 CHECKOUT<i class="fas fa-lock mx-2"></i>
                             </a>
 
