@@ -1,0 +1,118 @@
+  
+----------------------------------------------------------------------------------------------------
+----------------------------------------------triggers----------------------------------------------
+----------------------------------------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER insert_into_users_id
+    BEFORE INSERT
+    ON users
+    FOR EACH ROW
+    WHEN (NEW.user_id IS NULL)
+BEGIN
+    :NEW.user_id := users_seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER insert_into_customer_id
+    BEFORE INSERT
+    ON customers
+    FOR EACH ROW
+    WHEN (NEW.customer_id IS NULL)
+BEGIN
+    :NEW.customer_id := customers_seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER insert_into_trader_id
+    BEFORE INSERT
+    ON traders
+    FOR EACH ROW
+    WHEN (NEW.trader_id IS NULL)
+BEGIN
+    :NEW.trader_id := traders_seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER insert_into_admin_id
+    BEFORE INSERT
+    ON admin
+    FOR EACH ROW
+    WHEN (NEW.admin_id IS NULL)
+BEGIN
+    :NEW.admin_id := admin_seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER insert_into_orders_id
+    BEFORE INSERT
+    ON orders
+    FOR EACH ROW
+    WHEN (NEW.order_id IS NULL)
+BEGIN
+    :NEW.order_id := orders_seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER insert_into_basket_id
+    BEFORE INSERT
+    ON baskets
+    FOR EACH ROW
+    WHEN (NEW.basket_id IS NULL)
+BEGIN
+    :NEW.basket_id := baskets_seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER insert_into_review_id
+    BEFORE INSERT
+    ON reviews
+    FOR EACH ROW
+    WHEN (NEW.review_id IS NULL)
+BEGIN
+    :NEW.review_id := reviews_seq.NEXTVAL;
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER insert_into_product_id
+    BEFORE INSERT
+    ON products
+    FOR EACH ROW
+    WHEN (NEW.product_id IS NULL)
+BEGIN
+    :NEW.product_id := products_seq.NEXTVAL;
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER insert_into_shop_id
+    BEFORE INSERT
+    ON shops
+    FOR EACH ROW
+    WHEN (NEW.shop_id IS NULL)
+BEGIN
+    :NEW.shop_id := shops_seq.NEXTVAL;
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER insert_into_collection_slot_id
+    BEFORE INSERT
+    ON collection_slots
+    FOR EACH ROW
+    WHEN (NEW.collection_slot_id IS NULL)
+BEGIN
+    :NEW.collection_slot_id := collection_slots_seq.NEXTVAL;
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER insert_into_offer_id
+    BEFORE INSERT
+    ON offers
+    FOR EACH ROW
+    WHEN (NEW.offer_id IS NULL)
+BEGIN
+    :NEW.offer_id := offers_seq.NEXTVAL;
+END;
+/
+

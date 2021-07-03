@@ -1,0 +1,135 @@
+CREATE TABLE users(
+	user_id	INTEGER PRIMARY KEY,
+	first_name	VARCHAR2(20) NOT NULL,
+	last_name	VARCHAR2(20) NOT NULL,
+	address	VARCHAR2(50) NOT NULL,
+	email	VARCHAR2(50) NOT NULL UNIQUE,
+    phone_number INTEGER NOT NULL UNIQUE,
+	password	VARCHAR2(255) NOT NULL,
+    profile_img VARCHAR(100),
+    token VARCHAR2(255),
+    status INTEGER,
+    permissions VARCHAR2(40)
+);
+
+
+
+CREATE TABLE customers(
+	user_id	INTEGER NOT NULL,
+	customer_id	INTEGER NOT NULL UNIQUE,
+	CONSTRAINT	pk_customer PRIMARY KEY (user_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE traders(
+	user_id	INTEGER NOT NULL,
+	trader_id	INTEGER NOT NULL,
+    trader_type VARCHAR2(50) NOT NULL,
+	CONSTRAINT	pk_trader PRIMARY KEY (user_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
+
+CREATE TABLE admin(
+	user_id	INTEGER NOT NULL,
+	admin_id	INTEGER NOT NULL UNIQUE,
+	CONSTRAINT	pk_admin PRIMARY KEY (user_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
+-- Create a Database table to represent the "shop" entity.
+CREATE TABLE shops(
+	shop_id	INTEGER NOT NULL,
+	shop_name	VARCHAR2(50) NOT NULL,
+    product_category VARCHAR2(50) NOT NULL,
+	fk_trader_id	INTEGER NOT NULL,
+	CONSTRAINT	pk_shop PRIMARY KEY (shop_id),
+    FOREIGN KEY(fk_trader_id) REFERENCES traders(trader_id)
+);
+
+
+-- Create a Database table to represent the "Offer" entity.
+CREATE TABLE offers(
+	offer_id	INTEGER NOT NULL,
+	percentage	INTEGER NOT NULL,
+	description	VARCHAR2(500) NOT NULL,
+    fk_trader_id INTEGER NOT NULL,
+	CONSTRAINT	pk_offer PRIMARY KEY (offer_id),
+    FOREIGN KEY(fk_trader_id) REFERENCES traders(trader_id)
+);
+
+-- Create a Database table to represent the "Product" entity.
+CREATE TABLE products(
+	product_id	INTEGER NOT NULL,
+	product_name VARCHAR2(150) NOT NULL,
+    item_price NUMBER(5,2) NOT NULL,
+    quantity_in_stock INTEGER NOT NULL,
+	availablility INTEGER NOT NULL,
+	min_order INTEGER NOT NULL,
+	max_order INTEGER NOT NULL,
+	allergy_info VARCHAR2(1000),
+    product_info VARCHAR2(600) NOT NULL,
+	product_image VARCHAR2(50),
+    status INTEGER NOT NULL,
+	fk_shop_id	INTEGER NOT NULL,
+	fk_offer_id	INTEGER,
+	CONSTRAINT	pk_product PRIMARY KEY (product_id),
+    FOREIGN KEY(fk_shop_id) REFERENCES shops(shop_id),
+    FOREIGN KEY(fk_offer_id) REFERENCES offers(offer_id)
+);
+
+
+-- Create a Database table to represent the "review" entity.
+ CREATE TABLE reviews(
+	review_id	INTEGER NOT NULL,
+	review_rating	INTEGER,
+	review_comment	VARCHAR2(1000),
+    fk1_product_id	INTEGER NOT NULL,
+	fk2_user_id	INTEGER NOT NULL,
+	CONSTRAINT	pk_review PRIMARY KEY (review_id),
+    FOREIGN KEY(fk1_product_id) REFERENCES products(product_id),
+    FOREIGN KEY(fk2_user_id) REFERENCES users(user_id)
+);
+
+-- Create a Database table to represent the "collection_slot" entity.
+CREATE TABLE collection_slots(
+	collection_slot_id	INTEGER NOT NULL,
+	collection_time VARCHAR2(100) NOT NULL,
+	collection_day VARCHAR2(20) NOT NULL,
+	CONSTRAINT	pk_collection_slot PRIMARY KEY (collection_slot_id)
+);
+
+-- Create a Database table to represent the "basket" entity.
+CREATE TABLE baskets(
+	basket_id INTEGER NOT NULL,
+	total_sum INTEGER,
+	fk_customer_id INTEGER NOT NULL,
+    token VARCHAR2(255) NOT NULL,
+	CONSTRAINT	pk_basket_id PRIMARY KEY (basket_id),
+    FOREIGN KEY(fk_customer_id) REFERENCES customers(customer_id)
+);
+
+-- Create a Database table to represent the "order_products" entity.
+CREATE TABLE basket_products(
+    fk_product_id	INTEGER NOT NULL,
+	fk_basket_id	INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY(fk_product_id) REFERENCES products(product_id),
+	FOREIGN KEY(fk_basket_id) REFERENCES baskets(basket_id)
+);
+
+-- Create a Database table to represent the "orders" entity.
+CREATE TABLE orders(
+	order_id	INTEGER NOT NULL,
+    payment_date DATE,
+    order_status VARCHAR(50),
+    fk_basket_id INTEGER NOT NULL,
+    fk_collection_slot_id INTEGER NOT NULL,
+    CONSTRAINT	pk_orders PRIMARY KEY (order_id),
+    FOREIGN KEY(fk_basket_id) REFERENCES baskets(basket_id),
+    FOREIGN KEY(fk_collection_slot_id) REFERENCES collection_slots(collection_slot_id)
+);
+
+
+
+
