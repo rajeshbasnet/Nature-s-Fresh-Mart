@@ -21,8 +21,10 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
 <div class="overlay"></div>
 <div class="agreement-section w-50 position-absolute">
     <div class="agreement p-4">
-        <p class="text-center text-success font-rale"><i class="fas fa-check-circle"></i>&nbsp;You are agreeing our all terms and conditions by clicking checkout btn.</p>
-        <p class="text-center text-success"><i class="fas fa-check-circle"></i>&nbsp;<b class="font-rale">You will be redirected to checkout page for further processing.</b></p>
+        <p class="text-center text-success font-rale"><i class="fas fa-check-circle"></i>&nbsp;You are agreeing our all
+            terms and conditions by clicking checkout btn.</p>
+        <p class="text-center text-success"><i class="fas fa-check-circle"></i>&nbsp;<b class="font-rale">You will be
+                redirected to checkout page for further processing.</b></p>
     </div>
 </div>
 
@@ -64,11 +66,12 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
 
                         $count = 0;
                         $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
-                        $basket_id = get_basket_id_from_baskets($customer_id, $connection);
+                        $basket_token = $_SESSION['basket_token'];
+                        $basket_id = get_basket_id_from_baskets($basket_token, $connection);
                         $count_items = fetch_cart_items_from_baskets($basket_id, $connection);
 
                         $count_basket_products = "";
-                        $count_basket_products =  count_basket_products($basket_id, $connection);
+                        $count_basket_products = count_basket_products($basket_id, $connection);
 
 
                         while ($rows = oci_fetch_assoc($count_items)) {
@@ -205,19 +208,48 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
 
                         <p class="total my-5 text-uppercase">
                             <?php
-                            if(isset($_SESSION['user'])) {
+                            if (isset($_SESSION['user'])) {
                                 update_total_sum_from_baskets($basket_id, $customer_id, $totalPrice, $connection);
                             }
                             ?>
 
                             Cart total <span class="total-price mx-2">£<?php echo $totalPrice; ?></span>
                         </p>
-                        <div class="terms-conditions mt-5">
-                            <p>I agree your Terms & Conditions</p>
+                        <div class="terms-conditions mt-5 w-100">
+                            <p class="m-0 p-0 w-100">By clicking the checkout button,</p>
+                            <p class="m-0 p-0 w-100">You are agreeing to our Terms & Conditions</p>
                         </div>
-                        <a href="#" class="checkout-btn btn mt-2 font-rubik">
-                            CHECKOUT<i class="fas fa-lock mx-2"></i>
-                        </a>
+
+                        <?php
+
+                        if(isset($_SESSION['user'])) {
+
+                            $total_product_per_orders = $_SESSION['count'];
+
+                            if ($total_product_per_orders === 0) { ?>
+
+                            <div class="checkout-error mt-2 font-rubik border border-warning">
+                                <p class="text-warning text-center mt-2">There are not items in your cart.</p>
+                            </div>
+
+
+                        <?php } elseif ($total_product_per_orders <= 20 && $total_product_per_orders > 0) { ?>
+
+                            <a href="/website/project/assets/checkout/checkout.php"
+                               class="checkout-btn btn mt-2 font-rubik">
+                                CHECKOUT<i class="fas fa-lock mx-2"></i>
+                            </a>
+
+                        <?php } else { ?>
+
+                            <div class="checkout-error mt-2 font-rubik border border-warning">
+                                <p class="text-warning text-center">Cart has exceeded it's limit.</p>
+                                <p class="text-warning text-center p-0 mt-1">Please,
+                                    remove <?php echo($total_product_per_orders - 20) ?> different items</p>
+                            </div>
+
+                        <?php } } ?>
+
                     </div>
                 </div>
             </div>
@@ -227,5 +259,3 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
 
 <!--Footer Section-->
 <?php include_once "../../includes/page-contents/page-footer.php"; ?>
-
-<script src="script.js" defer></script>

@@ -4,6 +4,7 @@ include_once "../../../connection/connect.php";
 $connection = getConnection();
 
 $message = $_GET['message'] ??= "";
+$logout_success = $_GET['logged'] ??= "";
 
 include_once "../../../includes/html-skeleton/skeleton.php";
 include_once "../../../includes/cdn-links/fontawesome-cdn.php";
@@ -35,29 +36,33 @@ include_once "../../../includes/cdn-links/bootstrap-cdn.php";
                         <!--Fetching page that has login proccess-->
                         <?php include_once "check-signin.php"; ?>
 
-                        <?php if(isset($errors['login'])) {
+                        <?php if (isset($errors['login'])) {
                             echo $errors['login'];
                         } ?>
 
 
-                        <?php if(isset($success)) {
+                        <?php if (isset($success)) {
                             echo $success;
                         } ?>
 
-                        <?php if(!empty($message)) {
-                            echo "<p style='font-size: 1.2rem' class='font-rubik border border-danger text-danger p-1 m-0 d-flex align-items-center justify-content-center'><i class='text-danger fas fa-times-circle'></i>&nbsp;Sorry, you must be logged in first to purchase your items.</p>";
+                        <?php if ($logout_success == "out") {
+                            echo "<p style='font-size: 1.1rem; border-width: 1px !important;' class='font-rubik border border-success text-success p-1 m-0 d-flex align-items-center justify-content-center'><i class='text-success fas fa-check-circle'></i>&nbsp;You have been logged out from Nature's Fresh Mart successfully.</p>";
+                        } ?>
+
+                        <?php if (!empty($message)) {
+                            echo "<p style='font-size: 1.2rem' class='font-rubik border border-danger text-danger p-1 m-0 d-flex align-items-center justify-content-center'><i class='text-danger fas fa-times-circle'></i>&nbsp;You must be logged in as customer in order to purchase your items.</p>";
                         } ?>
 
                         <div class="input-field w-75 mx-auto my-4">
                             <div class="email-field position-relative my-4">
                                 <input type="email" id="user-email" class="form-control" placeholder="Email"
-                                       name="user-email" />
+                                       name="user-email"/>
                                 <i class="fas fa-envelope position-absolute custom-icon"></i>
                             </div>
 
                             <div class="password-field my-4 position-relative">
                                 <input type="password" class="form-control" placeholder="Password" id="user-password"
-                                       name="user-password" />
+                                       name="user-password"/>
                                 <i class="fas fa-lock position-absolute custom-icon"></i>
                             </div>
 
@@ -71,9 +76,7 @@ include_once "../../../includes/cdn-links/bootstrap-cdn.php";
 
                             <p class="text-center my-4">
                                 <a href="/website/project/homepage.php">Home</a> |
-                                New to Nature's Fresh Mart ? <a class="signup"
-                                                                href="/website/project/assets/form/signup/customer-signup/customer-signup.php">Click
-                                    here...</a>
+                                New to Nature's Fresh Mart ? <a class="signup" href="/website/project/assets/form/signup/customer-signup/customer-signup.php">Click here...</a>
                             </p>
 
                             <div class="btn-container text-center my-4 d-block">

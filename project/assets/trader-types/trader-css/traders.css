@@ -144,6 +144,7 @@ main {
     height: 200px;
     border-radius: 5px;
     overflow: hidden;
+    object-fit: cover;
 }
 
 .traders-products .container-fluid .products .individual-product .img-container .fa-search {
@@ -240,4 +241,9 @@ footer .container-fluid .row .info .social-media-links .fa-linkedin {
 footer .container-fluid .row .info .mail,
 footer .container-fluid .row .info .phone {
     font-size: 1.1rem;
+}
+
+.sorry {
+    font-size: 2rem;
+    color: #bdc3c7;
 }

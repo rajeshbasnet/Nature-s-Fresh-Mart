@@ -3,7 +3,7 @@
 session_start();
 include_once '../../connection/connect.php';
 $connection = getConnection();
-$collection_slot_id = "";
+$collection_slot_id = 110;
 
 include_once '../../includes/html-skeleton/skeleton.php';
 include_once '../../includes/cdn-links/fontawesome-cdn.php';
@@ -15,7 +15,8 @@ if(isset($_SESSION['user'])) {
 
     $user_id = $_SESSION['user'];
     $customer_id = get_user_type_id($user_id, $connection, "CUSTOMERS");
-    $basket_id = get_basket_id_from_baskets($customer_id, $connection);
+    $basket_token = $_SESSION['basket_token'];
+    $basket_id = get_basket_id_from_baskets($basket_token, $connection);
     $total_sum = fetch_total_sum_from_baskets($basket_id, $connection);
 ?>
 <link rel="stylesheet" href="checkout.css">
@@ -26,7 +27,7 @@ if(isset($_SESSION['user'])) {
           <?php
               if(isset($_POST['select_slot'])){
                 echo "<p style='border-width:1px; font-size: 1.1rem;'  class='text-success border border-success mt-4 text-center p-2'><i class='fas fa-check-circle'></i>&nbsp;&nbsp;&nbsp;Your collection slot preferrence has been saved</p>";
-                $collection_slot_id = $_POST['collection_slot'];
+                $collection_slot_id = $_POST['collection_slot'] ??= 110;
               }
           ?>
           <form action="" method="POST">

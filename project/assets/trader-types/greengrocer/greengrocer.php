@@ -69,25 +69,26 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
                         </nav>
                     </div>
 
+
                     <!--Search and sort form-->
                     <div class="search-sort">
-                        <form action="#" class="d-flex align-items-center justify-content-end">
+                        <form action="#" method="POST" class="d-flex align-items-center justify-content-end">
                             <div class="search-field mx-2">
-                                <input type="text" class="form-control font-rubik" name="search"
+                                <input type="text" class="form-control font-rubik" name="search-items"
                                        placeholder="Eg. Bananas, Apple"/>
                             </div>
 
                             <div class="sort-field mx-2">
                                 <select name="sort-items" id="sort-items" class="form-control font-rubik">
                                     <option value="" selected disabled>Sort By</option>
-                                    <option value="high">Price (Highest)</option>
-                                    <option value="low">Price (Lowest)</option>
-                                    <option value="asc">Product name</option>
+                                    <option value="high_price">Price (Highest)</option>
+                                    <option value="low_price">Price (Lowest)</option>
+                                    <option value="product_name">Product name</option>
                                 </select>
                             </div>
 
                             <div class="btn-container mx-2 font-rubik">
-                                <button class="btn btn-md">Search</button>
+                                <button class="btn btn-md" name="searchSubmit">Search</button>
                             </div>
                         </form>
                     </div>
@@ -101,7 +102,40 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
         <?php
 
         include_once "../functions.php";
-        $result = fetch_all_products_of_trader("greengrocer", $connection);
+
+        if (isset($_POST['searchSubmit'])) {
+            $search_items = $_POST['search-items'] ??= "";
+            $sort_items = $_POST['sort-items'] ??= "";
+
+            $query = "SELECT * FROM TRADERS, SHOPS, PRODUCTS WHERE SHOPS.FK_TRADER_ID = TRADERS.TRADER_ID AND PRODUCTS.FK_SHOP_ID = SHOPS.SHOP_ID AND TRADERS.TRADER_TYPE = 'greengrocer' ";
+
+            if (!empty($search_items)) {
+
+                $query .= "AND PRODUCT_NAME LIKE '%$search_items%' ";
+
+            }
+
+            if (!empty($sort_items)) {
+
+                if ($sort_items == 'high_price') {
+                    $query .= " ORDER BY PRODUCTS.ITEM_PRICE DESC";
+
+                } elseif ($sort_items == "low_price") {
+                    $query .= " ORDER BY PRODUCTS.ITEM_PRICE ASC";
+
+                } elseif ($sort_items == 'product_name') {
+                    $query .= " ORDER BY PRODUCTS.PRODUCT_NAME ASC";
+                }
+
+            }
+
+            $result = oci_parse($connection, $query);
+            oci_execute($result);
+
+        } else {
+            $result = fetch_all_products_of_trader("greengrocer", $connection);
+        }
+
         ?>
 
         <!--Products Section-->
@@ -112,26 +146,32 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
 
                     <!--Individual Products-->
                     <?php
+                    $count = 0;
 
-                    while ($row = oci_fetch_assoc($result)) { ?>
+                    while ($row = oci_fetch_assoc($result)) {
+                        $count++; ?>
+
                         <div class="individual-product">
                             <div class="img-container position-relative">
                                 <img src="./images/products/<?php echo $row['PRODUCT_IMAGE'] ?>" alt=""/>
                                 <i class="fas fa-search position-absolute"></i>
                             </div>
+
                             <div class="info d-flex align-items-baseline justify-content-between mt-3">
                                 <p class="font-rubik"><?php echo $row['PRODUCT_NAME'] ?></p>
+
                                 <?php $discounted_result = fetch_discouted_price_from_products($row['FK_OFFER_ID'], $row['ITEM_PRICE'], $connection) ?>
-                                <p class="font-rubik price-content">$<?php echo $discounted_result['total_price_after_discount']?></p>
+                                <p class="font-rubik price-content">
+                                    $<?php echo $discounted_result['total_price_after_discount'] ?></p>
                             </div>
+
                             <div class="btn-container font-rubik">
-                                <a href="/website/project/assets/trader-types/individual-product/individual-product.php?search=<?php echo $row['PRODUCT_ID']?>&type=greengrocer"
+                                <a href="/website/project/assets/trader-types/individual-product/individual-product.php?search=<?php echo $row['PRODUCT_ID'] ?>&type=greengrocer"
                                    class="btn btn-dark">View Product</a>
                             </div>
+
                         </div>
                     <?php } ?>
-
-
                 </div>
             </div>
         </section>

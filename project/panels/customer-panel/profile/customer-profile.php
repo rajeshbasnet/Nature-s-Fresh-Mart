@@ -28,12 +28,12 @@ include_once '../../../includes/cdn-links/bootstrap-cdn.php';
                 <?php
 
                 include_once '../../../assets/trader-types/functions.php';
-                $profile_img = get_profile_image_of_customer($_SESSION['user'], $connection);
+                $profile_img = get_profile_image_of_user($_SESSION['user'], $connection);
 
                 echo "<div class='user-profile-header'>";
 
-                if(!isset($profile_image)) {
-                    $profile_image = "default-image.jpg";
+                if(empty($profile_img)) {
+                    $profile_img = "default-image.jpg";
                 }
 
                 echo "<img src='./profile-img/" . $profile_img . "' alt='profile-icon' width='40px' height='40px'>";
@@ -87,6 +87,13 @@ include_once '../../../includes/cdn-links/bootstrap-cdn.php';
                                     echo "<div class='img-select'>";
                                     echo "<input type='file' name='profile_img' id='profile_img' />";
                                     echo "</div>";
+                                    if(isset($img_error)) {
+                                        echo $img_error;
+                                    }
+
+                                    echo "<span class='note'><b>Note:</b> Profile will be updated even if you do not provide profile image or password.</span>";
+                                    echo "<span class='note'><b>Note:</b> Both profile image and password will be your previous image and password.</span>";
+
                                     echo "</div>";
 
                                     echo "<div class='column-right w-100 ml-3'>";
@@ -112,6 +119,10 @@ include_once '../../../includes/cdn-links/bootstrap-cdn.php';
                                     echo "<label for='userEmail' class='form-label'>Email</label>";
                                     echo "<input type='email' class='form-control' id='userEmail' name='userEmail'  value='" . $row['EMAIL'] . "'>";
                                     echo "</div>";
+
+                                    if(isset($email_error)) {
+                                        echo $email_error;
+                                    }
 
                                     echo "<div class='password my-4'>";
                                     echo "<label for='user_pass' class='form-label'>Password</label>";
@@ -150,7 +161,7 @@ include_once '../../../includes/cdn-links/bootstrap-cdn.php';
 </main>
 
 <!--External Script-->
-<script src="script.js"></script>
+<script src="../../script.js"></script>
 
 
 

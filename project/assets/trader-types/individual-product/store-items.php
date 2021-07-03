@@ -12,10 +12,13 @@ if (isset($_POST['formSubmit'])) {
     $product_name = $_POST['product-name'] ??= "";
     $product_image = $_POST['product-image'] ??= "";
 
+    //Fetch maximum order
+
     if (isset($_SESSION['user'])) {
         $count_cart_items = 0;
         $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
-        $basket_id = get_basket_id_from_baskets($customer_id, $connection);
+        $basket_token = $_SESSION['basket_token'];
+        $basket_id = get_basket_id_from_baskets($basket_token, $connection);
         insert_into_basket_products($basket_id, $product_id, $product_quantity, $connection);
         $result = fetch_cart_items_from_baskets($basket_id, $connection);
 
@@ -51,7 +54,6 @@ if (isset($_POST['formSubmit'])) {
 
     }
     header("Refresh: 0; url='/website/project/assets/trader-types/individual-product/individual-product.php?search=$product_id&type=$trader_type'");
-
 }
 
 

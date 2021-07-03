@@ -99,15 +99,3 @@ input[type="number"] {
     box-shadow: none;
 }
 
-/** On Select change css */
-.custom-container .block {
-    display: block !important;
-}
-
-.custom-container .none {
-    display: none !important;
-}
-
-.column-second {
-    display: none;
-}

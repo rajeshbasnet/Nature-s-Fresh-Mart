@@ -7,7 +7,7 @@ body {
 }
 
 .container-fluid {
-    background-image: url("..e/formbg.jpg");
+    background-image: url("../bg-image/formbg.jpg");
     background-size: cover;
     height: 100vh;
     overflow: hidden;

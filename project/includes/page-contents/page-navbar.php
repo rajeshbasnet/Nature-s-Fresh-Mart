@@ -11,7 +11,7 @@ if (!$connection) {
 
 
 //Select all the trader types of trader
-$query = "SELECT * FROM TRADERS";
+$query = "SELECT * FROM USERS, TRADERS WHERE TRADERS.USER_ID = USERS.USER_ID AND USERS.STATUS = 1";
 $result = oci_parse($connection, $query);
 oci_execute($result);
 ?>
@@ -59,7 +59,7 @@ oci_execute($result);
                 >
             </li>
 
-            <li class="nav-item mx-3 dropdown">
+            <li class="nav-item mx-4 dropdown">
                 <a class="nav-link" href="#" data-toggle="dropdown">
                     Shops
                     <i class="fas fa-chevron-down mx-1"></i>
@@ -72,28 +72,51 @@ oci_execute($result);
                            href="/website/project/assets/trader-types/<?php echo $row['TRADER_TYPE'] ?>/<?php echo $row['TRADER_TYPE'] ?>.php"><?php echo ucfirst($row['TRADER_TYPE']); ?></a>
                     <?php } ?>
 
-            <li class="nav-item mx-3">
+            <li class="nav-item mx-4">
                 <a href="/website/project/assets/about-us/about-us.php" class="nav-link">About Us</a>
             </li>
 
             <?php if ((isset($_SESSION['user']))) { ?>
 
-                <li class="nav-item mx-3">
+                <li class="nav-item mx-4">
                     <!--Provide Link for Sign Up-->
-                    <a href="/website/project/panels/customer-panel/profile/customer-profile.php" class="nav-link nav-link-item"><i style="font-size: 1.5rem"
-                                                                  class="fas fa-user text-warning"></i></a>
+                    <a href="/website/project/panels/customer-panel/profile/customer-profile.php" class="nav-link nav-link-item">
+                        <i style="font-size: 1.65rem; color: var(--primary-color);"  class="fas fa-user-circle"></i>
+                    </a>
                 </li>
 
+            <?php }elseif(isset($_SESSION['trader'])) { ?>
+
+                <li class="nav-item mx-4">
+                    <!--Provide Link for Sign Up-->
+                    <a href="/website/project/panels/trader-panel/profile/trader-profile.php" class="nav-link nav-link-item">
+                        <i style="font-size: 1.65rem; color: var(--primary-color);"  class="fas fa-user-circle"></i>
+                    </a>
+                </li>
+
+            <?php }elseif(isset($_SESSION['admin'])) { ?>
+
+                <li class="nav-item mx-4">
+                    <!--Provide Link for Sign Up-->
+                    <a href="/website/project/panels/admin-panel/profile/admin-profile.php" class="nav-link nav-link-item">
+                        <i style="font-size: 1.65rem; color: var(--primary-color);"  class="fas fa-user-circle"></i>
+                    </a>
+                </li>
 
             <?php } else { ?>
 
-                <li class="nav-item mx-3">
-                    <a class="nav-link" href="/website/project/assets/form/signin/signin.php">Login</a>
+                <li class="nav-item dropdown mx-4">
+                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Sign Up
+                        &nbsp;<i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a href="/website/project/assets/form/signup/customer-signup/customer-signup.php" class="nav-link nav-link-item text-dark">Customer</a>
+                        <a href="/website/project/assets/form/signup/trader-signup/trader-signup.php" class="nav-link nav-link-item text-dark">Trader</a>
+                    </div>
                 </li>
 
-                <li class="nav-item mx-3">
-                    <a href="/website/project/assets/form/signup/customer-signup/customer-signup.php"
-                       class="nav-link nav-link-item">Sign Up</a>
+                <li class="nav-item mx-4">
+                    <a class="nav-link" href="/website/project/assets/form/signin/signin.php">Login</a>
                 </li>
 
             <?php } ?>

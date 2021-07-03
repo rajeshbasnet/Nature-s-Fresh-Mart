@@ -1,4 +1,6 @@
-
+<?php
+  $total_sum=0;
+?>
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -92,6 +94,7 @@
       <img src='https://raw.githubusercontent.com/rajeshbasnet/images/13f40fd94b35ab3a730c2d3aefe98201c423b3df/footer_logo.png' alt=''>
       <br>
       <?php
+        oci_execute($qp2);
         $countCust = 0;
         while (($row = oci_fetch_assoc($qp2)) && ($countCust === 0)){
           echo "<p style='float: left;'><strong>Order ID:&nbsp;&nbsp;".$row['ORDER_ID']."</strong></p>";
@@ -104,22 +107,36 @@
       ?>
       <table>
         <tr>
-          <th>product_name</th>
-          <th>item_price</th>
-          <th>quantity</th>
+          <th>Product name</th>
+          <th>Item Price</th>
+          <th>Quantity</th>
+          <th>Item Total</th>
         </tr>
         <?php
-        oci_execute($qp2);
+          oci_execute($qp2);
           while (($roww = oci_fetch_assoc($qp2)) ){
+            $product_id = $roww['PRODUCT_ID'];
+            $value = fetch_offerid_and_productprice_from_product_id($product_id, $connection);
+
+            $offer_id = $value['offer_id'];
+            $product_price = $value['product_price'];
+            $array_value = fetch_discouted_price_from_products($offer_id, $product_price, $connection);
+
+            $discount_price = $array_value['total_price_after_discount'];
+
+            $quantity = $roww['QUANTITY'];
+            $individual_sum = floatval($discount_price) * intval($quantity);
+            $total_sum = $total_sum + $individual_sum;
             echo "<tr>";
               echo "<td>".$roww['PRODUCT_NAME']."</td>";
-              echo "<td>".$roww['ITEM_PRICE']."</td>";
+              echo "<td>".$discount_price."</td>";
               echo "<td>".$roww['QUANTITY']."</td>";
+              echo "<td>".$individual_sum."</td>";
             echo "</tr>";
-            // $countPr++;
           }
         ?>
         <tr>
+          <td></td>
           <td></td>
           <td><strong>Total</strong></td>
           <td><?php echo $total_sum; ?></td>

@@ -21,14 +21,14 @@ $discount = 0;
 $totalPriceAfterDiscount = 0;
 $offerDescription = "";
 
-include_once "./store-items.php";
 
-
-if (isset($product_id)) {
-
+if (!empty($product_id) && !empty($trader_type)) {
+    include_once "./store-items.php";
     include_once "../../../includes/html-skeleton/skeleton.php";
     include_once "../../../includes/cdn-links/bootstrap-cdn.php";
     include_once "../../../includes/cdn-links/fontawesome-cdn.php"; ?>
+
+
 
     <!--External Sylesheet-->
     <link rel="stylesheet" href="../trader-product-css/trader-product.css">
@@ -64,15 +64,17 @@ if (isset($product_id)) {
 
 
     <main class="my-5">
-        <!--Add to Cart-->
+
         <?php
+
         //Fetch row of a single product out of all products
         while ($row = oci_fetch_assoc($result)) { ?>
             <section class="w-75 mx-auto cart-info">
                 <div class="img-container">
                     <div class="row">
                         <div class="col-12 col-sm-11 col-md-8 col-lg-5 col-xl-5">
-                            <img src="../images/products/<?php echo $row['PRODUCT_IMAGE'] ?>" class="w-100" alt=""/>
+                            <img src="../<?php echo $trader_type; ?>/images/products/<?php echo $row['PRODUCT_IMAGE'] ?>"
+                                 class="w-100" alt=""/>
                         </div>
                         <div class="col-12 col-sm-11 col-md-8 col-lg-7 col-xl-7 font-rale">
                             <!--TODO : Provide action for form-->
@@ -113,44 +115,84 @@ if (isset($product_id)) {
                                         <span>(<?php echo $count; ?>)</span>
                                     </div>
 
-                                    <!--Calculating Offers for individual product-->
                                     <?php
 
-                                    $offerId = $row['FK_OFFER_ID'];
-                                    $productPrice = $row['ITEM_PRICE'];
+                                    $product_availability = $row['AVAILABLILITY'];
+
+                                    if ($product_availability == 1) {
+
+                                        //Calculating Offers for individual product
+                                        $offerId = $row['FK_OFFER_ID'];
+                                        $productPrice = $row['ITEM_PRICE'];
+
+                                        $resultThird = fetch_discouted_price_from_products($offerId, $productPrice, $connection); ?>
 
 
-                                    $resultThird = fetch_discouted_price_from_products($offerId, $productPrice, $connection);
+                                        <div class="pricing-container my-4">
+                                            <p class="my-0">
+                                                <del>$<?php echo number_format($productPrice, '2', '.'); ?></del>
+                                                <span class="mx-3">(Including all taxes)</span>
+                                            </p>
+                                            <p class="discount">
+                                                $<?php echo $resultThird['total_price_after_discount']; ?><span
+                                                        class="rounded">-<?php echo $resultThird['offer_percentage']; ?>%</span>
+                                            </p>
+                                        </div>
 
+                                        <!--Hidden input field-->
+                                        <input type="hidden" name="product-price"
+                                               value="<?php echo $resultThird['total_price_after_discount']; ?>">
+                                        <input type="hidden" name="product-name"
+                                               value="<?php echo $row['PRODUCT_NAME']; ?>">
+                                        <input type="hidden" name="product-image"
+                                               value="<?php echo $row['PRODUCT_IMAGE']; ?>">
+
+                                        <?php
+
+                                        $product_quantity = $row['QUANTITY_IN_STOCK'];
+
+                                        if($product_quantity >= 20) { ?>
+
+                                            <div class="order-quantity d-flex align-items-start my-3">
+                                                <p class="mr-2">Quantity :</p>
+
+                                                <div class="quantity ml-3 d-flex">
+                                                    <button type="button" class="btn decrease-btn">-</button>
+                                                    <input type="number" class="form-control w-25 text-center" value="1"
+                                                           name="product_quantity" readonly>
+                                                    <button type="button" class="btn increase-btn">+</button>
+                                                </div>
+                                            </div>
+
+                                        <?php }else { ?>
+
+                                            <div class="order-quantity d-flex align-items-start my-3">
+                                                <p class="mr-2">Quantity :</p>
+
+                                                <div class="quantity ml-3 d-flex">
+                                                    <button type="button" class="btn decrease-btn">-</button>
+                                                    <input type="number" class="form-control w-25 text-center" value="1"
+                                                           name="product_quantity" readonly>
+                                                    <button type="button" class="btn increase-btn btn-<?php echo $product_quantity; ?>">+</button>
+                                                </div>
+                                            </div>
+
+                                        <?php }?>
+
+
+                                        <div class="order-btn__container my-3">
+                                            <button type="submit" class="btn btn-md btn-primary" name="formSubmit">Add
+                                                to Cart
+                                            </button>
+                                        </div>
+
+
+                                    <?php } else { ?>
+                                        <p class="out-of-stock text-uppercase text-center border border-success font-rubik text-danger">
+                                            OUT OF STOCK</p>
+                                    <?php }
                                     ?>
 
-                                    <div class="pricing-container my-4">
-                                        <p class="my-0">
-                                            <del>$<?php echo number_format($productPrice, '2', '.'); ?></del>
-                                            <span class="mx-3">(Including all taxes)</span>
-                                        </p>
-                                        <p class="discount">$<?php echo $resultThird['total_price_after_discount']; ?><span
-                                                    class="rounded">-<?php echo $resultThird['offer_percentage']; ?>%</span></p>
-                                    </div>
-
-                                    <!--Hidden input field-->
-                                    <input type="hidden" name="product-price" value="<?php echo $resultThird['total_price_after_discount']; ?>">
-                                    <input type="hidden" name="product-name" value="<?php echo $row['PRODUCT_NAME']; ?>">
-                                    <input type="hidden" name="product-image" value="<?php echo $row['PRODUCT_IMAGE']; ?>">
-
-                                    <div class="order-quantity d-flex align-items-start my-3">
-                                        <p class="mr-2">Quantity :</p>
-
-                                        <div class="quantity ml-3 d-flex">
-                                            <button type="button" class="btn decrease-btn">-</button>
-                                            <input type="number" class="form-control w-25 text-center" value="1"
-                                                   name="product_quantity">
-                                            <button type="button" class="btn increase-btn">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="order-btn__container my-3">
-                                        <button type="submit" class="btn btn-md btn-primary" name="formSubmit">Add to Cart</button>
-                                    </div>
                                 </fieldset>
                             </form>
                         </div>
@@ -162,7 +204,8 @@ if (isset($product_id)) {
             <section class="w-75 mx-auto item-description my-5">
                 <div class="row my-5">
                     <div class="col-5 col-sm-5 col-md-4 col-lg-5 col-xl-4 mx-auto d-flex">
-                        <img src="../trader-images/undraw_real_time_collaboration_c62i%20(1).svg" class="w-75 mx-auto" alt=""/>
+                        <img src="../trader-images/undraw_real_time_collaboration_c62i%20(1).svg" class="w-75 mx-auto"
+                             alt=""/>
                     </div>
                     <div class="col-10 col-sm-10 col-md-7 col-lg-6 col-xl-6 mx-auto">
                         <div id="accordion">
@@ -409,22 +452,22 @@ if (isset($product_id)) {
 
 
                                 <div class="rating-container d-inline mx-3">
-                                <?php
+                                    <?php
 
-                                $rating = 0;
-                                $rating = $rowFifth['REVIEW_RATING'];
+                                    $rating = 0;
+                                    $rating = $rowFifth['REVIEW_RATING'];
 
-                                if($rating > 0) {
-                                    for($i = 1; $i <= $rating; $i++) { ?>
-                                        <i class="fas fa-star text-warning"></i>
-                                    <?php }
+                                    if ($rating > 0) {
+                                        for ($i = 1; $i <= $rating; $i++) { ?>
+                                            <i class="fas fa-star text-warning"></i>
+                                        <?php }
 
-                                    $unrated = 5 - $rating;
-                                    for($i = 1; $i <= $unrated; $i++) { ?>
-                                        <i class="far fa-star text-warning"></i>
-                                   <?php  }
-                                }
-                                ?>
+                                        $unrated = 5 - $rating;
+                                        for ($i = 1; $i <= $unrated; $i++) { ?>
+                                            <i class="far fa-star text-warning"></i>
+                                        <?php }
+                                    }
+                                    ?>
                                 </div>
 
 
@@ -456,5 +499,5 @@ if (isset($product_id)) {
     <script src="../trader-scripts/vendor.js"></script>
 
 <?php } else {
-    header('Location: /website/project/trader-types/'. $trader_type. '/'.$trader_type.'.php');
+    header('Location: https://localhost/website/project/homepage.php');
 } ?>

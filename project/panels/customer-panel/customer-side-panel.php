@@ -9,13 +9,13 @@
                 </li>
 
                 <li class="nav-item panel-links">
-                    <a href="#" class="nav-link d-inline-block">
+                    <a href="/website/project/panels/customer-panel/dashboard/dashboard.php" class="nav-link d-inline-block">
                         <i class="fas fa-tachometer-alt"></i>
                         Dashboard</a>
                 </li>
 
                 <li class="nav-item panel-links">
-                    <a href="./profile/customer-profile.php" class="nav-link d-inline-block">
+                    <a href="/website/project/panels/customer-panel/profile/customer-profile.php" class="nav-link d-inline-block">
                         <i class="fas fa-user-circle"></i>
                         Profile</a>
                 </li>
@@ -23,7 +23,7 @@
                 <li class="nav-item panel-links">
                     <a href="/website/project/homepage.php" class="nav-link d-inline-block">
                         <i class="fas fa-arrow-circle-left"></i>
-                        Back to site</a>
+                        Back to site</a
                 </li>
             </ul>
         </nav>

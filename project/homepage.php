@@ -15,18 +15,11 @@ if (isset($_SESSION['user'])) {
 
     $inserted_items = "";
     $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
-    $count_basket = check_customers_from_basket($customer_id, $connection);
 
-    if($count_basket == 0) {
-        insert_into_basket($customer_id, $connection);
-    }
+    $basket_token = $_SESSION['basket_token'];
+    $basket_id = get_basket_id_from_baskets($basket_token, $connection);
 
-
-    insert_into_basket($_SESSION['user'], $connection);
-    $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
-    $basket_id = get_basket_id_from_baskets($customer_id, $connection);
-
-    if(count($_COOKIE) > 1) {
+    if (count($_COOKIE) > 1) {
         $total_price = 0;
 
         foreach ($_COOKIE as $key => $item) {
@@ -57,35 +50,22 @@ if (isset($_SESSION['user'])) {
 
         $count_cart_items = 0;
 
-        while($rows = oci_fetch_assoc($inserted_items)) {
+        while ($rows = oci_fetch_assoc($inserted_items)) {
             $count_cart_items++;
         }
 
-        if(isset($_SESSION['count'])) {
+        if (isset($_SESSION['count'])) {
             $_SESSION['count'] = $_SESSION['count'] + $count_cart_items;
 
-        }else {
+        } else {
             $_SESSION['count'] = $count_cart_items;
         }
 
-    }else {
+    } else {
 
-        $bool = true;
+        $count_basket_products = count_basket_products($basket_id, $connection);
 
-
-        if(isset($bool)) {
-            $count_basket_products = count_basket_products($basket_id, $connection);
-
-            if(isset($_SESSION['count'])) {
-                $_SESSION['count'] = $_SESSION['count'] + $count_basket_products;
-
-            }else {
-                $_SESSION['count'] = $count_basket_products;
-            }
-
-            $bool = false;
-        }
-
+        $_SESSION['count'] = $count_basket_products;
 
     }
 }
@@ -97,7 +77,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
 ?>
 
 <!--External CSS-->
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css"/>
 
 
 <header>
@@ -109,10 +89,10 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="./images/homepage/bg/main-bg.jpg" alt="First slide" />
+                    <img class="d-block w-100" src="./images/homepage/bg/main-bg.jpg" alt="First slide"/>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="./images/homepage/bg/bg.jpg" alt="Second slide" />
+                    <img class="d-block w-100" src="./images/homepage/bg/bg.jpg" alt="Second slide"/>
                 </div>
             </div>
         </div>
@@ -133,13 +113,13 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
     <!--Why Nature's Fresh Mart-->
     <section class="features mt-5">
         <h2 class="font-cursive text-center">Why Nature's Fresh Mart</h2>
-        <hr class="horizantal-break my-3" />
+        <hr class="horizantal-break my-3"/>
 
         <div class="container-fluid w-100">
             <div class="row my-5">
                 <div class="col-xl-4 border feature-first font-rubik px-5">
                     <p class="text-center mt-3">
-                        <img src="./images/homepage/features/orange_travelpictdinner_1484336833.png" alt="dinning" />
+                        <img src="./images/homepage/features/orange_travelpictdinner_1484336833.png" alt="dinning"/>
                     </p>
 
                     <h5 class="mt-4 text-center">High Quality Products</h5>
@@ -154,7 +134,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
 
                 <div class="col-xl-4 border feature-first font-rubik px-5">
                     <p class="text-center mt-3">
-                        <img src="./images/homepage/features/5830939211582692246.svg" class="family" alt="family" />
+                        <img src="./images/homepage/features/5830939211582692246.svg" class="family" alt="family"/>
                     </p>
 
                     <h5 class="mt-4 text-center">We have a Large Family</h5>
@@ -169,7 +149,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
 
                 <div class="col-xl-4 border feature-first font-rubik px-5">
                     <p class="text-center mt-3">
-                        <img src="./images/homepage/features/delivery-truck.png" alt="delivery" />
+                        <img src="./images/homepage/features/delivery-truck.png" alt="delivery"/>
                     </p>
 
                     <h5 class="mt-4 text-center">Timely delivery</h5>
@@ -185,12 +165,12 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
         </div>
     </section>
 
-    <br />
+    <br/>
 
     <!--Why you will love us-->
     <section class="platform-description bg-light pt-5 pb-1">
         <h2 class="font-cursive text-center">Why you'll love us....</h2>
-        <hr class="horizantal-break my-3" />
+        <hr class="horizantal-break my-3"/>
 
         <div class="container-fluid love-us">
             <div class="row">
@@ -203,7 +183,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                         </p>
                     </div>
 
-                    <br />
+                    <br/>
 
                     <div class="points d-flex align-items-center">
                         <p class="bullets">2</p>
@@ -213,7 +193,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                         </p>
                     </div>
 
-                    <br />
+                    <br/>
 
                     <div class="points d-flex align-items-center">
                         <p class="bullets">3</p>
@@ -223,7 +203,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                         </p>
                     </div>
 
-                    <br />
+                    <br/>
 
                     <div class="points d-flex align-items-center">
                         <p class="bullets">4</p>
@@ -237,17 +217,17 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                 <div class="col-xl-3 mb-5">
                     <h2 class="ls-f"><strong> AWARD WINNING </strong></h2>
                     <img src="./images/homepage/loveus/pexels-adonyi-gábor-1400172.jpg" width="300px" height="200px"
-                        class="love-f-img" alt="vegetables" />
+                         class="love-f-img" alt="vegetables"/>
 
                     <h2 class="ls-s"><strong> SUSTAINABLE </strong></h2>
                     <img src="./images/homepage/loveus/pexels-anton-atanasov-221016.jpg" width="260px" height="160px"
-                        class="love-s-img" alt="farm" />
+                         class="love-s-img" alt="farm"/>
                 </div>
 
                 <div class="col-xl-2 align-self-center">
                     <h2 class="ls-t"><strong> SEASONAL </strong></h2>
                     <img src="./images/homepage/loveus/pexels-pixabay-161573.jpg" width="200px" height="150px"
-                        class="love-t-img" alt="lemon" />
+                         class="love-t-img" alt="lemon"/>
                 </div>
             </div>
         </div>
@@ -256,53 +236,51 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
     <!--Trader's Image Section-->
     <section class="header-img my-5">
         <h2 class="text-center font-cursive">Explore our shops</h2>
-        <hr class="horizantal-break" />
+        <hr class="horizantal-break"/>
 
         <div class="custom-container mt-5">
             <div class="column column-first position-relative">
-                <img src="./images/homepage/traders/butcher.jpg" class="column-img" alt="" />
-                <a href="/website/project/assets/trader-types/butcher/butcher.php"
-                    class="position-absolute font-rale">Butcher</a>
+                <img src="./images/homepage/traders/butcher.jpg" class="column-img" alt=""/>
+                <a href="/website/project/assets/trader-types/butcher/butcher.php" class="position-absolute font-rale">Butcher</a>
             </div>
 
             <div class="column column-middle">
-                <img src="./images/homepage/traders/fishmonger.jpg" class="column-img" alt="" />
+                <img src="./images/homepage/traders/fishmonger.jpg" class="column-img" alt=""/>
                 <a href="/website/project/assets/trader-types/fishmonger/fishmonger.php"
-                    class="position-absolute font-rale">Fishmonger</a>
+                   class="position-absolute font-rale">Fishmonger</a>
             </div>
 
             <div class="column column-middle">
-                <img src="./images/homepage/traders/delicatessen.jpg" class="column-img" alt="" />
+                <img src="./images/homepage/traders/delicatessen.jpg" class="column-img" alt=""/>
                 <a href="/website/project/assets/trader-types/delicatessen/delicatessen.php"
-                    class="position-absolute font-rale">Delicatessen</a>
+                   class="position-absolute font-rale">Delicatessen</a>
             </div>
 
             <div class="column column-middle">
-                <img src="./images/homepage/traders/greengrocer.jpg" class="column-img" alt="" />
+                <img src="./images/homepage/traders/greengrocer.jpg" class="column-img" alt=""/>
                 <a href="/website/project/assets/trader-types/greengrocer/greengrocer.php"
-                    class="position-absolute font-rale">Greengrocer</a>
+                   class="position-absolute font-rale">Greengrocer</a>
             </div>
 
             <div class="column column-last">
-                <img src="./images/homepage/traders/bakery.jpg" class="column-img" alt="" />
-                <a href="/website/project/assets/trader-types/bakery/bakery.php"
-                    class="position-absolute font-rale">Bakery</a>
+                <img src="./images/homepage/traders/bakery.jpg" class="column-img" alt=""/>
+                <a href="/website/project/assets/trader-types/bakery/bakery.php" class="position-absolute font-rale">Bakery</a>
             </div>
         </div>
     </section>
 
-    <br />
-    <br />
-    <br />
+    <br/>
+    <br/>
+    <br/>
 
     <!--TODO : Proper Questions and Answer-->
     <!--Frequently asked questions-->
     <section class="w-75 mx-auto item-description my-5">
         <h2 class="font-cursive text-center">Frequently Asked Questions</h2>
-        <hr class="horizantal-break my-3" />
+        <hr class="horizantal-break my-3"/>
         <div class="row my-5">
             <div class="col-5 col-sm-5 col-md-4 col-lg-5 col-xl-4 mx-auto">
-                <img src="./images/homepage/faq/undraw_real_time_collaboration_c62i (1).svg" class="w-100" alt="" />
+                <img src="./images/homepage/faq/undraw_real_time_collaboration_c62i (1).svg" class="w-100" alt=""/>
             </div>
             <div class="col-10 col-sm-10 col-md-7 col-lg-6 col-xl-6 mx-auto">
                 <div id="accordion">
@@ -313,13 +291,13 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                     align-items-start
                     justify-content-between
                   " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                            id="headingOne">
+                             id="headingOne">
                             <p class="font-rale">How to view above image</p>
                             <i class="fas fa-chevron-down"></i>
                         </div>
 
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                            data-parent="#accordion">
+                             data-parent="#accordion">
                             <div class="card-body">
                                 <p class="font-rubik">
                                     Anim pariatur cliche reprehenderit, enim eiusmod high life
@@ -344,7 +322,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                     align-items-center
                     justify-content-between
                   " data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-                            id="headingTwo">
+                             id="headingTwo">
                             <p class="font-rale">What are collection slots</p>
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -372,13 +350,13 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                     d-flex
                     align-items-center
                     justify-content-between
-                  " data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                            aria-controls="collapseThree" id="headingThree">
+                  " data-toggle="collapse" data-target="#collapseThree"
+                             aria-expanded="false" aria-controls="collapseThree" id="headingThree">
                             <p class="font-rale">More Info</p>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                            data-parent="#accordion">
+                             data-parent="#accordion">
                             <div class="card-body">
                                 <p class="font-rubik">
                                     Anim pariatur cliche reprehenderit, enim eiusmod high life

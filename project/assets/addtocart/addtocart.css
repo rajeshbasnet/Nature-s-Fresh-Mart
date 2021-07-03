@@ -197,6 +197,10 @@ main {
     text-decoration: underline;
 }
 
+.cart-items .container-fluid .row .col-xl-3 .cart-total .terms-conditions .p-0 {
+    font-size: 0.95rem;
+}
+
 .cart-items .container-fluid .row .col-xl-3 .cart-total .total {
     font-weight: bold;
 }

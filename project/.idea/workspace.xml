@@ -13,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -26,25 +26,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/addtocart/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\website\project\addtocart\images" />
-      <recent name="C:\xampp\htdocs\website\project\trader-types\butcher\images\bg-img" />
-      <recent name="C:\xampp\htdocs\website\project\trader-types\bakery\images\bg-img" />
-      <recent name="C:\xampp\htdocs\website\project\trader-types\trader-product-css" />
-      <recent name="C:\xampp\htdocs\website\project\trader-types\trader-css" />
+      <recent name="C:\xampp\htdocs\website\project\assets" />
+      <recent name="C:\xampp\htdocs\website\project\assets\trader-types\greengrocer\images\bg-img" />
+      <recent name="C:\xampp\htdocs\website\project\panels\admin-panel\profile\profile-img" />
+      <recent name="C:\xampp\htdocs\website\project\panels\trader-panel\crud-product\displayproduct" />
+      <recent name="C:\xampp\htdocs\website\project\panels\trader-panel\profile\profile-img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\website\project\panels\trader-panel\offers\displayoffer" />
+      <recent name="C:\xampp\htdocs\website\project\panels" />
+      <recent name="C:\xampp\htdocs\website\project\panels\default-img" />
       <recent name="C:\xampp\htdocs\website\project\panels\customer-panel\profile" />
       <recent name="C:\xampp\htdocs\website\project\assets" />
-      <recent name="C:\xampp\htdocs\website\project\trader-types" />
-      <recent name="C:\xampp\htdocs\website\project" />
-      <recent name="C:\xampp\htdocs\website\project\form" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -84,6 +84,27 @@
       <workItem from="1625031615544" duration="41000" />
       <workItem from="1625036730481" duration="7304000" />
       <workItem from="1625047736289" duration="1503000" />
+      <workItem from="1625049435295" duration="4380000" />
+      <workItem from="1625054043686" duration="1324000" />
+      <workItem from="1625058614155" duration="810000" />
+      <workItem from="1625060952561" duration="434000" />
+      <workItem from="1625072732611" duration="117000" />
+      <workItem from="1625114188609" duration="6058000" />
+      <workItem from="1625120960681" duration="13830000" />
+      <workItem from="1625137939777" duration="2019000" />
+      <workItem from="1625140090377" duration="4788000" />
+      <workItem from="1625145507930" duration="871000" />
+      <workItem from="1625153265538" duration="6268000" />
+      <workItem from="1625203006871" duration="18791000" />
+      <workItem from="1625224660032" duration="6675000" />
+      <workItem from="1625232442901" duration="342000" />
+      <workItem from="1625241429295" duration="4027000" />
+      <workItem from="1625285430544" duration="5372000" />
+      <workItem from="1625291760466" duration="4885000" />
+      <workItem from="1625296907840" duration="802000" />
+      <workItem from="1625300941685" duration="2529000" />
+      <workItem from="1625304298327" duration="885000" />
+      <workItem from="1625305459767" duration="1876000" />
     </task>
     <servers />
   </component>

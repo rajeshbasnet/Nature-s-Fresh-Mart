@@ -71,23 +71,23 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
 
                     <!--Search and sort form-->
                     <div class="search-sort">
-                        <form action="#" class="d-flex align-items-center justify-content-end">
+                        <form action="#" method="POST" class="d-flex align-items-center justify-content-end">
                             <div class="search-field mx-2">
-                                <input type="text" class="form-control font-rubik" name="search"
+                                <input type="text" class="form-control font-rubik" name="search-items"
                                        placeholder="Eg. Bananas, Apple"/>
                             </div>
 
                             <div class="sort-field mx-2">
                                 <select name="sort-items" id="sort-items" class="form-control font-rubik">
                                     <option value="" selected disabled>Sort By</option>
-                                    <option value="high">Price (Highest)</option>
-                                    <option value="low">Price (Lowest)</option>
-                                    <option value="asc">Product name</option>
+                                    <option value="high_price">Price (Highest)</option>
+                                    <option value="low_price">Price (Lowest)</option>
+                                    <option value="product_name">Product name</option>
                                 </select>
                             </div>
 
                             <div class="btn-container mx-2 font-rubik">
-                                <button class="btn btn-md">Search</button>
+                                <button type="submit" name="searchSubmit" class="btn btn-md">Search</button>
                             </div>
                         </form>
                     </div>
@@ -101,7 +101,40 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
         <?php
 
         include_once "../functions.php";
-        $result = fetch_all_products_of_trader("delicatessen", $connection);
+
+        if (isset($_POST['searchSubmit'])) {
+            $search_items = $_POST['search-items'] ??= "";
+            $sort_items = $_POST['sort-items'] ??= "";
+
+            $query = "SELECT * FROM TRADERS, SHOPS, PRODUCTS WHERE SHOPS.FK_TRADER_ID = TRADERS.TRADER_ID AND PRODUCTS.FK_SHOP_ID = SHOPS.SHOP_ID AND TRADERS.TRADER_TYPE = 'delicatessen' ";
+
+            if (!empty($search_items)) {
+
+                $query .= "AND PRODUCT_NAME LIKE '%$search_items%' ";
+
+            }
+
+            if (!empty($sort_items)) {
+
+                if ($sort_items == 'high_price') {
+                    $query .= " ORDER BY PRODUCTS.ITEM_PRICE DESC";
+
+                } elseif ($sort_items == "low_price") {
+                    $query .= " ORDER BY PRODUCTS.ITEM_PRICE ASC";
+
+                } elseif ($sort_items == 'product_name') {
+                    $query .= " ORDER BY PRODUCTS.PRODUCT_NAME ASC";
+                }
+
+            }
+
+            $result = oci_parse($connection, $query);
+            oci_execute($result);
+
+        } else {
+            $result = fetch_all_products_of_trader("delicatessen", $connection);
+        }
+
         ?>
 
         <!--Products Section-->

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once "../../../../connection/connect.php";
 
 //including form santization page
@@ -19,7 +21,7 @@ include_once "../../../../includes/cdn-links/bootstrap-cdn.php"; ?>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"
           class="customer-account w-50 mx-auto">
         <fieldset>
-            <h4 class="text-center font-rubik">Register for Customer Account</h4>
+            <h4 class="text-center font-rubik">Registeration for Customer Account</h4>
             <div class="icon-container d-flex justify-content-center align-items-center my-4">
                 <i class="fab fa-facebook-f mx-3"></i>
                 <i class="fab fa-google mx-3"></i>
@@ -31,6 +33,10 @@ include_once "../../../../includes/cdn-links/bootstrap-cdn.php"; ?>
             }
             if (isset($mail_error_msg)) {
                 echo $mail_error_msg;
+            }
+
+            if(isset($errors['empty'])) {
+                echo $errors['empty'];
             } ?>
 
 
