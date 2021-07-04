@@ -52,14 +52,14 @@ if (isset($_POST['updateProduct'])) {
                 $actual_path = 'C:/xampp/htdocs/website/project/assets/trader-types/' . $trader_type . '/images/products/' . $image_name . '';
                 move_uploaded_file($temp_path, $actual_path);
 
-                $query = "UPDATE PRODUCTS SET product_name = '$productName', item_price = $productPrice, quantity_in_stock = $instock, availablility = $availability, min_order = $minOrder, max_order = $maxOrder, allergy_info = '$allergyInfo', product_info = '$productDesc', product_image = '$image_name',  fk_offer_id = $fk_offer_id WHERE product_id = $product_id";
+                $query = "UPDATE PRODUCTS SET product_name = '$productName', item_price = $productPrice, quantity_in_stock = $instock, availablility = $availability, min_order = $minOrder, max_order = $maxOrder, allergy_info = '$allergyInfo', product_info = '$productDesc', product_image = '$image_name',  fk_offer_id = '$fk_offer_id' WHERE product_id = $product_id";
 
             } else {
                 $img_error = "<p style='border-width:1px !important' class='text-danger border border-danger text-center mt-4'><i class='fas fa-times-circle'></i>&nbsp;&nbsp;ERROR: INVALID IMAGE FORMAT</p>";
             }
 
         } else {
-            $query = "UPDATE PRODUCTS SET product_name = '$productName', item_price = $productPrice, quantity_in_stock = $instock, availablility = $availability, min_order = $minOrder, max_order = $maxOrder, allergy_info = '$allergyInfo', product_info = '$productDesc', fk_offer_id = $fk_offer_id WHERE product_id = $product_id";
+            $query = "UPDATE PRODUCTS SET product_name = '$productName', item_price = $productPrice, quantity_in_stock = $instock, availablility = $availability, min_order = $minOrder, max_order = $maxOrder, allergy_info = '$allergyInfo', product_info = '$productDesc', fk_offer_id = '$fk_offer_id' WHERE product_id = $product_id";
         }
 
         $qte = oci_parse($connection, $query);
