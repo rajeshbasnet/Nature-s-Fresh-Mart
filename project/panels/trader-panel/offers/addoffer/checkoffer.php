@@ -20,7 +20,7 @@ if(isset($_POST['insertOffer'])) {
         $result = oci_parse($connection, $query);
         oci_execute($result);
 
-        echo "<p style='border-width:2px !important; font-size: 1.1rem; font-weight : bold;' class='text-success border p-2 border-success w-50 mx-auto text-center mt-4'><i class='fas fa-times-circle'></i>&nbsp;&nbsp;SUCCESS: OFFER ADDED SUCCESSFULLY</p>";
+        echo "<p style='border-width:2px !important; font-size: 1.1rem; font-weight : bold;' class='text-success border p-2 border-success w-50 mx-auto text-center mt-4'><i class='fas fa-check-circle'></i>&nbsp;&nbsp;SUCCESS: OFFER ADDED SUCCESSFULLY</p>";
 
     }else {
         echo "<p style='border-width:2px !important; font-size: 1.1rem; font-weight : bold;' class='text-danger border p-2 border-danger w-50 mx-auto text-center mt-4'><i class='fas fa-times-circle'></i>&nbsp;&nbsp;ERROR: OFFER DISCOUNT FIELD CANNOT BE LEFT EMPTY</p>";

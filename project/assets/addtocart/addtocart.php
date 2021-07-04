@@ -8,7 +8,8 @@ $basket_id = "";
 include_once "../../connection/connect.php";
 $connection = getConnection();
 
-
+//Imp;orting functions
+include_once "../trader-types/functions.php";
 include_once '../../includes/html-skeleton/skeleton.php';
 include_once "../../includes/cdn-links/fontawesome-cdn.php";
 include_once "../../includes/cdn-links/bootstrap-cdn.php";
@@ -34,7 +35,7 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
     <?php include_once "../../includes/page-contents/page-navbar.php" ?>
 
     <div class="bg-image position-absolute">
-        <img src="./images/240_F_332384525_lhyX7giR1uKSRNpWDWR0v3Y1hooQMaqx.jpg" class="w-100" alt=""/>
+        <img src="./images/240_F_332384525_lhyX7giR1uKSRNpWDWR0v3Y1hooQMaqx.jpg" class="w-100" alt="" />
     </div>
 
     <!--Breadcrumbs-->
@@ -61,11 +62,11 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
 
                     <?php
 
-                    include_once "../trader-types/functions.php";
                     if (isset($_SESSION['user'])) {
 
                         $count = 0;
                         $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
+
                         $basket_token = $_SESSION['basket_token'];
                         $basket_id = get_basket_id_from_baskets($basket_token, $connection);
                         $count_items = fetch_cart_items_from_baskets($basket_id, $connection);
@@ -79,19 +80,19 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
                         }
 
                         if ($count > 0) { ?>
-                            <table class="table font-rubik table-hover">
-                                <thead class="text-center bg-light border">
-                                <th>No.</th>
-                                <th>Product image</th>
-                                <th>Product name</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Action</th>
-                                </thead>
+                    <table class="table font-rubik table-hover">
+                        <thead class="text-center bg-light border">
+                            <th>No.</th>
+                            <th>Product image</th>
+                            <th>Product name</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </thead>
 
-                                <tbody class="text-center">
+                        <tbody class="text-center">
 
-                                <?php
+                            <?php
 
                                 $i = 0;
                                 $cart_items = fetch_cart_items_from_baskets($basket_id, $connection);
@@ -113,53 +114,53 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
                                     $total_price = $discounted_price['total_price_after_discount'] * $rows['QUANTITY'];
                                     $totalPrice = $total_price + $totalPrice;
                                     ?>
-                                    <tr>
-                                        <td style="font-weight: bold;"
-                                            class="align-middle"><?php echo $i; ?></td>
-                                        <td class="align-middle">
-                                            <img src="../trader-types/<?php echo $trader_type; ?>/images/products/<?php echo $rows['PRODUCT_IMAGE'] ?>"
-                                                 alt="" class="my-3"/>
-                                        </td>
-                                        <td class="align-middle"><?php echo $rows['PRODUCT_NAME'] ?></td>
-                                        <td class="align-middle"><?php echo $rows['QUANTITY'] ?></td>
-                                        <td class="align-middle">£<?php echo $total_price; ?></td>
-                                        <td class="align-middle">
-                                            <a href="/website/project/assets/addtocart/remove-items.php?basket_id=<?php echo $rows['BASKET_ID'] ?>&product_id=<?php echo $rows['PRODUCT_ID'] ?>"><i
-                                                        class="fas fa-trash-alt text-danger"></i></a>
-                                        </td>
-                                    </tr>
+                            <tr>
+                                <td style="font-weight: bold;" class="align-middle"><?php echo $i; ?></td>
+                                <td class="align-middle">
+                                    <img src="../trader-types/<?php echo $trader_type; ?>/images/products/<?php echo $rows['PRODUCT_IMAGE'] ?>"
+                                        alt="" class="my-3" />
+                                </td>
+                                <td class="align-middle"><?php echo $rows['PRODUCT_NAME'] ?></td>
+                                <td class="align-middle"><?php echo $rows['QUANTITY'] ?></td>
+                                <td class="align-middle">£<?php echo $total_price; ?></td>
+                                <td class="align-middle">
+                                    <a
+                                        href="/website/project/assets/addtocart/remove-items.php?basket_id=<?php echo $rows['BASKET_ID'] ?>&product_id=<?php echo $rows['PRODUCT_ID'] ?>"><i
+                                            class="fas fa-trash-alt text-danger"></i></a>
+                                </td>
+                            </tr>
 
-                                <?php } ?>
+                            <?php } ?>
 
-                                </tbody>
-                            </table>
+                        </tbody>
+                    </table>
 
-                        <?php } else { ?>
+                    <?php } else { ?>
 
-                            <p class="text-center">
-                                <img src="images/oops.svg" class="no-items w-25" alt="">
-                            </p>
-                            <p class="alert alert-warning text-center font-rale"><b>No products have been placed to
-                                    cart items. Please, go to products to add items in your cart.</b></p>
+                    <p class="text-center">
+                        <img src="images/oops.svg" class="no-items w-25" alt="">
+                    </p>
+                    <p class="alert alert-warning text-center font-rale"><b>No products have been placed to
+                            cart items. Please, go to products to add items in your cart.</b></p>
 
-                        <?php }
+                    <?php }
                     } else {
 
                         if (count($_COOKIE) > 1) { ?>
 
-                            <table class="table font-rubik table-hover">
-                                <thead class="text-center bg-light border">
-                                <th>No.</th>
-                                <th>Product image</th>
-                                <th>Product name</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Action</th>
-                                </thead>
+                    <table class="table font-rubik table-hover">
+                        <thead class="text-center bg-light border">
+                            <th>No.</th>
+                            <th>Product image</th>
+                            <th>Product name</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </thead>
 
-                                <tbody class="text-center">
+                        <tbody class="text-center">
 
-                                <?php $index = 0;
+                            <?php $index = 0;
 
                                 foreach ($_COOKIE as $key => $item) {
 
@@ -172,34 +173,34 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
                                         $decodedItem = json_decode($item, true);
                                         $totalPrice = $totalPrice + $decodedItem['price']; ?>
 
-                                        <tr>
-                                            <td style="font-weight: bold;"
-                                                class="align-middle"><?php echo $index; ?></td>
-                                            <td class="align-middle">
-                                                <img src="../trader-types/<?php echo $decodedItem['type'] ?>/images/products/<?php echo $decodedItem['image'] ?>"
-                                                     alt="" class="my-3"/>
-                                            </td>
-                                            <td class="align-middle"><?php echo $decodedItem['name'] ?></td>
-                                            <td class="align-middle"><?php echo $decodedItem['quantity'] ?></td>
-                                            <td class="align-middle">£<?php echo $decodedItem['price'] ?></td>
-                                            <td class="align-middle">
-                                                <a href="/website/project/assets/addtocart/remove-items.php?key=<?php echo $decodedItem['id'] ?>"><i
-                                                            class="fas fa-trash-alt text-danger"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php }
+                            <tr>
+                                <td style="font-weight: bold;" class="align-middle"><?php echo $index; ?></td>
+                                <td class="align-middle">
+                                    <img src="../trader-types/<?php echo $decodedItem['type'] ?>/images/products/<?php echo $decodedItem['image'] ?>"
+                                        alt="" class="my-3" />
+                                </td>
+                                <td class="align-middle"><?php echo $decodedItem['name'] ?></td>
+                                <td class="align-middle"><?php echo $decodedItem['quantity'] ?></td>
+                                <td class="align-middle">£<?php echo $decodedItem['price'] ?></td>
+                                <td class="align-middle">
+                                    <a
+                                        href="/website/project/assets/addtocart/remove-items.php?key=<?php echo $decodedItem['id'] ?>"><i
+                                            class="fas fa-trash-alt text-danger"></i></a>
+                                </td>
+                            </tr>
+                            <?php }
                                 } ?>
 
-                                </tbody>
-                            </table>
+                        </tbody>
+                    </table>
 
-                        <?php } else { ?>
-                            <p class="text-center">
-                                <img src="images/oops.svg" class="no-items w-25" alt="">
-                            </p>
-                            <p class="alert alert-warning text-center font-rale"><b>No products have been placed
-                                    to cart items. Please, go to products to add items in your cart.</b></p>
-                        <?php }
+                    <?php } else { ?>
+                    <p class="text-center">
+                        <img src="images/oops.svg" class="no-items w-25" alt="">
+                    </p>
+                    <p class="alert alert-warning text-center font-rale"><b>No products have been placed
+                            to cart items. Please, go to products to add items in your cart.</b></p>
+                    <?php }
                     } ?>
                 </div>
 
@@ -210,7 +211,7 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
 
                         <div class="promo-code mt-5">
                             <p class="code text-uppercase">Do you have a promo code ?</p>
-                            <input type="text" class="form-control" placeholder="#####"/>
+                            <input type="text" class="form-control" placeholder="#####" />
                         </div>
 
                         <p class="total my-5 text-uppercase">
@@ -233,29 +234,41 @@ include_once "../../includes/cdn-links/bootstrap-cdn.php";
 
                             $total_product_per_orders = $_SESSION['count'];
 
-                            if ($total_product_per_orders === 0) { ?>
+                            $payment_date = get_latest_payment_dates_of_customer($connection, $customer_id);
+                            $latest_payment_date = date('Y-m-d', strtotime($payment_date['payment_date']));
+                            $payment_date_plus_one = date('Y-m-d', strtotime($payment_date['payment_date_plus_one']));
+                            $current_date = date('Y-m-d');
 
-                            <div class="checkout-error mt-2 font-rubik border border-warning">
-                                <p class="text-warning text-center mt-2">There are not items in your cart.</p>
-                            </div>
+                            if($current_date == $latest_payment_date || $current_date == $payment_date_plus_one) { ?>
+
+                        <div class="checkout-error mt-2 font-rubik border border-warning">
+                            <p class="text-warning text-center mt-2">You must wait 24 hrs from the time of purchase to
+                                place another order</p>
+                        </div>
+
+                        <?php } elseif ($total_product_per_orders === 0) { ?>
+
+                        <div class="checkout-error mt-2 font-rubik border border-warning">
+                            <p class="text-warning text-center mt-2">There are not items in your cart.</p>
+                        </div>
 
 
                         <?php } elseif ($total_product_per_orders <= 20 && $total_product_per_orders > 0) { ?>
 
-                            <a href="/website/project/assets/checkout/checkout.php"
-                               class="checkout-btn btn mt-5 font-rubik">
-                                CHECKOUT<i class="fas fa-lock mx-2"></i>
-                            </a>
+                        <a href="/website/project/assets/checkout/checkout.php"
+                            class="checkout-btn btn mt-5 font-rubik">
+                            CHECKOUT<i class="fas fa-lock mx-2"></i>
+                        </a>
 
-                        <?php } else { ?>
+                        <?php } elseif($total_product_per_orders > 20) { ?>
 
-                            <div class="checkout-error mt-2 font-rubik border border-warning">
-                                <p class="text-warning text-center">Cart has exceeded it's limit.</p>
-                                <p class="text-warning text-center p-0 mt-1">Please,
-                                    remove <?php echo($total_product_per_orders - 20) ?> different items</p>
-                            </div>
+                        <div class="checkout-error mt-2 font-rubik border border-warning">
+                            <p class="text-warning text-center">Cart has exceeded it's limit.</p>
+                            <p class="text-warning text-center p-0 mt-1">Please,
+                                remove <?php echo($total_product_per_orders - 20) ?> different items</p>
+                        </div>
 
-                        <?php } } ?>
+                        <?php }} ?>
 
                     </div>
                 </div>

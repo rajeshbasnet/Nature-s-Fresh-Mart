@@ -388,3 +388,28 @@ function delete_basket_using_total_sum($connection) {
     $result = oci_parse($connection, $query);
     oci_execute($result);
 }
+
+
+function get_latest_payment_dates_of_customer($connection, $customer_id)
+{
+    $query = "SELECT  payment_date, payment_date+1 AS payment
+                FROM ORDERS, BASKETS, BASKET_PRODUCTS, PRODUCTS, users, customers, shops
+                WHERE ORDERS.FK_BASKET_ID = BASKETS.BASKET_ID
+                AND BASKET_PRODUCTS.FK_BASKET_ID = BASKETS.BASKET_ID AND BASKET_PRODUCTS.FK_PRODUCT_ID = PRODUCTS.PRODUCT_ID 
+                AND baskets.fk_customer_id=customers.customer_id AND customers.customer_id = $customer_id  AND  (EXTRACT( DAY FROM sysdate ) )= (EXTRACT( DAY FROM payment_date )+1)
+                GROUP BY payment_date";
+
+    $result = oci_parse($connection, $query);
+    oci_execute($result);
+
+    $payment_date = "";
+    $payment_date_plus_one = "";
+
+    while($rows = oci_fetch_assoc($result)) {
+        $payment_date = $rows['PAYMENT'];
+        $payment_date_plus_one = $rows['PAYMENT_DATE'];
+    }
+
+    return array('payment_date' => $payment_date, "payment_date_plus_one" => $payment_date_plus_one);
+}
+
