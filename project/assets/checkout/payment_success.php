@@ -53,7 +53,7 @@
         ob_start();
         include "Customerinvoice.php";
         $msg = ob_get_clean();
-        $header = "From: tsaugat18@tbc.edu.np";
+        $header = "From: <tsaugat18@tbc.edu.np>\r\n";
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
