@@ -66,9 +66,17 @@ main .container-fluid .row .col-xl-10 .user-profile-header {
     height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     background-color: white;
     box-shadow: 5px 0px 15px rgb(208, 208, 208);
+}
+
+main .container-fluid .row .col-xl-10 .user-profile-header .trader-type {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 2rem;
+    margin-top : 1rem;
+    color: #747474;
 }
 
 main .container-fluid .row .col-xl-10 .user-profile-header img {

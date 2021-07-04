@@ -2,7 +2,14 @@
 
 session_start();
 
-if (isset($_SESSION['trader'])) {
+if(isset($_SESSION['trader'])) {
+    $user_id = $_SESSION['trader'];
+
+}elseif(isset($_SESSION['admin_as_trader'])) {
+    $user_id = $_SESSION['admin_as_trader'];
+}
+
+if (isset($user_id)) {
 
     include_once "../../../connection/connect.php";
     $connection = getConnection();
@@ -28,13 +35,18 @@ if (isset($_SESSION['trader'])) {
                     <?php
 
                     include_once '../../../assets/trader-types/functions.php';
-                    $profile_img = get_profile_image_of_user($_SESSION['trader'], $connection);
+                    $profile_img = get_profile_image_of_user($user_id, $connection);
 
                     echo "<div class='user-profile-header'>";
 
                     if (empty($profile_img)) {
                         $profile_img = "default-image.jpg";
                     }
+
+                    $trader_id = get_user_type_id($user_id, $connection, "TRADERS");
+                    $trader_type = get_trader_type_from_traders($trader_id, $connection);
+
+                    echo "<p class='trader-type'>" . strtoupper($trader_type) . "</p>";
 
                     echo "<img src='../profile/profile-img/" . $profile_img . "' alt='profile-icon' width='40px' height='40px'>";
                     echo "</div>";
@@ -49,48 +61,43 @@ if (isset($_SESSION['trader'])) {
 
                     <div class="table-container my-5 mx-4">
                         <table class="table table-hover table-bordered">
-                            <thead>
-                            <th>Product Price</th>
-                            <th>Product Image</th>
+                            <thead class="text-uppercase">
+                            <th>Order No</th>
+                            <th>Product Name</th>
                             <th>Product Price</th>
                             <th>Qty.</th>
-                            <th>Purchase Time</th>
-                            <th>Purchased Date</th>
+                            <th>Payment Date</th>
+                            <th>Delivery time</th>
+                            <th>Delivery Day</th>
                             </thead>
-<!--                            <tbody>-->
-<!--                            --><?php
-//
-//                            $customer_id = get_user_type_id($_SESSION['user'], $connection, "CUSTOMERS");
-//                            $query = "SELECT * FROM ORDERS, BASKETS, BASKET_PRODUCTS, PRODUCTS, CUSTOMERS, COLLECTION_SLOTS
-//                                WHERE ORDERS.FK_BASKET_ID = BASKETS.BASKET_ID AND
-//                                BASKET_PRODUCTS.FK_BASKET_ID = BASKETS.BASKET_ID AND
-//                                BASKET_PRODUCTS.FK_PRODUCT_ID = PRODUCTS.PRODUCT_ID AND
-//                                BASKETS.FK_CUSTOMER_ID = CUSTOMERS.CUSTOMER_ID AND
-//                                ORDERS.FK_COLLECTION_SLOT_ID = COLLECTION_SLOTS.COLLECTION_SLOT_ID AND CUSTOMERS.CUSTOMER_ID = $customer_id";
-//
-//                            $result = oci_parse($connection, $query);
-//                            oci_execute($result);
-//
-//                            while ($rows = oci_fetch_assoc($result)) {
-//
-//                                $time = $rows['COLLECTION_TIME'] . ' - ' . $rows['COLLECTION_DAY'];
-//
-//                                ?>
-<!---->
-<!--                                <tr>-->
-<!--                                    <td>--><?php //echo $rows['PRODUCT_NAME'] ?><!--</td>-->
-<!---->
-<!--                                    --><?php //$trader_type = fetch_trader_type_from_product($rows['PRODUCT_ID'], $connection); ?>
-<!--                                    <td><img src="/website/project/assets/trader-types/--><?php //echo $trader_type ?><!--/images/products/--><?php //echo $rows['PRODUCT_IMAGE'] ?><!--" alt=""></td>-->
-<!--                                    <td>£--><?php //echo $rows['ITEM_PRICE'] ?><!--</td>-->
-<!--                                    <td>--><?php //echo $rows['QUANTITY'] ?><!--</td>-->
-<!--                                    <td>--><?php //echo $time ?><!--</td>-->
-<!--                                    <td>--><?php //echo $rows['PAYMENT_DATE'] ?><!--</td>-->
-<!--                                </tr>-->
-<!---->
-<!--                            --><?php //} ?>
-<!---->
-<!--                            </tbody>-->
+                            <tbody>
+                            <?php
+
+                            $query = "SELECT  order_id,   orders.payment_date,  product_name, item_price, basket_products.quantity,collection_time,collection_day ,order_status 
+                                    FROM ORDERS, BASKETS, BASKET_PRODUCTS, PRODUCTS, users, traders, shops,collection_slots
+                                    WHERE  ORDERS.FK_BASKET_ID = BASKETS.BASKET_ID AND BASKET_PRODUCTS.FK_BASKET_ID = BASKETS.BASKET_ID
+                                    AND BASKET_PRODUCTS.FK_PRODUCT_ID = PRODUCTS.PRODUCT_ID AND orders.fk_collection_slot_id=collection_slots.collection_slot_id AND PRODUCTS.fk_shop_id = shops.shop_id
+                                    AND shops.fk_trader_id = traders.trader_id AND traders.user_id = users.user_id AND users.user_id= '$user_id' ORDER BY order_id desc";
+
+                            $result = oci_parse($connection, $query);
+                            oci_execute($result);
+
+                            $index = 0;
+                            while ($rows = oci_fetch_assoc($result)) { $index++;?>
+
+                                <tr>
+                                    <td><?php echo $index; ?></td>
+                                    <td><?php echo $rows['PRODUCT_NAME']; ?></td>
+                                    <td><?php echo $rows['ITEM_PRICE']; ?></td>
+                                    <td><?php echo $rows['QUANTITY']; ?></td>
+                                    <td><?php echo $rows['PAYMENT_DATE']; ?></td>
+                                    <td><?php echo $rows['COLLECTION_SLOT_TIME']; ?></td>
+                                    <td><?php echo $rows['COLLECTION_SLOT_DAY']; ?></td>
+                                </tr>
+
+                            <?php } ?>
+
+                            </tbody>
                         </table>
                     </div>
 
