@@ -21,8 +21,8 @@ DROP TABLE orders CASCADE CONSTRAINTS;
 -- Create a Database table to represent the "users" entity.
 CREATE TABLE users(
 	user_id	INTEGER PRIMARY KEY,
-	first_name	VARCHAR2(20) NOT NULL,
-	last_name	VARCHAR2(20) NOT NULL,
+	first_name	VARCHAR2(50) NOT NULL,
+	last_name	VARCHAR2(50) NOT NULL,
 	address	VARCHAR2(50) NOT NULL,
 	email	VARCHAR2(50) NOT NULL UNIQUE,
     phone_number INTEGER NOT NULL UNIQUE,
@@ -30,7 +30,8 @@ CREATE TABLE users(
     profile_img VARCHAR(100),
     token VARCHAR2(255),
     status INTEGER,
-    permissions VARCHAR2(40)
+    permissions VARCHAR2(40),
+    ADMIN_ACCESS VARCHAR(10)
 );
 
 CREATE TABLE customers(
@@ -87,7 +88,7 @@ CREATE TABLE products(
 	max_order INTEGER NOT NULL,
 	allergy_info VARCHAR2(1000),
     product_info VARCHAR2(600) NOT NULL,
-	product_image VARCHAR2(50),
+	product_image VARCHAR2(255),
     status INTEGER NOT NULL,
 	fk_shop_id	INTEGER NOT NULL,
 	fk_offer_id	INTEGER,
@@ -132,7 +133,6 @@ CREATE TABLE basket_products(
     fk_product_id	INTEGER NOT NULL,
 	fk_basket_id	INTEGER NOT NULL,
     quantity INTEGER NOT NULL,
-    --PRIMARY KEY (fk_product_id, fk_basket_id),
     FOREIGN KEY(fk_product_id) REFERENCES products(product_id),
 	FOREIGN KEY(fk_basket_id) REFERENCES baskets(basket_id)
 );
@@ -148,11 +148,6 @@ CREATE TABLE orders(
     FOREIGN KEY(fk_basket_id) REFERENCES baskets(basket_id),
     FOREIGN KEY(fk_collection_slot_id) REFERENCES collection_slots(collection_slot_id)
 );
-
-
-
-
-
 
 
 
@@ -371,17 +366,12 @@ END;
 -------------------------------------insert statements----------------------------------------------
 ----------------------------------------------------------------------------------------------------
 -- users data
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS) VALUES (null, 'saugat', 'thapa', 'Npj-12, Banke Gaon','neplese931@gmail.com', 9840064535,  'saugat123', '11/profile.jpg', null, 1, 'STHAPA');
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS) VALUES (null, 'rajesh', 'birse', 'Kathmandu', 'brajesh18@tbc.edu.np', 9840263535,  'saugat123', '12/profile.jpg', null, 1, 'RBASNET');
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS) VALUES (null, 'gaurav', 'bhansali', 'Mahendranagar, Tinkune','bhansaligaurav2000@gmail.com', 9940063535,  'saugat123', '13/profile.jpg', null, 1, 'GBHANSALI');
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS) VALUES (null, 'aakash', 'Verma', 'Npj-8, Bhrikutinagar','	aakashpuchu@gmail.com', 9840033535,  'saugat123', '14/profile.jpg', null, 1, 'AKDAS');
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS) VALUES (null, 'harsh', 'Teewary', 'Kathmandu', 'gharsh18@tbc.edu.np', 9840063545,  'saugat123', '15/profile.jpg', null, 1, 'HGUPTA');
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS) VALUES (null, 'MAIN', 'ADMIN', 'NPJ-12, Banke Gaon','adminWala@gmail.com', 9820063535, 'saugat123', '1/profile.png', null, 1);
-
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS) VALUES (null, 'prdeep', 'Verma', 'satdobato','prdeep@gmail.com', 9824063535, 'saugat123', '16/profile.jpg', null, 1);
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS) VALUES (null, 'sunny', 'Teewary', 'Kathmandu', 'sunny@gmail.com', 986003535, 'saugat123', '17/profile.jpg', null, 1);
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS) VALUES (null, 'jamla', 'Teewary', 'Kathmandu', 'jamal@gmail.com', 986006535, 'saugat123', '17/profile.jpg', null, 1);
-INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS) VALUES (null, 'harry', 'Teewary', 'Kathmandu', 'harry@gmail.com', 986063535, 'saugat123', '17/profile.jpg', null, 1);
+INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS, ADMIN_ACCESS) VALUES (null, 'saugat', 'thapa', 'Npj-12, Banke Gaon','neplese931@gmail.com', 9840064535,  'c43591e4f076656e9ab46df5131e06d8', '', null, 1, 'STHAPA', 'VILEROZE');
+INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS, ADMIN_ACCESS) VALUES (null, 'rajesh', 'khapatari', 'Kathmandu', 'brajesh18@tbc.edu.np', 9840263535,  'c43591e4f076656e9ab46df5131e06d8', '', null, 1, 'RBASNET', 'VILEROZE');
+INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS, ADMIN_ACCESS) VALUES (null, 'gaurav', 'bhansali', 'Mahendranagar, Tinkune','bhansaligaurav2000@gmail.com', 9940063535,  'c43591e4f076656e9ab46df5131e06d8', '', null, 1, 'GBHANSALI', 'VILEROZE');
+INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS, ADMIN_ACCESS) VALUES (null, 'aakash', 'das', 'Npj-8, Bhrikutinagar','	aakashpuchu@gmail.com', 9840033535,  'c43591e4f076656e9ab46df5131e06d8', '', null, 1, 'AKDAS', 'VILEROZE');
+INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS, ADMIN_ACCESS) VALUES (null, 'harsh', 'gupta', 'Kathmandu', 'gharsh18@tbc.edu.np', 9840063545,  'c43591e4f076656e9ab46df5131e06d8', '', null, 1, 'HGUPTA', 'VILEROZE');
+INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD, PROFILE_IMG, TOKEN, STATUS, PERMISSIONS, ADMIN_ACCESS) VALUES (null, 'MAIN', 'ADMIN', 'NPJ-12, Banke Gaon','adminWala@gmail.com', 9820063535, 'c43591e4f076656e9ab46df5131e06d8', '', null, 1,'VILEROZE', 'VILEROZE');
 
 
 -- trader data
@@ -389,27 +379,24 @@ INSERT INTO traders (USER_ID, TRADER_ID, trader_type) VALUES (10, null, 'greengr
 INSERT INTO traders (USER_ID, TRADER_ID, trader_type) VALUES (11, null, 'fishmonger');
 INSERT INTO traders (USER_ID, TRADER_ID, trader_type) VALUES (12, null, 'delicatessen');
 INSERT INTO traders (USER_ID, TRADER_ID, trader_type) VALUES (13, null, 'butcher');
-INSERT INTO traders(USER_ID, TRADER_ID, trader_type) VALUES (14, null, 'baker');
+INSERT INTO traders(USER_ID, TRADER_ID, trader_type) VALUES (14, null, 'bakery');
 
-
--- customer data
-INSERT INTO customers (USER_ID, customer_id) VALUES (16, null);
-INSERT INTO customers(USER_ID, customer_id) VALUES (17, null);
-INSERT INTO customers(USER_ID, customer_id) VALUES (18, null);
-INSERT INTO customers(USER_ID, customer_id) VALUES (19, null);
 
 -- admin data
 INSERT INTO admin (USER_ID, admin_id) VALUES (15, null);
 
 
 -- shop data
-INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null, 'John Legend Shop','Fresh Meat', 30);
-INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null,  'Rajbir Chand Shop','Fresh Daal', 31);
-INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null, 'Bijay Giri Shop','Bhaat', 32);
-INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null,  'Kadamber Verma Shop','Tarkari', 33);
-INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null, 'Sushant Teewary Shop', 'Roti', 34);
+INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null, 'Fresh Thapa Shop','Fruits and Vegetables', 30);
+INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null,  'Clean Basnet Shop','Fishes', 31);
+INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null, 'Gaurav Bhansali Shop','Fresh Ready to eat Goods', 32);
+INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null,  'Akash Puchu Shop','Fresh Meat', 33);
+INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (null, 'Sudha Gupta Shop', 'Bakery & Sweats ', 34);
 
-
+-- collection slots
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '10am - 1pm', 'Wednesday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '1am - 4pm', 'Thursday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '4am - 7pm', 'Friday');
 
 
 
