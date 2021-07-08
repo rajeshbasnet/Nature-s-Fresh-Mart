@@ -8,7 +8,6 @@ let collectionTimesArray = Array.prototype.slice.call(collectionTimes);
 
 let selectCollectionDayCont = document.querySelector('.collection_day__container');
 
-//Wednesday = 4, Thursday = 5, Friday = 6
 let defaultSlotDay = [4, 5, 6];
 
 let defaultSlotTime = [
