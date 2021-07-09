@@ -395,8 +395,26 @@ INSERT INTO SHOPS (SHOP_ID, SHOP_NAME, PRODUCT_CATEGORY, fk_trader_id) VALUES (n
 
 -- collection slots
 INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '10am - 1pm', 'Wednesday');
-INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '1am - 4pm', 'Thursday');
-INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '4am - 7pm', 'Friday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '1pm - 4pm', 'Wednesday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '4pm - 7pm', 'Wednesday');
 
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '10am - 1pm', 'Thursday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '1pm - 4pm', 'Thursday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '4pm - 7pm', 'Thursday');
 
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '10am - 1pm', 'Friday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '1pm - 4pm', 'Friday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '4pm - 7pm', 'Friday');
+
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '10am - 1pm', 'Next Wednesday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '1pm - 4pm', 'Next Wednesday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '4pm - 7pm', 'Next Wednesday');
+
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '10am - 1pm', 'Next Thursday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '1pm - 4pm', 'Next Thursday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '4pm - 7pm', 'Next Thursday');
+
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '10am - 1pm', 'Next Friday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '1pm - 4pm', 'Next Friday');
+INSERT INTO collection_slots (collection_slot_id, collection_time, collection_day) VALUES (null, '4pm - 7pm', 'Next Friday');
 
