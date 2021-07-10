@@ -146,11 +146,18 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
                     <!--Individual Products-->
                     <?php
                     $count = 0;
+                    $delay = 0.5;
 
                     while ($row = oci_fetch_assoc($result)) {
-                        $count++; ?>
+                        $count++; $delay = $delay + 0.2; ?>
+                        <style>
+                            .in-<?php echo $count;?>{
+                                animation-delay: <?php echo $delay; ?>s;
+                            }
+                        </style>
 
-                        <div class="individual-product">
+
+                        <div class="individual-product in-<?php echo $count;?> animate__animated animate__fadeInUp">
                             <div class="img-container position-relative">
                                 <img src="./images/products/<?php echo $row['PRODUCT_IMAGE'] ?>" alt=""/>
                                 <i class="fas fa-search position-absolute"></i>

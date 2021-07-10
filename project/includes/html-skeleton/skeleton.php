@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/website/project/images/homepage/icons/favicon-16x16.png">
     <link rel="manifest" href="/website/project/images/homepage/icons/site.webmanifest">
     <link rel="mask-icon" href="/website/project/images/homepage/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 </head>
