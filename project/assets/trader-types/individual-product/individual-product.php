@@ -630,8 +630,7 @@ if (!empty($product_id) && !empty($trader_type)) {
                         include_once "./reviews/reviews.php" ?>
 
                         <div class="insert-reviews w-100 text-center">
-                            <button class="btn btn-primary btn-review font-rubik">Click here to write your Reviews |
-                                Show/hide
+                            <button class="btn btn-primary btn-review font-rubik">Click here to write your Reviews
                             </button>
                             <?php
 

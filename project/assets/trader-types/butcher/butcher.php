@@ -105,7 +105,7 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
             $search_items = $_POST['search-items'] ??= "";
             $sort_items = $_POST['sort-items'] ??= "";
 
-            $query = "SELECT * FROM TRADERS, SHOPS, PRODUCTS WHERE SHOPS.FK_TRADER_ID = TRADERS.TRADER_ID AND PRODUCTS.FK_SHOP_ID = SHOPS.SHOP_ID AND TRADERS.TRADER_TYPE = 'butcher' ";
+            $query = "SELECT * FROM TRADERS, SHOPS, PRODUCTS WHERE SHOPS.FK_TRADER_ID = TRADERS.TRADER_ID AND PRODUCTS.FK_SHOP_ID = SHOPS.SHOP_ID AND TRADERS.TRADER_TYPE = 'butcher' AND PRODUCTS.STATUS = 1 ";
 
             if (!empty($search_items)) {
 
@@ -144,17 +144,27 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
 
                     <!--Individual Products-->
                     <?php
-                    $count = 0;
+                    $count_animation = 0;
                     $delay = 0.5;
-                    while ($row = oci_fetch_assoc($result)) { $count++; $delay = $delay + 0.2; ?>
+                    $count_products =0;
+
+                    while ($row = oci_fetch_assoc($result)) {
+
+                        $count_products++;
+                        $count_animation++;
+                        $delay = $delay + 0.2;
+
+                        ?>
+
+
                         <style>
-                            .in-<?php echo $count;?>{
+                            .in-<?php echo $count_animation;?>{
                                 animation-delay: <?php echo $delay; ?>s;
                             }
                         </style>
 
 
-                        <div class="individual-product in-<?php echo $count;?> animate__animated animate__fadeInUp">
+                        <div class="individual-product in-<?php echo $count_animation;?> animate__animated animate__fadeInUp">
                             <div class="img-container position-relative">
                                 <img src="./images/products/<?php echo $row['PRODUCT_IMAGE'] ?>" alt="" />
                                 <i class="fas fa-search position-absolute"></i>
@@ -179,7 +189,15 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
                                    class="btn btn-dark">View Product</a>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php }
+
+                    if($count_products == 0) { ?>
+
+                        <p style="font-size: 1.4rem; width: 100vw" class="font-rubik">Sorry, there is no such products to show :) </p>
+
+                    <?php }
+
+                    ?>
 
 
                 </div>

@@ -15,6 +15,7 @@ allIcons.forEach((icon, index) => {
     icon.addEventListener('click', () => {
 
         let iconIndex = index;
+        console.log(iconIndex)
         let iconClassName = icon.className;
         let splittedIconClassName = iconClassName.split(' ');
 
@@ -22,7 +23,7 @@ allIcons.forEach((icon, index) => {
 
             for(let index = 4; index >= iconIndex; index-- ) {
                 allIcons[index].removeAttribute('class');
-                allIcons[index].setAttribute('class', 'far fa-star text-warning')
+                allIcons[index].setAttribute('class', 'far fa-star text-warning');
             }
         }
 
@@ -32,10 +33,11 @@ allIcons.forEach((icon, index) => {
 
             for(let index= 0; index <= iconIndex; index++) {
                 allIcons[index].removeAttribute('class');
-                allIcons[index].setAttribute('class', 'fas fa-star text-warning')
+                allIcons[index].setAttribute('class', 'fas fa-star text-warning');
             }
         }
 
-        // ratingValue.value = iconIndex;
+        ratingValue.value = (iconIndex + 1);
+
     })
 })

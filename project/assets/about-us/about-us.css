@@ -24,9 +24,11 @@ header .bg-image {
     top: 0;
     left: 0;
     z-index: -1;
+    width: 100vw !important;
 }
 
 header .bg-image img {
+    width: 100%;
     z-index: -1;
     height: 35vh;
     object-fit: cover;

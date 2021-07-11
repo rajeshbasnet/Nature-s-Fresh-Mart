@@ -166,9 +166,21 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
     <!--Carouel Headings-->
     <div class="carousel-heading position-absolute text-center">
         <h2 class="font-cursive heading">Welcome to Nature's Fresh Mart</h2>
-        <div class="btn-container text-center">
-            <a href="/website/project/assets/form/signin/signin.php" class="btn btn-first">Login</a>
-            <a href="#explore" class="btn btn-second">Explore</a>
+        <div class="btn-container text-center font-rale">
+
+            <?php
+
+            //If customer is already logged in
+            if(isset($_SESSION['user'])) { ?>
+
+                <a href="#explore" class="btn btn-second explore-btn">Explore our shops</a>
+
+            <?php }else { //If a customer is not logged in ?>
+
+                <a href="/website/project/assets/form/signin/signin.php" class="btn btn-first">Login</a>
+                <a href="#explore" class="btn btn-second">Explore</a>
+
+            <?php } ?>
         </div>
     </div>
 </header>
@@ -242,7 +254,7 @@ include_once "includes/cdn-links/fontawesome-cdn.php";
                     <div class="points d-flex align-items-center">
                         <p class="bullets bullet-first">1</p>
                         <p class="mx-4">
-                            On average, plat, insect and bird life is 50% more abundant on
+                            On average plant, insect and bird life is 50% more abundant on
                             organic farms.
                         </p>
                     </div>

@@ -106,7 +106,7 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
         $search_items = $_POST['search-items'] ??= "";
         $sort_items = $_POST['sort-items'] ??= "";
 
-        $query = "SELECT * FROM TRADERS, SHOPS, PRODUCTS WHERE SHOPS.FK_TRADER_ID = TRADERS.TRADER_ID AND PRODUCTS.FK_SHOP_ID = SHOPS.SHOP_ID AND TRADERS.TRADER_TYPE = 'greengrocer' ";
+        $query = "SELECT * FROM TRADERS, SHOPS, PRODUCTS WHERE SHOPS.FK_TRADER_ID = TRADERS.TRADER_ID AND PRODUCTS.FK_SHOP_ID = SHOPS.SHOP_ID AND TRADERS.TRADER_TYPE = 'greengrocer' AND PRODUCTS.STATUS = 1 ";
 
         if (!empty($search_items)) {
 
@@ -148,9 +148,11 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
 
                 $count_animations = 0;
                 $delay = 0.5;
+                $count_products = 0;
 
                 while ($row = oci_fetch_assoc($result)) {
 
+                    $count_products++;
                     $count_animations++;
                     $delay = $delay + 0.2;
 
@@ -193,6 +195,12 @@ include_once "../../../includes/cdn-links/fontawesome-cdn.php";
                         </div>
 
                     </div>
+                <?php }
+
+                if($count_products == 0) { ?>
+
+                    <p style="font-size: 1.4rem; width: 100vw" class="font-rubik">Sorry, there is no such products to show :) </p>
+
                 <?php } ?>
             </div>
         </div>

@@ -162,6 +162,8 @@ button {
 }
 
 .table-container .table thead th{
+    text-align: center;
+    text-transform: uppercase;
     background-color: var(--totalcart-color);
     color: white;
     overflow: hidden;
@@ -177,12 +179,14 @@ button {
 
 
 .table-container .table tbody tr {
+    text-align: center;
     background-color: white;
 }
 
 .table-container .table tbody tr td img {
     width: 150px;
     height: 80px;
-    border-radius: 15px !important;
+    border-radius: 5px !important;
     overflow: hidden;
+    object-fit: cover;
 }
