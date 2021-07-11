@@ -1,0 +1,4 @@
+1. ERD, EERD, Composite/Decomposite ERD (word)
+	a. Include Team Name inside file
+2. ERD, EERD, Composite/Decomposite ERD (Qsee File)
+3.screen shots 

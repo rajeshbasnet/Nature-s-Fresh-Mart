@@ -2,12 +2,12 @@
 
 if (isset($_POST['updateProduct'])) {
 
-    if (!empty($_POST['product-name']) && !empty($_POST['product-price']) && !empty($_POST['product-quantity']) && !empty($_POST['product-availability'])) {
+    if (!empty($_POST['product-name']) && !empty($_POST['product-price'])) {
 
         $productName = htmlspecialchars(trim($_POST['product-name']));
         $productPrice = htmlspecialchars(trim($_POST['product-price']));
-        $instock = htmlspecialchars(trim($_POST['product-quantity']));
-        $availability = htmlspecialchars(trim($_POST['product-availability']));
+        $instock = $_POST['product-quantity'] ??= 0;
+        $availability = $_POST['product-availability'] ??= 0;
 
         if($availability == 1) {
             $minOrder = 1;

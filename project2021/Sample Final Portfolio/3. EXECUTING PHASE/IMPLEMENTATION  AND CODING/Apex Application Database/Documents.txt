@@ -1,0 +1,14 @@
+f101.sql
+
+application sql
+
+
+File Type: sql 
+
+3. DDL
+4. DML
+5. Sequence
+6. Trigger
+
+
+File Type: Notepad

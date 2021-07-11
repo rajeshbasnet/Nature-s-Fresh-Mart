@@ -1,0 +1,37 @@
+-- Create a Database table to represent the "orders" entity.
+CREATE TABLE orders(
+	order_id	INTEGER NOT NULL,
+    payment_date DATE NOT NULL,
+    order_status VARCHAR2(20),
+    fk_basket_id INTEGER NOT NULL,
+    fk_collection_slot_id INTEGER NOT NULL,
+    CONSTRAINT	pk_orders PRIMARY KEY (order_id),
+    FOREIGN KEY(fk_basket_id) REFERENCES baskets(basket_id),
+    FOREIGN KEY(fk_collection_slot_id) REFERENCES collection_slots(collection_slot_id)
+);
+--sequence
+CREATE SEQUENCE orders_seq
+    START WITH 50
+    INCREMENT BY 1;
+
+--triggers
+
+CREATE OR REPLACE TRIGGER insert_into_orders_id
+    BEFORE INSERT
+    ON orders
+    FOR EACH ROW
+    WHEN (NEW.order_id IS NULL)
+BEGIN
+    :NEW.order_id := orders_seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER insert_into_order_status
+    BEFORE INSERT
+    ON orders
+    FOR EACH ROW
+    WHEN (NEW.order_status IS NULL)
+BEGIN
+    :NEW.order_status := 'not delivered';
+END;
+/

@@ -1,0 +1,35 @@
+CREATE TABLE products(
+	product_id	INTEGER NOT NULL,
+	product_name VARCHAR2(150) NOT NULL,
+    item_price NUMBER(6,2) NOT NULL,
+    quantity_in_stock INTEGER NOT NULL,
+	availablility INTEGER NOT NULL,
+	min_order INTEGER NOT NULL,
+	max_order INTEGER NOT NULL,
+	allergy_info VARCHAR2(1000),
+    product_info VARCHAR2(600) NOT NULL,
+	product_image VARCHAR2(255),
+    status INTEGER NOT NULL,
+	fk_shop_id	INTEGER NOT NULL,
+	fk_offer_id	INTEGER,
+	CONSTRAINT	pk_product PRIMARY KEY (product_id),
+    FOREIGN KEY(fk_shop_id) REFERENCES shops(shop_id),
+    FOREIGN KEY(fk_offer_id) REFERENCES offers(offer_id)
+);
+
+
+--sequence
+CREATE SEQUENCE products_seq
+    START WITH 70
+    INCREMENT BY 1;
+
+--triggers
+CREATE OR REPLACE TRIGGER insert_into_product_id
+    BEFORE INSERT
+    ON products
+    FOR EACH ROW
+    WHEN (NEW.product_id IS NULL)
+BEGIN
+    :NEW.product_id := products_seq.NEXTVAL;
+END;
+/

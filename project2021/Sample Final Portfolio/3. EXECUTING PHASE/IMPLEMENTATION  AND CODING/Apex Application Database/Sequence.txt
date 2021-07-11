@@ -1,0 +1,73 @@
+
+
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------sequences---------------------------------------------
+----------------------------------------------------------------------------------------------------
+DROP SEQUENCE users_seq;
+DROP SEQUENCE customers_seq;
+DROP SEQUENCE traders_seq;
+DROP SEQUENCE admin_seq;
+DROP SEQUENCE baskets_seq;
+DROP SEQUENCE orders_seq;
+DROP SEQUENCE reviews_seq;
+DROP SEQUENCE products_seq;
+DROP SEQUENCE shops_seq;
+DROP SEQUENCE payments_seq;
+DROP SEQUENCE collection_slots_seq;
+DROP SEQUENCE offers_seq;
+DROP SEQUENCE invoices_seq;
+
+CREATE SEQUENCE users_seq
+    START WITH 10
+    INCREMENT BY 1;
+    
+CREATE SEQUENCE customers_seq
+    START WITH 20
+    INCREMENT BY 1;
+
+CREATE SEQUENCE traders_seq
+    START WITH 30
+    INCREMENT BY 1;
+
+CREATE SEQUENCE admin_seq
+    START WITH 40
+    INCREMENT BY 1;
+
+CREATE SEQUENCE orders_seq
+    START WITH 50
+    INCREMENT BY 1;
+
+CREATE SEQUENCE reviews_seq
+    START WITH 60
+    INCREMENT BY 1;
+
+CREATE SEQUENCE products_seq
+    START WITH 70
+    INCREMENT BY 1;
+
+CREATE SEQUENCE shops_seq
+    START WITH 80
+    INCREMENT BY 1;
+
+CREATE SEQUENCE payments_seq
+    START WITH 90
+    INCREMENT BY 1;
+
+CREATE SEQUENCE collection_slots_seq
+    START WITH 110
+    INCREMENT BY 1;
+
+CREATE SEQUENCE offers_seq
+    START WITH 120
+    INCREMENT BY 1;
+
+CREATE SEQUENCE baskets_seq
+    START WITH 130
+    INCREMENT BY 1;
+    
+CREATE SEQUENCE invoices_seq
+    START WITH 140
+    INCREMENT BY 1;
+    
+    

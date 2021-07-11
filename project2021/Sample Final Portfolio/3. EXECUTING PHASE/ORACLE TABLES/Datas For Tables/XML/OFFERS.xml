@@ -1,0 +1,28 @@
+
+
+-- Create a Database table to represent the "Offer" entity.
+CREATE TABLE offers(
+	offer_id	INTEGER NOT NULL,
+	percentage	INTEGER NOT NULL,
+	description	VARCHAR2(500) NOT NULL,
+    fk_trader_id INTEGER NOT NULL,
+	CONSTRAINT	pk_offer PRIMARY KEY (offer_id),
+    FOREIGN KEY(fk_trader_id) REFERENCES traders(trader_id)
+);
+--seq
+CREATE SEQUENCE offers_seq
+    START WITH 120
+    INCREMENT BY 1;
+
+
+--trigger
+
+CREATE OR REPLACE TRIGGER insert_into_offer_id
+    BEFORE INSERT
+    ON offers
+    FOR EACH ROW
+    WHEN (NEW.offer_id IS NULL)
+BEGIN
+    :NEW.offer_id := offers_seq.NEXTVAL;
+END;
+/

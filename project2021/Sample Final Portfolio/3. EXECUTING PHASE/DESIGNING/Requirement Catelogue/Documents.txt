@@ -1,0 +1,7 @@
+1. MOSCOW (Functional and Non-Functional)
+   a. Product
+   b. Customer
+   c. Trader
+   d. Mangement 
+
+File Type: Word

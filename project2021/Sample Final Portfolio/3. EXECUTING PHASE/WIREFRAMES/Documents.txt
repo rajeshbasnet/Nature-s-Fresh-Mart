@@ -1,0 +1,16 @@
+1. Admin
+2. Cart
+3. Home Mockup
+4. Invoice
+5. Login
+6. Register-customer
+7. Register Trader
+8. Trader Crud
+9. Admin panel
+10. Customer-panel
+11. Oracle-sign in
+12.Report on apex
+13.Admin,Trader,Customer Profile
+
+
+File type: screenshot/png file

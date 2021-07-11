@@ -1,0 +1,26 @@
+
+-- Create a Database table to represent the "collection_slot" entity.
+CREATE TABLE collection_slots(
+	collection_slot_id	INTEGER NOT NULL,
+	collection_time VARCHAR2(100) NOT NULL,
+	collection_day VARCHAR2(20) NOT NULL,
+	CONSTRAINT	pk_collection_slot PRIMARY KEY (collection_slot_id)
+);
+
+
+CREATE SEQUENCE collection_slots_seq
+    START WITH 110
+    INCREMENT BY 1;
+
+
+--trigger
+
+CREATE OR REPLACE TRIGGER insert_into_collection_slot_id
+    BEFORE INSERT
+    ON collection_slots
+    FOR EACH ROW
+    WHEN (NEW.collection_slot_id IS NULL)
+BEGIN
+    :NEW.collection_slot_id := collection_slots_seq.NEXTVAL;
+END;
+/

@@ -1,0 +1,8 @@
+-- Create a Database table to represent the "order_products" entity.
+CREATE TABLE basket_products(
+    fk_product_id	INTEGER NOT NULL,
+	fk_basket_id	INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY(fk_product_id) REFERENCES products(product_id),
+	FOREIGN KEY(fk_basket_id) REFERENCES baskets(basket_id)
+);

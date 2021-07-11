@@ -1,0 +1,24 @@
+-- Create a Database table to represent the "basket" entity.
+CREATE TABLE baskets(
+	basket_id INTEGER NOT NULL,
+	total_sum NUMBER(6,2),
+	fk_customer_id INTEGER NOT NULL,
+    token VARCHAR2(255) NOT NULL,
+	CONSTRAINT	pk_basket_id PRIMARY KEY (basket_id),
+    FOREIGN KEY(fk_customer_id) REFERENCES customers(customer_id)
+);
+--sequence
+CREATE SEQUENCE baskets_seq
+    START WITH 130
+    INCREMENT BY 1;
+
+--triggers
+CREATE OR REPLACE TRIGGER insert_into_basket_id
+    BEFORE INSERT
+    ON baskets
+    FOR EACH ROW
+    WHEN (NEW.basket_id IS NULL)
+BEGIN
+    :NEW.basket_id := baskets_seq.NEXTVAL;
+END;
+/

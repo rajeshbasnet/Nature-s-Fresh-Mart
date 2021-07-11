@@ -1,0 +1,3 @@
+1. All Php files
+
+File Type: php

@@ -1,0 +1,40 @@
+
+-- Create a Database table to represent the "users" entity.
+CREATE TABLE users(
+	user_id	INTEGER PRIMARY KEY,
+	first_name	VARCHAR2(50) NOT NULL,
+	last_name	VARCHAR2(50) NOT NULL,
+	address	VARCHAR2(50) NOT NULL,
+	email	VARCHAR2(50) NOT NULL UNIQUE,
+    phone_number INTEGER NOT NULL UNIQUE,
+	password	VARCHAR2(255) NOT NULL,
+    profile_img VARCHAR(100),
+    token VARCHAR2(255),
+    status INTEGER,
+    permissions VARCHAR2(40),
+    ADMIN_ACCESS VARCHAR(10)
+);
+
+
+--sequence
+
+CREATE SEQUENCE users_seq
+    START WITH 10
+    INCREMENT BY 1;
+    
+
+--trigger
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------triggers----------------------------------------------
+----------------------------------------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER insert_into_users_id
+    BEFORE INSERT
+    ON users
+    FOR EACH ROW
+    WHEN (NEW.user_id IS NULL)
+BEGIN
+    :NEW.user_id := users_seq.NEXTVAL;
+END;
+/
+

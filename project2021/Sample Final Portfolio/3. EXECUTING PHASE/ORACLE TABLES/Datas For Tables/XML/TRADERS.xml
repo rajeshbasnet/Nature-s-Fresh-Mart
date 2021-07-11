@@ -1,0 +1,25 @@
+
+CREATE TABLE traders(
+	user_id	INTEGER NOT NULL,
+	trader_id	INTEGER NOT NULL UNIQUE,
+    trader_type VARCHAR2(32) NOT NULL UNIQUE,
+	CONSTRAINT	pk_trader PRIMARY KEY (user_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
+
+--sequence
+
+CREATE SEQUENCE traders_seq
+    START WITH 30
+    INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER insert_into_trader_id
+    BEFORE INSERT
+    ON traders
+    FOR EACH ROW
+    WHEN (NEW.trader_id IS NULL)
+BEGIN
+    :NEW.trader_id := traders_seq.NEXTVAL;
+END;
+/

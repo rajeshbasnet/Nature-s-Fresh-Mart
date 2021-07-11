@@ -1,0 +1,26 @@
+-- Create a Database table to represent the "shop" entity.
+CREATE TABLE shops(
+	shop_id	INTEGER NOT NULL,
+	shop_name	VARCHAR2(50) NOT NULL UNIQUE,
+    product_category VARCHAR2(50) NOT NULL UNIQUE,
+	fk_trader_id INTEGER NOT NULL UNIQUE,
+	CONSTRAINT	pk_shop PRIMARY KEY (shop_id),
+    FOREIGN KEY(fk_trader_id) REFERENCES traders(trader_id)
+);
+
+--sequence
+CREATE SEQUENCE shops_seq
+    START WITH 80
+    INCREMENT BY 1;
+
+--triggers
+
+CREATE OR REPLACE TRIGGER insert_into_shop_id
+    BEFORE INSERT
+    ON shops
+    FOR EACH ROW
+    WHEN (NEW.shop_id IS NULL)
+BEGIN
+    :NEW.shop_id := shops_seq.NEXTVAL;
+END;
+/

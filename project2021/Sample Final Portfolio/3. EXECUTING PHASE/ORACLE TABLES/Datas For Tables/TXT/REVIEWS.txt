@@ -1,0 +1,27 @@
+-- Create a Database table to represent the "review" entity.
+ CREATE TABLE reviews(
+	review_id	INTEGER NOT NULL,
+	review_rating	INTEGER,
+	review_comment	VARCHAR2(1000),
+    fk1_product_id	INTEGER NOT NULL,
+	fk2_user_id	INTEGER NOT NULL,
+	CONSTRAINT	pk_review PRIMARY KEY (review_id),
+    FOREIGN KEY(fk1_product_id) REFERENCES products(product_id),
+    FOREIGN KEY(fk2_user_id) REFERENCES users(user_id)
+);
+--sequence
+CREATE SEQUENCE reviews_seq
+    START WITH 60
+    INCREMENT BY 1;
+
+--triggers
+
+CREATE OR REPLACE TRIGGER insert_into_review_id
+    BEFORE INSERT
+    ON reviews
+    FOR EACH ROW
+    WHEN (NEW.review_id IS NULL)
+BEGIN
+    :NEW.review_id := reviews_seq.NEXTVAL;
+END;
+/
