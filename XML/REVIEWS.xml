@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>-- Create a Database table to represent the "review" entity.&#13;</para>
+  <para> CREATE TABLE reviews(&#13;</para>
+  <para>        review_id        INTEGER NOT NULL,&#13;</para>
+  <para>        review_rating        INTEGER,&#13;</para>
+  <para>        review_comment        VARCHAR2(1000),&#13;</para>
+  <para>    fk1_product_id        INTEGER NOT NULL,&#13;</para>
+  <para>        fk2_user_id        INTEGER NOT NULL,&#13;</para>
+  <para>        CONSTRAINT        pk_review PRIMARY KEY (review_id),&#13;</para>
+  <para>    FOREIGN KEY(fk1_product_id) REFERENCES products(product_id),&#13;</para>
+  <para>    FOREIGN KEY(fk2_user_id) REFERENCES users(user_id)&#13;</para>
+  <para>);&#13;</para>
+  <para>--sequence&#13;</para>
+  <para>CREATE SEQUENCE reviews_seq&#13;</para>
+  <para>    START WITH 60&#13;</para>
+  <para>    INCREMENT BY 1;&#13;</para>
+  <para>&#13;</para>
+  <para>--triggers&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE OR REPLACE TRIGGER insert_into_review_id&#13;</para>
+  <para>    BEFORE INSERT&#13;</para>
+  <para>    ON reviews&#13;</para>
+  <para>    FOR EACH ROW&#13;</para>
+  <para>    WHEN (NEW.review_id IS NULL)&#13;</para>
+  <para>BEGIN&#13;</para>
+  <para>    :NEW.review_id := reviews_seq.NEXTVAL;&#13;</para>
+  <para>END;&#13;</para>
+  <para>/</para>
+</article>

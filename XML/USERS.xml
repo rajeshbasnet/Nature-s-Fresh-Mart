@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>&#13;</para>
+  <para>-- Create a Database table to represent the "users" entity.&#13;</para>
+  <para>CREATE TABLE users(&#13;</para>
+  <para>        user_id        INTEGER PRIMARY KEY,&#13;</para>
+  <para>        first_name        VARCHAR2(50) NOT NULL,&#13;</para>
+  <para>        last_name        VARCHAR2(50) NOT NULL,&#13;</para>
+  <para>        address        VARCHAR2(50) NOT NULL,&#13;</para>
+  <para>        email        VARCHAR2(50) NOT NULL UNIQUE,&#13;</para>
+  <para>    phone_number INTEGER NOT NULL UNIQUE,&#13;</para>
+  <para>        password        VARCHAR2(255) NOT NULL,&#13;</para>
+  <para>    profile_img VARCHAR(100),&#13;</para>
+  <para>    token VARCHAR2(255),&#13;</para>
+  <para>    status INTEGER,&#13;</para>
+  <para>    permissions VARCHAR2(40),&#13;</para>
+  <para>    ADMIN_ACCESS VARCHAR(10)&#13;</para>
+  <para>);&#13;</para>
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para>--sequence&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE SEQUENCE users_seq&#13;</para>
+  <para>    START WITH 10&#13;</para>
+  <para>    INCREMENT BY 1;&#13;</para>
+  <para>    &#13;</para>
+  <para>&#13;</para>
+  <para>--trigger&#13;</para>
+  <para>&#13;</para>
+  <para>----------------------------------------------------------------------------------------------------&#13;</para>
+  <para>----------------------------------------------triggers----------------------------------------------&#13;</para>
+  <para>----------------------------------------------------------------------------------------------------&#13;</para>
+  <para>CREATE OR REPLACE TRIGGER insert_into_users_id&#13;</para>
+  <para>    BEFORE INSERT&#13;</para>
+  <para>    ON users&#13;</para>
+  <para>    FOR EACH ROW&#13;</para>
+  <para>    WHEN (NEW.user_id IS NULL)&#13;</para>
+  <para>BEGIN&#13;</para>
+  <para>    :NEW.user_id := users_seq.NEXTVAL;&#13;</para>
+  <para>END;&#13;</para>
+  <para>/&#13;</para>
+  <para>&#13;</para>
+</article>

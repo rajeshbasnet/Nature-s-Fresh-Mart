@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE TABLE customers(&#13;</para>
+  <para>        user_id        INTEGER NOT NULL,&#13;</para>
+  <para>        customer_id        INTEGER NOT NULL UNIQUE,&#13;</para>
+  <para>        CONSTRAINT        pk_customers PRIMARY KEY (user_id),&#13;</para>
+  <para>        FOREIGN KEY(user_id) REFERENCES users(user_id)&#13;</para>
+  <para>);&#13;</para>
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para> &#13;</para>
+  <para>CREATE SEQUENCE customers_seq&#13;</para>
+  <para>    START WITH 20&#13;</para>
+  <para>    INCREMENT BY 1;&#13;</para>
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para>--trigger&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE OR REPLACE TRIGGER insert_into_customer_id&#13;</para>
+  <para>    BEFORE INSERT&#13;</para>
+  <para>    ON customers&#13;</para>
+  <para>    FOR EACH ROW&#13;</para>
+  <para>    WHEN (NEW.customer_id IS NULL)&#13;</para>
+  <para>BEGIN&#13;</para>
+  <para>    :NEW.customer_id := customers_seq.NEXTVAL;&#13;</para>
+  <para>END;&#13;</para>
+  <para>/&#13;</para>
+</article>

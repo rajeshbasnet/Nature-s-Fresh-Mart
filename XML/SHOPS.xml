@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>-- Create a Database table to represent the "shop" entity.&#13;</para>
+  <para>CREATE TABLE shops(&#13;</para>
+  <para>        shop_id        INTEGER NOT NULL,&#13;</para>
+  <para>        shop_name        VARCHAR2(50) NOT NULL UNIQUE,&#13;</para>
+  <para>    product_category VARCHAR2(50) NOT NULL UNIQUE,&#13;</para>
+  <para>        fk_trader_id INTEGER NOT NULL UNIQUE,&#13;</para>
+  <para>        CONSTRAINT        pk_shop PRIMARY KEY (shop_id),&#13;</para>
+  <para>    FOREIGN KEY(fk_trader_id) REFERENCES traders(trader_id)&#13;</para>
+  <para>);&#13;</para>
+  <para>&#13;</para>
+  <para>--sequence&#13;</para>
+  <para>CREATE SEQUENCE shops_seq&#13;</para>
+  <para>    START WITH 80&#13;</para>
+  <para>    INCREMENT BY 1;&#13;</para>
+  <para>&#13;</para>
+  <para>--triggers&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE OR REPLACE TRIGGER insert_into_shop_id&#13;</para>
+  <para>    BEFORE INSERT&#13;</para>
+  <para>    ON shops&#13;</para>
+  <para>    FOR EACH ROW&#13;</para>
+  <para>    WHEN (NEW.shop_id IS NULL)&#13;</para>
+  <para>BEGIN&#13;</para>
+  <para>    :NEW.shop_id := shops_seq.NEXTVAL;&#13;</para>
+  <para>END;&#13;</para>
+  <para>/&#13;</para>
+</article>

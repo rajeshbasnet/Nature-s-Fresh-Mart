@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>-- Create a Database table to represent the "orders" entity.&#13;</para>
+  <para>CREATE TABLE orders(&#13;</para>
+  <para>        order_id        INTEGER NOT NULL,&#13;</para>
+  <para>    payment_date DATE NOT NULL,&#13;</para>
+  <para>    order_status VARCHAR2(20),&#13;</para>
+  <para>    fk_basket_id INTEGER NOT NULL,&#13;</para>
+  <para>    fk_collection_slot_id INTEGER NOT NULL,&#13;</para>
+  <para>    CONSTRAINT        pk_orders PRIMARY KEY (order_id),&#13;</para>
+  <para>    FOREIGN KEY(fk_basket_id) REFERENCES baskets(basket_id),&#13;</para>
+  <para>    FOREIGN KEY(fk_collection_slot_id) REFERENCES collection_slots(collection_slot_id)&#13;</para>
+  <para>);&#13;</para>
+  <para>--sequence&#13;</para>
+  <para>CREATE SEQUENCE orders_seq&#13;</para>
+  <para>    START WITH 50&#13;</para>
+  <para>    INCREMENT BY 1;&#13;</para>
+  <para>&#13;</para>
+  <para>--triggers&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE OR REPLACE TRIGGER insert_into_orders_id&#13;</para>
+  <para>    BEFORE INSERT&#13;</para>
+  <para>    ON orders&#13;</para>
+  <para>    FOR EACH ROW&#13;</para>
+  <para>    WHEN (NEW.order_id IS NULL)&#13;</para>
+  <para>BEGIN&#13;</para>
+  <para>    :NEW.order_id := orders_seq.NEXTVAL;&#13;</para>
+  <para>END;&#13;</para>
+  <para>/&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE OR REPLACE TRIGGER insert_into_order_status&#13;</para>
+  <para>    BEFORE INSERT&#13;</para>
+  <para>    ON orders&#13;</para>
+  <para>    FOR EACH ROW&#13;</para>
+  <para>    WHEN (NEW.order_status IS NULL)&#13;</para>
+  <para>BEGIN&#13;</para>
+  <para>    :NEW.order_status := 'not delivered';&#13;</para>
+  <para>END;&#13;</para>
+  <para>/</para>
+</article>

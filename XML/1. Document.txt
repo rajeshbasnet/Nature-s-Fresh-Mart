@@ -1,0 +1,12 @@
+
+2. Order
+3. Order_Product
+4. Payment
+5. Product
+6. Review
+7. Shop
+8. Collection-slots
+9. Offers
+
+
+File Type: XML

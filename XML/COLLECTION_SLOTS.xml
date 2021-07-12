@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>&#13;</para>
+  <para>-- Create a Database table to represent the "collection_slot" entity.&#13;</para>
+  <para>CREATE TABLE collection_slots(&#13;</para>
+  <para>        collection_slot_id        INTEGER NOT NULL,&#13;</para>
+  <para>        collection_time VARCHAR2(100) NOT NULL,&#13;</para>
+  <para>        collection_day VARCHAR2(20) NOT NULL,&#13;</para>
+  <para>        CONSTRAINT        pk_collection_slot PRIMARY KEY (collection_slot_id)&#13;</para>
+  <para>);&#13;</para>
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE SEQUENCE collection_slots_seq&#13;</para>
+  <para>    START WITH 110&#13;</para>
+  <para>    INCREMENT BY 1;&#13;</para>
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para>--trigger&#13;</para>
+  <para>&#13;</para>
+  <para>CREATE OR REPLACE TRIGGER insert_into_collection_slot_id&#13;</para>
+  <para>    BEFORE INSERT&#13;</para>
+  <para>    ON collection_slots&#13;</para>
+  <para>    FOR EACH ROW&#13;</para>
+  <para>    WHEN (NEW.collection_slot_id IS NULL)&#13;</para>
+  <para>BEGIN&#13;</para>
+  <para>    :NEW.collection_slot_id := collection_slots_seq.NEXTVAL;&#13;</para>
+  <para>END;&#13;</para>
+  <para>/</para>
+</article>

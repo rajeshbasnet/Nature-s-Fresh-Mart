@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>CREATE TABLE products(&#13;</para>
+  <para>        product_id        INTEGER NOT NULL,&#13;</para>
+  <para>        product_name VARCHAR2(150) NOT NULL,&#13;</para>
+  <para>    item_price NUMBER(6,2) NOT NULL,&#13;</para>
+  <para>    quantity_in_stock INTEGER NOT NULL,&#13;</para>
+  <para>        availablility INTEGER NOT NULL,&#13;</para>
+  <para>        min_order INTEGER NOT NULL,&#13;</para>
+  <para>        max_order INTEGER NOT NULL,&#13;</para>
+  <para>        allergy_info VARCHAR2(1000),&#13;</para>
+  <para>    product_info VARCHAR2(600) NOT NULL,&#13;</para>
+  <para>        product_image VARCHAR2(255),&#13;</para>
+  <para>    status INTEGER NOT NULL,&#13;</para>
+  <para>        fk_shop_id        INTEGER NOT NULL,&#13;</para>
+  <para>        fk_offer_id        INTEGER,&#13;</para>
+  <para>        CONSTRAINT        pk_product PRIMARY KEY (product_id),&#13;</para>
+  <para>    FOREIGN KEY(fk_shop_id) REFERENCES shops(shop_id),&#13;</para>
+  <para>    FOREIGN KEY(fk_offer_id) REFERENCES offers(offer_id)&#13;</para>
+  <para>);&#13;</para>
+  <para>&#13;</para>
+  <para>&#13;</para>
+  <para>--sequence&#13;</para>
+  <para>CREATE SEQUENCE products_seq&#13;</para>
+  <para>    START WITH 70&#13;</para>
+  <para>    INCREMENT BY 1;&#13;</para>
+  <para>&#13;</para>
+  <para>--triggers&#13;</para>
+  <para>CREATE OR REPLACE TRIGGER insert_into_product_id&#13;</para>
+  <para>    BEFORE INSERT&#13;</para>
+  <para>    ON products&#13;</para>
+  <para>    FOR EACH ROW&#13;</para>
+  <para>    WHEN (NEW.product_id IS NULL)&#13;</para>
+  <para>BEGIN&#13;</para>
+  <para>    :NEW.product_id := products_seq.NEXTVAL;&#13;</para>
+  <para>END;&#13;</para>
+  <para>/&#13;</para>
+</article>

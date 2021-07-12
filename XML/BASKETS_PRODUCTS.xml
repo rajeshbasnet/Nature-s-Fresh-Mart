@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>-- Create a Database table to represent the "order_products" entity.&#13;</para>
+  <para>CREATE TABLE basket_products(&#13;</para>
+  <para>    fk_product_id        INTEGER NOT NULL,&#13;</para>
+  <para>        fk_basket_id        INTEGER NOT NULL,&#13;</para>
+  <para>    quantity INTEGER NOT NULL,&#13;</para>
+  <para>    FOREIGN KEY(fk_product_id) REFERENCES products(product_id),&#13;</para>
+  <para>        FOREIGN KEY(fk_basket_id) REFERENCES baskets(basket_id)&#13;</para>
+  <para>);</para>
+</article>
