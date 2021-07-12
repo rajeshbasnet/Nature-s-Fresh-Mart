@@ -1,0 +1,29 @@
+===============================================
+==================READ ME====================== 
+===============================================
+
+Before attempting to run our website please make the following changes:
+
+1. Please copy the entire folder above into htdocs before attempting to run the website i.e. website/project/...
+
+2. Change username and password inside the Project folder:
+ 	- connection/connect.php => line 7 
+	- includes/page-contents/page-navbar.php => line 4
+
+3. In the "users" table change the "admin_access" column values which is currently set to "VILEROZE" to your own administrative username.
+
+4. After importing the app into your oracle environment, please make the following users with the same username as given below (these are for the trader and admin):
+
+	- neplese931@gmail.com	         (greengrocer)
+
+	- brajesh18@tbc.edu.np           (fishmonger)                
+	
+	- bhansaligaurav2000@gmail.com   (delicatessen)     
+	
+	- aakashpuchu@gmail.com          (butcher)        
+	 
+	- gharsh18@tbc.edu.np            (bakery)                 
+
+                           
+
+
