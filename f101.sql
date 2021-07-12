@@ -28,7 +28,7 @@ prompt APPLICATION 101 - NATURES FRESH MART
 -- Application Export:
 --   Application:     101
 --   Name:            NATURES FRESH MART
---   Date and Time:   14:52 Monday July 12, 2021
+--   Date and Time:   15:50 Monday July 12, 2021
 --   Exported By:     VILEROZE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -119,7 +119,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'NATURES FRESH MART'
 ,p_last_updated_by=>'VILEROZE'
-,p_last_upd_yyyymmddhh24miss=>'20210712144335'
+,p_last_upd_yyyymmddhh24miss=>'20210712154826'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>4
 ,p_ui_type_name => null
@@ -13955,7 +13955,7 @@ wwv_flow_api.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'VILEROZE'
-,p_last_upd_yyyymmddhh24miss=>'20210705201208'
+,p_last_upd_yyyymmddhh24miss=>'20210712154826'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(8412940373332825)
@@ -14156,20 +14156,19 @@ wwv_flow_api.create_jet_chart_series(
 ,p_name=>'CAPITAL GROSSED (ALL TIME)'
 ,p_data_source_type=>'SQL'
 ,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT SUM(item_price), product_name',
+'SELECT SUM(quantity * item_price), product_name',
 'FROM ORDERS, BASKETS, BASKET_PRODUCTS, PRODUCTS, users, traders, shops',
 'WHERE ORDERS.FK_BASKET_ID = BASKETS.BASKET_ID',
 'AND BASKET_PRODUCTS.FK_BASKET_ID = BASKETS.BASKET_ID AND BASKET_PRODUCTS.FK_PRODUCT_ID = PRODUCTS.PRODUCT_ID AND PRODUCTS.fk_shop_id = shops.shop_id',
-'AND shops.fk_trader_id = traders.trader_id AND traders.user_id = users.user_id AND (UPPER (permissions) = UPPER(V(''APP_USER'')) OR UPPER (permissions) = UPPER(V(''APP_USER'')) OR UPPER (permissions) = UPPER(V(''APP_USER'')) ',
+'AND shops.fk_trader_id = traders.trader_id AND traders.user_id = users.user_id AND (UPPER (permissions) = UPPER(V(''APP_USER'')) ',
+'OR UPPER (permissions) = UPPER(V(''APP_USER'')) OR UPPER (permissions) = UPPER(V(''APP_USER'')) ',
 'OR UPPER (permissions) = UPPER(V(''APP_USER'')) OR UPPER (permissions) = UPPER(V(''APP_USER'')) OR UPPER (ADMIN_ACCESS) = UPPER(V(''APP_USER'')))',
 'GROUP BY product_name'))
-,p_items_value_column_name=>'SUM(ITEM_PRICE)'
+,p_items_value_column_name=>'SUM(QUANTITY*ITEM_PRICE)'
 ,p_items_label_column_name=>'PRODUCT_NAME'
 ,p_color=>'#14B32C'
 ,p_assigned_to_y2=>'off'
 ,p_items_label_rendered=>false
-,p_items_label_display_as=>'PERCENT'
-,p_threshold_display=>'onIndicator'
 );
 wwv_flow_api.create_jet_chart_axis(
  p_id=>wwv_flow_api.id(8933594991351315)
